@@ -1,5 +1,8 @@
 package com.skilldistillery.challengeaccepted.controllers;
 
-public class AuthController {
+import org.springframework.web.bind.annotation.RestController;
 
+@RestController
+public class AuthController {
+	
 }

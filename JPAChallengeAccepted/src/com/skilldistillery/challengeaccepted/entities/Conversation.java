@@ -1,34 +1,18 @@
 package com.skilldistillery.challengeaccepted.entities;
 
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 
 @Entity
-public class Skill {
-	
+public class Conversation {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-	private String name;
-	
-	@ManyToMany(mappedBy="skills")
-	private List <User> users;
-	
-	public Skill() {
-	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
+	public Conversation() {
 	}
 
 	public int getId() {
@@ -38,12 +22,9 @@ public class Skill {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Skill [id=");
+		builder.append("Conversation id: ");
 		builder.append(id);
-		builder.append(", name=");
-		builder.append(name);
-		builder.append("]");
 		return builder.toString();
 	}
-	
+
 }
