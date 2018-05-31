@@ -1,5 +1,5 @@
 package com.skilldistillery.challengeaccepted.services;
 
-public class MessageServiceImpl {
+public class MessageServiceImpl implements MessageService{
 
 }

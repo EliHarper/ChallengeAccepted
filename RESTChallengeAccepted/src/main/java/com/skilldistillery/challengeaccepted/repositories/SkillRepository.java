@@ -1,5 +1,9 @@
 package com.skilldistillery.challengeaccepted.repositories;
 
-public class SkillRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.skilldistillery.challengeaccepted.entities.Skill;
+
+public interface SkillRepository extends JpaRepository<Skill, Integer> {
 
 }

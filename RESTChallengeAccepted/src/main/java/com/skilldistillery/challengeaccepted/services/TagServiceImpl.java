@@ -1,5 +1,5 @@
 package com.skilldistillery.challengeaccepted.services;
 
-public class TagServiceImpl {
+public class TagServiceImpl implements TagService {
 
 }

@@ -1,5 +1,5 @@
 package com.skilldistillery.challengeaccepted.services;
 
-public class ChallengeServiceImpl {
+public class ChallengeServiceImpl implements ChallengeService {
 
 }

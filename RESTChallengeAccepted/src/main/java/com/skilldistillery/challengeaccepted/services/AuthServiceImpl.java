@@ -1,5 +1,5 @@
 package com.skilldistillery.challengeaccepted.services;
 
-public class AuthServiceImpl {
+public class AuthServiceImpl implements AuthService {
 
 }
