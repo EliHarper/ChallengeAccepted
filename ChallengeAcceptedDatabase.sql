@@ -5,16 +5,16 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema challengedb
 -- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `mydb` ;
+DROP SCHEMA IF EXISTS `challengedb` ;
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema challengedb
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
+CREATE SCHEMA IF NOT EXISTS `challengedb` DEFAULT CHARACTER SET utf8 ;
 SHOW WARNINGS;
-USE `mydb` ;
+USE `challengedb` ;
 
 -- -----------------------------------------------------
 -- Table `user`
@@ -64,6 +64,9 @@ CREATE TABLE IF NOT EXISTS `challenge` (
   `time_created` DATETIME NOT NULL,
   `wager` INT NULL,
   `skill_id` INT NOT NULL,
+  `min_number_of_challengers` INT NULL,
+  `max_number_of_challengers` INT NULL,
+  `expiration` DATETIME NULL,
   PRIMARY KEY (`id`),
   INDEX `user_id_to_user_idx` (`creator_id` ASC),
   INDEX `skill_id_to_skill_idx` (`skill_id` ASC),
