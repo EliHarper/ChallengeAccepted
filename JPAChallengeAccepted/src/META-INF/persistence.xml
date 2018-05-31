@@ -8,15 +8,21 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider
     </provider>
 
+        <class>com.skilldistillery.challengeaccepted.entities.Challenge</class>
+        <class>com.skilldistillery.challengeaccepted.entities.Conversation</class>
         <class>com.skilldistillery.challengeaccepted.entities.Message</class>
+        <class>com.skilldistillery.challengeaccepted.entities.Skill</class>
+        <class>com.skilldistillery.challengeaccepted.entities.Tag</class>
         <class>com.skilldistillery.challengeaccepted.entities.User</class>
+        <class>com.skilldistillery.challengeaccepted.entities.UserChallenge</class>
+        <class>com.skilldistillery.challengeaccepted.entities.UserSkill</class>
 
         <properties>
             <property name="javax.persistence.jdbc.url"
-                value="jdbc:mysql://localhost:3306/********************************" />
-            <property name="javax.persistence.jdbc.user" value="**************************" />
+                value="jdbc:mysql://localhost:3306/challengedb" />
+            <property name="javax.persistence.jdbc.user" value="challengeUser" />
             <property name="javax.persistence.jdbc.password"
-                value="*************************" />
+                value="challenge" />
             <property name="javax.persistence.jdbc.driver"
                 value="com.mysql.jdbc.Driver" />
 
