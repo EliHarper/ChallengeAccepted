@@ -32,6 +32,6 @@ public class TagTest {
 	
 	@Test
 	void test_tag_associations() {
-		assertEquals("Party Games", t.getName());
+		assertEquals("sports", t.getName());
 	}
 }
