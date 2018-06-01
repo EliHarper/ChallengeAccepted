@@ -49,6 +49,20 @@ ENGINE = InnoDB;
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
+-- Table `status`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `status` ;
+
+SHOW WARNINGS;
+CREATE TABLE IF NOT EXISTS `status` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+SHOW WARNINGS;
+
+-- -----------------------------------------------------
 -- Table `challenge`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `challenge` ;
@@ -57,19 +71,21 @@ SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `challenge` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `creator_id` INT NOT NULL,
-  `active` TINYINT NOT NULL DEFAULT 1,
-  `name` VARCHAR(45) NULL,
-  `challenger_won` TINYINT NULL DEFAULT 0,
-  `location` VARCHAR(100) NULL,
-  `time_created` DATETIME NOT NULL,
-  `wager` INT NULL,
   `skill_id` INT NOT NULL,
+  `status_id` INT NOT NULL,
+  `name` VARCHAR(45) NULL,
+  `location` VARCHAR(100) NULL,
+  `time_created` TIMESTAMP NOT NULL DEFAULT current_timestamp,
+  `wager` INT NULL,
   `min_number_of_challengers` INT NULL,
   `max_number_of_challengers` INT NULL,
   `expiration` DATETIME NULL,
+  `description` TEXT NULL,
+  `image` VARCHAR(1000) NULL,
   PRIMARY KEY (`id`),
   INDEX `user_id_to_user_idx` (`creator_id` ASC),
   INDEX `skill_id_to_skill_idx` (`skill_id` ASC),
+  INDEX `status_id_to_status_idx` (`status_id` ASC),
   CONSTRAINT `creator_id_to_user`
     FOREIGN KEY (`creator_id`)
     REFERENCES `user` (`id`)
@@ -78,6 +94,11 @@ CREATE TABLE IF NOT EXISTS `challenge` (
   CONSTRAINT `skill_id_in_chall_to_skill`
     FOREIGN KEY (`skill_id`)
     REFERENCES `skill` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `status_id_to_status`
+    FOREIGN KEY (`status_id`)
+    REFERENCES `status` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -162,7 +183,7 @@ CREATE TABLE IF NOT EXISTS `message` (
   `sender_id` INT NOT NULL,
   `receiver_id` INT NOT NULL,
   `message` TEXT NULL,
-  `time_sent` TIMESTAMP NULL,
+  `time_sent` TIMESTAMP NULL DEFAULT current_timestamp,
   `thread_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `sender_id_to_user_id_idx` (`sender_id` ASC),
@@ -192,8 +213,7 @@ CREATE TABLE IF NOT EXISTS `user_challenge` (
   `challenge_id` INT NOT NULL,
   `invited_user_id` INT NOT NULL,
   `accepted` TINYINT NULL DEFAULT 0,
-  `accept_time` TIMESTAMP NULL,
-  `completed` TINYINT NULL DEFAULT 0,
+  `accept_time` TIMESTAMP NULL DEFAULT current_timestamp,
   `acceptor_won` TINYINT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   INDEX `challenge_id_to_challenge_idx` (`challenge_id` ASC),
@@ -233,3 +253,164 @@ SHOW WARNINGS;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+-- -----------------------------------------------------
+-- Data for table `user`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `challengedb`;
+INSERT INTO `user` (`id`, `username`, `password`, `email`, `location`, `role`) VALUES (1, 'AlexTheDestroyer', 'alex', 'alex@alex.com', 'here', NULL);
+INSERT INTO `user` (`id`, `username`, `password`, `email`, `location`, `role`) VALUES (2, 'DoraTheExplora', 'dora', 'dora@dora.com', 'here', NULL);
+INSERT INTO `user` (`id`, `username`, `password`, `email`, `location`, `role`) VALUES (3, 'EliTheHair', 'eli', 'eli@eli.com', 'here', NULL);
+INSERT INTO `user` (`id`, `username`, `password`, `email`, `location`, `role`) VALUES (4, 'AndrewTheOtherAndrew', 'andrew', 'andrew@andrew.com', 'here', NULL);
+INSERT INTO `user` (`id`, `username`, `password`, `email`, `location`, `role`) VALUES (5, 'MeganTheIncomplete', 'megan', 'megan@megan.com', 'here', NULL);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `skill`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `challengedb`;
+INSERT INTO `skill` (`id`, `name`) VALUES (1, 'drinking');
+INSERT INTO `skill` (`id`, `name`) VALUES (2, 'weight lifting');
+INSERT INTO `skill` (`id`, `name`) VALUES (3, 'workout');
+INSERT INTO `skill` (`id`, `name`) VALUES (4, 'billiards');
+INSERT INTO `skill` (`id`, `name`) VALUES (5, 'ping pong');
+INSERT INTO `skill` (`id`, `name`) VALUES (6, 'chess');
+INSERT INTO `skill` (`id`, `name`) VALUES (7, 'darts');
+INSERT INTO `skill` (`id`, `name`) VALUES (8, 'video games');
+INSERT INTO `skill` (`id`, `name`) VALUES (9, 'board games');
+INSERT INTO `skill` (`id`, `name`) VALUES (10, 'trivia');
+INSERT INTO `skill` (`id`, `name`) VALUES (11, 'football');
+INSERT INTO `skill` (`id`, `name`) VALUES (12, 'basketball');
+INSERT INTO `skill` (`id`, `name`) VALUES (13, 'baseball');
+INSERT INTO `skill` (`id`, `name`) VALUES (14, 'soccer');
+INSERT INTO `skill` (`id`, `name`) VALUES (15, 'hockey');
+INSERT INTO `skill` (`id`, `name`) VALUES (16, 'running');
+INSERT INTO `skill` (`id`, `name`) VALUES (17, 'shuffleboard');
+INSERT INTO `skill` (`id`, `name`) VALUES (18, 'other bar games');
+INSERT INTO `skill` (`id`, `name`) VALUES (19, 'other sports');
+INSERT INTO `skill` (`id`, `name`) VALUES (20, 'other games');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `status`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `challengedb`;
+INSERT INTO `status` (`id`, `name`) VALUES (1, 'pending');
+INSERT INTO `status` (`id`, `name`) VALUES (2, 'active');
+INSERT INTO `status` (`id`, `name`) VALUES (3, 'completed');
+INSERT INTO `status` (`id`, `name`) VALUES (4, 'expired');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `challenge`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `challengedb`;
+INSERT INTO `challenge` (`id`, `creator_id`, `skill_id`, `status_id`, `name`, `location`, `time_created`, `wager`, `min_number_of_challengers`, `max_number_of_challengers`, `expiration`, `description`, `image`) VALUES (1, 1, 1, 2, 'Drinking Challenge', 'The bar', DEFAULT, NULL, 2, 2, NULL, 'Drink against Me!', NULL);
+INSERT INTO `challenge` (`id`, `creator_id`, `skill_id`, `status_id`, `name`, `location`, `time_created`, `wager`, `min_number_of_challengers`, `max_number_of_challengers`, `expiration`, `description`, `image`) VALUES (2, 2, 2, 1, 'Lift Me Bro', 'The gym', DEFAULT, NULL, 2, 3, NULL, 'I can outlift you bro', NULL);
+INSERT INTO `challenge` (`id`, `creator_id`, `skill_id`, `status_id`, `name`, `location`, `time_created`, `wager`, `min_number_of_challengers`, `max_number_of_challengers`, `expiration`, `description`, `image`) VALUES (3, 3, 3, 1, 'Crossfit', 'The gym', DEFAULT, NULL, 2, 3, NULL, 'I can do more cardio than anyone with a heart', NULL);
+INSERT INTO `challenge` (`id`, `creator_id`, `skill_id`, `status_id`, `name`, `location`, `time_created`, `wager`, `min_number_of_challengers`, `max_number_of_challengers`, `expiration`, `description`, `image`) VALUES (4, 4, 4, 1, '8 Ball', 'The bar', DEFAULT, NULL, 2, 4, NULL, 'I\'m pretty good at pool', NULL);
+INSERT INTO `challenge` (`id`, `creator_id`, `skill_id`, `status_id`, `name`, `location`, `time_created`, `wager`, `min_number_of_challengers`, `max_number_of_challengers`, `expiration`, `description`, `image`) VALUES (5, 5, 5, 3, 'Ping Pang', 'The bar', DEFAULT, NULL, 2, 2, NULL, 'I wanna play someone at Ping Pong!', NULL);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `tag`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `challengedb`;
+INSERT INTO `tag` (`id`, `name`) VALUES (1, 'sports');
+INSERT INTO `tag` (`id`, `name`) VALUES (2, 'bar games');
+INSERT INTO `tag` (`id`, `name`) VALUES (3, 'social');
+INSERT INTO `tag` (`id`, `name`) VALUES (4, 'endurance');
+INSERT INTO `tag` (`id`, `name`) VALUES (5, 'tabletop games');
+INSERT INTO `tag` (`id`, `name`) VALUES (6, 'video games');
+INSERT INTO `tag` (`id`, `name`) VALUES (7, 'brain teasers');
+INSERT INTO `tag` (`id`, `name`) VALUES (8, 'outdoors');
+INSERT INTO `tag` (`id`, `name`) VALUES (9, 'indoors');
+INSERT INTO `tag` (`id`, `name`) VALUES (10, 'teams');
+INSERT INTO `tag` (`id`, `name`) VALUES (11, 'one on one');
+INSERT INTO `tag` (`id`, `name`) VALUES (12, 'physical strength');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `user_skill`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `challengedb`;
+INSERT INTO `user_skill` (`id`, `skill_id`, `user_id`, `points`) VALUES (1, 1, 1, 5);
+INSERT INTO `user_skill` (`id`, `skill_id`, `user_id`, `points`) VALUES (2, 2, 2, 7);
+INSERT INTO `user_skill` (`id`, `skill_id`, `user_id`, `points`) VALUES (3, 3, 3, 15);
+INSERT INTO `user_skill` (`id`, `skill_id`, `user_id`, `points`) VALUES (4, 4, 4, 18);
+INSERT INTO `user_skill` (`id`, `skill_id`, `user_id`, `points`) VALUES (5, 5, 5, 9);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `challenge_tag`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `challengedb`;
+INSERT INTO `challenge_tag` (`tag_id`, `challenge_id`) VALUES (2, 1);
+INSERT INTO `challenge_tag` (`tag_id`, `challenge_id`) VALUES (3, 1);
+INSERT INTO `challenge_tag` (`tag_id`, `challenge_id`) VALUES (12, 2);
+INSERT INTO `challenge_tag` (`tag_id`, `challenge_id`) VALUES (4, 2);
+INSERT INTO `challenge_tag` (`tag_id`, `challenge_id`) VALUES (4, 3);
+INSERT INTO `challenge_tag` (`tag_id`, `challenge_id`) VALUES (9, 4);
+INSERT INTO `challenge_tag` (`tag_id`, `challenge_id`) VALUES (2, 4);
+INSERT INTO `challenge_tag` (`tag_id`, `challenge_id`) VALUES (2, 5);
+INSERT INTO `challenge_tag` (`tag_id`, `challenge_id`) VALUES (8, 5);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `message`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `challengedb`;
+INSERT INTO `message` (`id`, `sender_id`, `receiver_id`, `message`, `time_sent`, `thread_id`) VALUES (1, 1, 2, 'Nice weightlifting bro', NULL, 1);
+INSERT INTO `message` (`id`, `sender_id`, `receiver_id`, `message`, `time_sent`, `thread_id`) VALUES (2, 2, 1, 'Thx ;)', NULL, 1);
+INSERT INTO `message` (`id`, `sender_id`, `receiver_id`, `message`, `time_sent`, `thread_id`) VALUES (3, 2, 3, 'How long does it take you to do your hair like that every morning?', NULL, 3);
+INSERT INTO `message` (`id`, `sender_id`, `receiver_id`, `message`, `time_sent`, `thread_id`) VALUES (4, 3, 2, 'I just wake up this way', NULL, 3);
+INSERT INTO `message` (`id`, `sender_id`, `receiver_id`, `message`, `time_sent`, `thread_id`) VALUES (5, 3, 4, 'Wanna smoke?', NULL, 5);
+INSERT INTO `message` (`id`, `sender_id`, `receiver_id`, `message`, `time_sent`, `thread_id`) VALUES (6, 4, 3, 'You mean vape? I don\'t smoke', NULL, 5);
+INSERT INTO `message` (`id`, `sender_id`, `receiver_id`, `message`, `time_sent`, `thread_id`) VALUES (7, 4, 5, 'Why is Alex so mean to me?', NULL, 7);
+INSERT INTO `message` (`id`, `sender_id`, `receiver_id`, `message`, `time_sent`, `thread_id`) VALUES (8, 5, 4, 'Because he thinks you\'re cute', NULL, 7);
+INSERT INTO `message` (`id`, `sender_id`, `receiver_id`, `message`, `time_sent`, `thread_id`) VALUES (9, 5, 1, 'Do you think Andrew is cute?', NULL, 9);
+INSERT INTO `message` (`id`, `sender_id`, `receiver_id`, `message`, `time_sent`, `thread_id`) VALUES (10, 1, 5, 'yea', NULL, 9);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `user_challenge`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `challengedb`;
+INSERT INTO `user_challenge` (`id`, `challenge_id`, `invited_user_id`, `accepted`, `accept_time`, `acceptor_won`) VALUES (1, 1, 1, 1, NULL, 0);
+INSERT INTO `user_challenge` (`id`, `challenge_id`, `invited_user_id`, `accepted`, `accept_time`, `acceptor_won`) VALUES (2, 2, 2, 1, NULL, 0);
+INSERT INTO `user_challenge` (`id`, `challenge_id`, `invited_user_id`, `accepted`, `accept_time`, `acceptor_won`) VALUES (3, 3, 3, 1, NULL, 0);
+INSERT INTO `user_challenge` (`id`, `challenge_id`, `invited_user_id`, `accepted`, `accept_time`, `acceptor_won`) VALUES (4, 4, 4, 1, NULL, 0);
+INSERT INTO `user_challenge` (`id`, `challenge_id`, `invited_user_id`, `accepted`, `accept_time`, `acceptor_won`) VALUES (5, 5, 5, 1, NULL, 1);
+INSERT INTO `user_challenge` (`id`, `challenge_id`, `invited_user_id`, `accepted`, `accept_time`, `acceptor_won`) VALUES (6, 2, 1, 1, NULL, 0);
+INSERT INTO `user_challenge` (`id`, `challenge_id`, `invited_user_id`, `accepted`, `accept_time`, `acceptor_won`) VALUES (7, 3, 2, 1, NULL, 0);
+INSERT INTO `user_challenge` (`id`, `challenge_id`, `invited_user_id`, `accepted`, `accept_time`, `acceptor_won`) VALUES (8, 4, 3, 1, NULL, 0);
+INSERT INTO `user_challenge` (`id`, `challenge_id`, `invited_user_id`, `accepted`, `accept_time`, `acceptor_won`) VALUES (9, 5, 4, 1, NULL, 0);
+INSERT INTO `user_challenge` (`id`, `challenge_id`, `invited_user_id`, `accepted`, `accept_time`, `acceptor_won`) VALUES (10, 1, 5, 1, NULL, 0);
+INSERT INTO `user_challenge` (`id`, `challenge_id`, `invited_user_id`, `accepted`, `accept_time`, `acceptor_won`) VALUES (11, 4, 1, 1, NULL, 0);
+
+COMMIT;
