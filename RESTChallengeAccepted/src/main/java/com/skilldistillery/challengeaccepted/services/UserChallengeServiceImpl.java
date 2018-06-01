@@ -33,7 +33,7 @@ public class UserChallengeServiceImpl implements UserChallengeService{
 	 public Boolean delete(int id, String username) {
 		 try {
 			userChallengeRepo.deleteById(id);
-			 return true;
+			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -54,11 +54,11 @@ public class UserChallengeServiceImpl implements UserChallengeService{
 		}
 	 }
 	 
-	 public List<UserChallenge> userChallengesOfAChallenge(Challenge challenge, String username) {
+	 public List<UserChallenge> getTheChallengeAcceptorsForAChallenge(Challenge challenge, String username) {
 		 return userChallengeRepo.findByChallengeId(challenge.getId());
 	 }
 	 
-	 public List<UserChallenge> userChallengesOfAUser(User user, String username) {
+	 public List<UserChallenge> challengesUserHasParticipatedIn(User user, String username) {
 		 return userChallengeRepo.findByUserId(user.getId());
 	 }
 	 
