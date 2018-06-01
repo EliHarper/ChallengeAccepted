@@ -20,7 +20,6 @@ public class UserChallenge {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private boolean completed;
 	
 	
 	@OneToMany(mappedBy="acceptedChallenges")
@@ -47,14 +46,6 @@ public class UserChallenge {
 
 	public void setAccepted(boolean accepted) {
 		this.accepted = accepted;
-	}
-
-	public boolean isCompleted() {
-		return completed;
-	}
-
-	public void setCompleted(boolean completed) {
-		this.completed = completed;
 	}
 
 	public boolean isAcceptorWon() {
@@ -100,8 +91,6 @@ public class UserChallenge {
 		builder.append(id);
 		builder.append(", accepted=");
 		builder.append(accepted);
-		builder.append(", completed=");
-		builder.append(completed);
 		builder.append(", acceptorWon=");
 		builder.append(acceptorWon);
 		builder.append(", acceptedTime=");

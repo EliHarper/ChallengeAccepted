@@ -35,6 +35,10 @@ public class Challenge {
 	@Column(name="max_number_of_challengers")
 	private int maxNumberOfChallengers;
 	
+	@ManyToOne
+	@JoinColumn(name="status_id")
+	private Status status;
+	
 	@ManyToMany(mappedBy="challenges")
 	private List <User> users;
 	
@@ -184,6 +188,30 @@ public class Challenge {
 	}
 
 
+	public int getMinNumberOfChallengers() {
+		return minNumberOfChallengers;
+	}
+
+	public void setMinNumberOfChallengers(int minNumberOfChallengers) {
+		this.minNumberOfChallengers = minNumberOfChallengers;
+	}
+
+	public int getMaxNumberOfChallengers() {
+		return maxNumberOfChallengers;
+	}
+
+	public void setMaxNumberOfChallengers(int maxNumberOfChallengers) {
+		this.maxNumberOfChallengers = maxNumberOfChallengers;
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -205,6 +233,8 @@ public class Challenge {
 		builder.append(users);
 		builder.append(", pending=");
 		builder.append(pending);
+		builder.append(", status=");
+		builder.append(status);
 		builder.append(", timeCreated=");
 		builder.append(timeCreated);
 		builder.append("]");
