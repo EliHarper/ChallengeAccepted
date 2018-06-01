@@ -5,20 +5,24 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.skilldistillery.challengeaccepted.repositories.ChallengeRepository;
-import com.skilldistillery.challengeaccepted.repositories.TagRepository;
-import com.skilldistillery.challengeaccepted.repositories.UserRepository;
+import com.skilldistillery.challengeaccepted.services.ChallengeService;
+import com.skilldistillery.challengeaccepted.services.SkillService;
+import com.skilldistillery.challengeaccepted.services.TagService;
+import com.skilldistillery.challengeaccepted.services.UserService;
 
 @RestController
 @RequestMapping("api")
 @CrossOrigin({"*", "http://localhost:4200"})
 public class ChallengeController {
 	@Autowired
-	private ChallengeRepository chaRepo;
+	private ChallengeService chaServ;
 
 	@Autowired
-	private UserRepository userRepo;
+	private UserService userServ;
 	
 	@Autowired
-	private TagRepository tagRepo;
+	private TagService tagServ;
+	
+	@Autowired
+	private SkillService skillzServ;
 }
