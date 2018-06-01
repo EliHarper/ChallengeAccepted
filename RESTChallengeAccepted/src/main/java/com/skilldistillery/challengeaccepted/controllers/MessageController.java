@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.skilldistillery.challengeaccepted.repositories.MessageRepository;
-import com.skilldistillery.challengeaccepted.repositories.UserRepository;
+import com.skilldistillery.challengeaccepted.services.MessageService;
+import com.skilldistillery.challengeaccepted.services.UserService;
 
 @RestController
 @RequestMapping("api")
@@ -14,9 +14,9 @@ import com.skilldistillery.challengeaccepted.repositories.UserRepository;
 public class MessageController {
 	
 	@Autowired
-	private MessageRepository messageRepo;
+	private MessageService messageServ;
 	
 	@Autowired
-	private UserRepository userRepo;
+	private UserService userServ;
 
 }

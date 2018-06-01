@@ -2,11 +2,13 @@ package com.skilldistillery.challengeaccepted.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.skilldistillery.challengeaccepted.entities.User;
 import com.skilldistillery.challengeaccepted.repositories.UserRepository;
 
+@Service
 public class AuthServiceImpl implements AuthService {
 	
 	@Autowired

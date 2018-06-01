@@ -26,7 +26,18 @@ public class Challenge {
 	private boolean active;
 	private String location;
 	private String name;
+	private String description;
 	private int wager;
+	
+	@Column(name="min_number_of_challengers")
+	private int minNumberOfChallengers;
+	
+	@Column(name="max_number_of_challengers")
+	private int maxNumberOfChallengers;
+	
+	@ManyToOne
+	@JoinColumn(name="status_id")
+	private Status status;
 	
 	@ManyToMany(mappedBy="challenges")
 	private List <User> users;
@@ -45,8 +56,7 @@ public class Challenge {
 	@JoinColumn(name="skill_id")
 	private Skill skill;
 
-	@Column(name= "challenger_won")
-	private boolean challengerWon;
+	private boolean pending;
 
 	@OneToMany(mappedBy="challenge")
 	private List <UserChallenge> userChallenges;
@@ -58,68 +68,148 @@ public class Challenge {
 	public Challenge() {
 	}
 
-	public Skill getSkill() {
-		return skill;
-	}
-	
-	public void setSkill(Skill skill) {
-		this.skill = skill;
-	}
-
 	public boolean isActive() {
 		return active;
 	}
+
 
 	public void setActive(boolean active) {
 		this.active = active;
 	}
 
+
 	public String getLocation() {
 		return location;
 	}
+
 
 	public void setLocation(String location) {
 		this.location = location;
 	}
 
+
 	public String getName() {
 		return name;
 	}
+
 
 	public void setName(String name) {
 		this.name = name;
 	}
 
+
+	public String getDescription() {
+		return description;
+	}
+
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+
 	public int getWager() {
 		return wager;
 	}
+
 
 	public void setWager(int wager) {
 		this.wager = wager;
 	}
 
+
 	public List<User> getUsers() {
 		return users;
 	}
 
-	public void setUser(List<User> users) {
+
+	public void setUsers(List<User> users) {
 		this.users = users;
 	}
 
-	public boolean isChallengerWon() {
-		return challengerWon;
+
+	public List<Tag> getTags() {
+		return tags;
 	}
 
-	public void setChallengerWon(boolean challengerWon) {
-		this.challengerWon = challengerWon;
+
+	public void setTags(List<Tag> tags) {
+		this.tags = tags;
 	}
+
+
+	public User getChallengeAcceptor() {
+		return challengeAcceptor;
+	}
+
+
+	public void setChallengeAcceptor(User challengeAcceptor) {
+		this.challengeAcceptor = challengeAcceptor;
+	}
+
+
+	public Skill getSkill() {
+		return skill;
+	}
+
+
+	public void setSkill(Skill skill) {
+		this.skill = skill;
+	}
+
+
+	public boolean isPending() {
+		return pending;
+	}
+
+
+	public void setPending(boolean pending) {
+		this.pending = pending;
+	}
+
+
+	public List<UserChallenge> getUserChallenges() {
+		return userChallenges;
+	}
+
+
+	public void setUserChallenges(List<UserChallenge> userChallenges) {
+		this.userChallenges = userChallenges;
+	}
+
 
 	public Date getTimeCreated() {
 		return timeCreated;
 	}
 
+
 	public void setTimeCreated(Date timeCreated) {
 		this.timeCreated = timeCreated;
+	}
+
+
+	public int getMinNumberOfChallengers() {
+		return minNumberOfChallengers;
+	}
+
+	public void setMinNumberOfChallengers(int minNumberOfChallengers) {
+		this.minNumberOfChallengers = minNumberOfChallengers;
+	}
+
+	public int getMaxNumberOfChallengers() {
+		return maxNumberOfChallengers;
+	}
+
+	public void setMaxNumberOfChallengers(int maxNumberOfChallengers) {
+		this.maxNumberOfChallengers = maxNumberOfChallengers;
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 
 	public int getId() {
@@ -141,13 +231,14 @@ public class Challenge {
 		builder.append(wager);
 		builder.append(", users=");
 		builder.append(users);
-		builder.append(", challengerWon=");
-		builder.append(challengerWon);
+		builder.append(", pending=");
+		builder.append(pending);
+		builder.append(", status=");
+		builder.append(status);
 		builder.append(", timeCreated=");
 		builder.append(timeCreated);
 		builder.append("]");
 		return builder.toString();
 	}
-	
 	
 }
