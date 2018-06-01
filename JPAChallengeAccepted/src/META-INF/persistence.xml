@@ -12,6 +12,7 @@
         <class>com.skilldistillery.challengeaccepted.entities.Conversation</class>
         <class>com.skilldistillery.challengeaccepted.entities.Message</class>
         <class>com.skilldistillery.challengeaccepted.entities.Skill</class>
+        <class>com.skilldistillery.challengeaccepted.entities.Status</class>
         <class>com.skilldistillery.challengeaccepted.entities.Tag</class>
         <class>com.skilldistillery.challengeaccepted.entities.User</class>
         <class>com.skilldistillery.challengeaccepted.entities.UserChallenge</class>
