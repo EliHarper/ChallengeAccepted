@@ -231,14 +231,28 @@ CREATE TABLE IF NOT EXISTS `user_challenge` (
 ENGINE = InnoDB;
 
 SHOW WARNINGS;
+
+-- -----------------------------------------------------
+-- Table `user_1`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `user_1` ;
+
+SHOW WARNINGS;
+CREATE TABLE IF NOT EXISTS `user_1` (
+  `username` VARCHAR(16) NOT NULL,
+  `email` VARCHAR(255) NULL,
+  `password` VARCHAR(32) NOT NULL,
+  `create_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP);
+
+SHOW WARNINGS;
 SET SQL_MODE = '';
-GRANT USAGE ON *.* TO challengeUser;
- DROP USER challengeUser;
+GRANT USAGE ON *.* TO challengeUser@localhost;
+ DROP USER challengeUser@localhost;
 SET SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 SHOW WARNINGS;
-CREATE USER 'challengeUser' IDENTIFIED BY 'challenge';
+CREATE USER 'challengeUser'@'localhost' IDENTIFIED BY 'challenge';
 
-GRANT SELECT, INSERT, TRIGGER, UPDATE, DELETE ON TABLE * TO 'challengeUser';
+GRANT SELECT, INSERT, TRIGGER, UPDATE, DELETE ON TABLE * TO 'challengeUser'@'localhost';
 SHOW WARNINGS;
 SET SQL_MODE = '';
 GRANT USAGE ON *.* TO challengeAdmin;
