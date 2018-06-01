@@ -31,7 +31,7 @@ public class TagTest {
 	}
 	
 	@Test
-	void test_challenge_associations() {
+	void test_tag_associations() {
 		assertEquals("Party Games", t.getName());
 	}
 }

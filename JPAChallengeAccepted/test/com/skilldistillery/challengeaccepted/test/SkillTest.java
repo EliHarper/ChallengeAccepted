@@ -31,7 +31,7 @@ public class SkillTest {
 	}
 	
 	@Test
-	void test_challenge_associations() {
+	void test_skill_associations() {
 		assertEquals("Drinker Driver", s.getName());
 	}
 }

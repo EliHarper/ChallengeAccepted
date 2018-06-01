@@ -31,7 +31,7 @@ public class MessageTest {
 	}
 	
 	@Test
-	void test_challenge_associations() {
+	void test_message_associations() {
 		assertEquals("AlexTheDestroyer", m.getSender().getUsername());
 	}
 }

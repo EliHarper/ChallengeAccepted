@@ -46,8 +46,7 @@ public class Challenge {
 	@JoinColumn(name="skill_id")
 	private Skill skill;
 
-	@Column(name= "challenger_won")
-	private boolean challengerWon;
+	private boolean pending;
 
 	@OneToMany(mappedBy="challenge")
 	private List <UserChallenge> userChallenges;
@@ -149,13 +148,13 @@ public class Challenge {
 	}
 
 
-	public boolean isChallengerWon() {
-		return challengerWon;
+	public boolean isPending() {
+		return pending;
 	}
 
 
-	public void setChallengerWon(boolean challengerWon) {
-		this.challengerWon = challengerWon;
+	public void setPending(boolean pending) {
+		this.pending = pending;
 	}
 
 
@@ -198,8 +197,8 @@ public class Challenge {
 		builder.append(wager);
 		builder.append(", users=");
 		builder.append(users);
-		builder.append(", challengerWon=");
-		builder.append(challengerWon);
+		builder.append(", pending=");
+		builder.append(pending);
 		builder.append(", timeCreated=");
 		builder.append(timeCreated);
 		builder.append("]");

@@ -32,7 +32,7 @@ public class UserTest {
 	}
 	
 	@Test
-	void test_challenge_associations() {
+	void test_user_associations() {
 		assertEquals("AlexTheDestroyer", u.getUsername());
 	}
 }

@@ -33,6 +33,6 @@ public class ChallengeTest {
 	
 	@Test
 	void test_challenge_associations() {
-		assertEquals("Fight me", c.getName());
+		assertEquals("Drinking Challenge", c.getName());
 	}
 }
