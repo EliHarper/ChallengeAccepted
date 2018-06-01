@@ -23,12 +23,10 @@ public class Challenge {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	private boolean active;
 	private String location;
 	private String name;
 	private String description;
-	private int wager;
-	private boolean pending;
+	private Integer wager;
 	
 	@Column(name="min_number_of_challengers")
 	private int minNumberOfChallengers;
@@ -41,7 +39,7 @@ public class Challenge {
 	private Status status;
 	
 	@ManyToMany(mappedBy="challenges")
-	private List <User> users;
+	private List <User> acceptors;
 	
 	@ManyToMany
 	@JoinTable(name="challenge_tag",
@@ -50,8 +48,8 @@ public class Challenge {
 	private List<Tag> tags;
 	
 	@ManyToOne
-	@JoinColumn(name="invited_user_id")
-	private User challengeAcceptor;
+	@JoinColumn(name="creator_id")
+	private User creator;
 	
 	@ManyToOne
 	@JoinColumn(name="skill_id")
@@ -67,13 +65,6 @@ public class Challenge {
 	public Challenge() {
 	}
 
-	public boolean isActive() {
-		return active;
-	}
-
-	public void setActive(boolean active) {
-		this.active = active;
-	}
 
 	public String getLocation() {
 		return location;
@@ -108,11 +99,11 @@ public class Challenge {
 	}
 
 	public List<User> getUsers() {
-		return users;
+		return acceptors;
 	}
 
-	public void setUsers(List<User> users) {
-		this.users = users;
+	public void setUsers(List<User> acceptors) {
+		this.acceptors = acceptors;
 	}
 
 	public List<Tag> getTags() {
@@ -124,11 +115,11 @@ public class Challenge {
 	}
 
 	public User getChallengeAcceptor() {
-		return challengeAcceptor;
+		return creator;
 	}
 
-	public void setChallengeAcceptor(User challengeAcceptor) {
-		this.challengeAcceptor = challengeAcceptor;
+	public void setChallengeAcceptor(User creator) {
+		this.creator = creator;
 	}
 
 	public Skill getSkill() {
@@ -139,13 +130,6 @@ public class Challenge {
 		this.skill = skill;
 	}
 
-	public boolean isPending() {
-		return pending;
-	}
-
-	public void setPending(boolean pending) {
-		this.pending = pending;
-	}
 
 	public List<UserChallenge> getUserChallenges() {
 		return userChallenges;
@@ -196,8 +180,6 @@ public class Challenge {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Challenge [id=");
 		builder.append(id);
-		builder.append(", active=");
-		builder.append(active);
 		builder.append(", location=");
 		builder.append(location);
 		builder.append(", name=");
@@ -205,9 +187,7 @@ public class Challenge {
 		builder.append(", wager=");
 		builder.append(wager);
 		builder.append(", users=");
-		builder.append(users);
-		builder.append(", pending=");
-		builder.append(pending);
+		builder.append(acceptors);
 		builder.append(", status=");
 		builder.append(status);
 		builder.append(", timeCreated=");

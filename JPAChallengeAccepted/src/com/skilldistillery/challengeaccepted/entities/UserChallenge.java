@@ -21,8 +21,6 @@ public class UserChallenge {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	
-//	@OneToMany(mappedBy="acceptedChallenges")
 	private boolean accepted;
 
 	@ManyToOne
@@ -37,7 +35,7 @@ public class UserChallenge {
 	private boolean acceptorWon;
 	
 	@CreationTimestamp
-	@Column(name="accepted_time")
+	@Column(name="accept_time")
 	private Date acceptedTime;
 
 	public boolean isAccepted() {

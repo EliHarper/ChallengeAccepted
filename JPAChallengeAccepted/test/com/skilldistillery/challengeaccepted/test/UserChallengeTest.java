@@ -1,14 +1,16 @@
 package com.skilldistillery.challengeaccepted.test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import static org.junit.Assert.assertEquals;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import org.junit.jupiter.api.Test;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Test;
+
 import com.skilldistillery.challengeaccepted.entities.UserChallenge;
 
 public class UserChallengeTest {
@@ -33,7 +35,7 @@ public class UserChallengeTest {
 	@Test
 	public void basic_user_challenge_mapping() {
 		uc = em.find(UserChallenge.class, 1);
-		assertEquals("", uc.getUser().getUsername());
+		assertEquals(1, uc.getId());
 	}
 	
 }
