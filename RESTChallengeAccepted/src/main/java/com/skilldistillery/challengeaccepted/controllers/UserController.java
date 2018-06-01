@@ -5,9 +5,9 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.skilldistillery.challengeaccepted.repositories.ChallengeRepository;
-import com.skilldistillery.challengeaccepted.repositories.SkillRepository;
-import com.skilldistillery.challengeaccepted.repositories.UserRepository;
+import com.skilldistillery.challengeaccepted.services.ChallengeService;
+import com.skilldistillery.challengeaccepted.services.SkillService;
+import com.skilldistillery.challengeaccepted.services.UserService;
 
 @RestController
 @RequestMapping("api")
@@ -15,12 +15,12 @@ import com.skilldistillery.challengeaccepted.repositories.UserRepository;
 public class UserController {
 	
 	@Autowired
-	private UserRepository userRepo;
+	private UserService userServ;
 	
 	@Autowired
-	private ChallengeRepository chaRepo;
+	private ChallengeService chaServ;
 	
 	@Autowired
-	private SkillRepository skillzRepo;
+	private SkillService skillzServ;
 
 }
