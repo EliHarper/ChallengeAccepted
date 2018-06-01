@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Message {
 	
@@ -20,6 +22,7 @@ public class Message {
 	private int id;
 	private String message;
 	
+	
 	@ManyToOne
 	@JoinColumn(name="sender_id")
 	private User sender;
@@ -27,6 +30,7 @@ public class Message {
 	@Column(name="thread_id")
 	private int threadId;
 
+	
 	@ManyToOne
 	@JoinColumn(name="receiver_id")
 	private User receiver;
