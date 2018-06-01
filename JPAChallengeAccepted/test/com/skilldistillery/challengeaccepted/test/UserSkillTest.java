@@ -10,18 +10,18 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.skilldistillery.challengeaccepted.entities.User;
+import com.skilldistillery.challengeaccepted.entities.UserSkill;
 
-public class UserTest {
+public class UserSkillTest {
 	private EntityManagerFactory emf;
 	private EntityManager em;
-	private User u;
+	private UserSkill us;
 	
 	@BeforeEach
 	void setUp() throws Exception {
 		emf = Persistence.createEntityManagerFactory("ChallengeAccepted");
 		em = emf.createEntityManager();
-		u = em.find(User.class, 1);
+		us = em.find(UserSkill.class, 1);
 	}
 	
 	@AfterEach
@@ -31,7 +31,7 @@ public class UserTest {
 	}
 	
 	@Test
-	void test_user_associations() {
-		assertEquals("AlexTheDestroyer", u.getUsername());
+	void test_user_skill_associations() {
+		assertEquals(5, us.getPoints());
 	}
 }
