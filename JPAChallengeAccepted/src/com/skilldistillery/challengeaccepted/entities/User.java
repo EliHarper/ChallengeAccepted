@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 public class User {
@@ -25,8 +26,8 @@ public class User {
 	
 	@ManyToMany
 	@JoinTable(name="user_challenge",
-	joinColumns = @JoinColumn(name="challenge_id"),
-	inverseJoinColumns= @JoinColumn(name="invited_user_id"))
+	joinColumns =  @JoinColumn(name="invited_user_id"),
+	inverseJoinColumns=@JoinColumn(name="challenge_id"))
 	private List <Challenge> challenges;
 
 	@ManyToMany
@@ -35,6 +36,12 @@ public class User {
 	inverseJoinColumns= @JoinColumn(name="skill_id"))
 	private List <Skill> skills;
 
+	@OneToMany(mappedBy="user")
+	private List <UserChallenge> userChallenges;
+	
+	@OneToMany(mappedBy="user")
+	private List <UserSkill> userSkills;
+	
 	public User() {
 	}
 

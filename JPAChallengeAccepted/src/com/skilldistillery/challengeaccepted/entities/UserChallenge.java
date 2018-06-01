@@ -7,6 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -17,9 +20,19 @@ public class UserChallenge {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-	private boolean accepted;
 	private boolean completed;
+	
+	
+	@OneToMany(mappedBy="acceptedChallenges")
+	private boolean accepted;
+
+	@ManyToOne
+	@JoinColumn(name="challenge_id")
+	private Challenge challenge;
+	
+	@ManyToOne
+	@JoinColumn(name="invited_user_id")
+	private User user;
 	
 	@Column(name="acceptor_won")
 	private boolean acceptorWon;
@@ -27,4 +40,74 @@ public class UserChallenge {
 	@CreationTimestamp
 	@Column(name="accepted_time")
 	private Date acceptedTime;
+
+	public boolean isAccepted() {
+		return accepted;
+	}
+
+	public void setAccepted(boolean accepted) {
+		this.accepted = accepted;
+	}
+
+	public boolean isCompleted() {
+		return completed;
+	}
+
+	public void setCompleted(boolean completed) {
+		this.completed = completed;
+	}
+
+	public boolean isAcceptorWon() {
+		return acceptorWon;
+	}
+
+	public void setAcceptorWon(boolean acceptorWon) {
+		this.acceptorWon = acceptorWon;
+	}
+
+	public Date getAcceptedTime() {
+		return acceptedTime;
+	}
+
+	public void setAcceptedTime(Date acceptedTime) {
+		this.acceptedTime = acceptedTime;
+	}
+
+	public Challenge getChallenge() {
+		return challenge;
+	}
+
+	public void setChallenge(Challenge challenge) {
+		this.challenge = challenge;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("UserChallenge [id=");
+		builder.append(id);
+		builder.append(", accepted=");
+		builder.append(accepted);
+		builder.append(", completed=");
+		builder.append(completed);
+		builder.append(", acceptorWon=");
+		builder.append(acceptorWon);
+		builder.append(", acceptedTime=");
+		builder.append(acceptedTime);
+		builder.append("]");
+		return builder.toString();
+	}
+	
 }

@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -35,12 +37,20 @@ public class Challenge {
 	inverseJoinColumns= @JoinColumn(name="tag_id"))
 	private List<Tag> tags;
 	
-	@Column(name="skill_id")
-	private int skillId;
+	@ManyToOne
+	@JoinColumn(name="invited_user_id")
+	private User challengeAcceptor;
+	
+	@ManyToOne
+	@JoinColumn(name="skill_id")
+	private Skill skill;
 
 	@Column(name= "challenger_won")
 	private boolean challengerWon;
 
+	@OneToMany(mappedBy="challenge")
+	private List <UserChallenge> userChallenges;
+	
 	@CreationTimestamp
 	@Column(name= "time_created")
 	private Date timeCreated;
@@ -48,12 +58,12 @@ public class Challenge {
 	public Challenge() {
 	}
 
-	public int getSkillId() {
-		return skillId;
+	public Skill getSkill() {
+		return skill;
 	}
 	
-	public void setSkillId(int skillId) {
-		this.skillId = skillId;
+	public void setSkill(Skill skill) {
+		this.skill = skill;
 	}
 
 	public boolean isActive() {
