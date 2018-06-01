@@ -22,7 +22,7 @@ public class UserChallenge {
 	private int id;
 	
 	
-	@OneToMany(mappedBy="acceptedChallenges")
+//	@OneToMany(mappedBy="acceptedChallenges")
 	private boolean accepted;
 
 	@ManyToOne
