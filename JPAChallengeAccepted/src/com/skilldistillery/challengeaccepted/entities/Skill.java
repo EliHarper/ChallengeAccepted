@@ -26,7 +26,7 @@ public class Skill {
 	private List <User> users;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy="skills")
+	@OneToMany(mappedBy="skill")
 	private List <UserSkill> userSkills;
 	
 	public Skill() {
