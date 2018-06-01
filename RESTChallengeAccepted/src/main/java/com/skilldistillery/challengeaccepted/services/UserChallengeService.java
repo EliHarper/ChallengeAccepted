@@ -13,6 +13,6 @@ public interface UserChallengeService {
 	public Boolean delete(int id, String username);
 	public List<UserChallenge> index();
 	public UserChallenge show(int id, String username);
-	public List<UserChallenge> userChallengesOfAChallenge(Challenge challenge, String username);
-	public List<UserChallenge> userChallengesOfAUser(User user, String username);
+	public List<UserChallenge> getTheChallengeAcceptorsForAChallenge(Challenge challenge, String username);
+	public List<UserChallenge> challengesUserHasParticipatedIn(User user, String username);
 }
