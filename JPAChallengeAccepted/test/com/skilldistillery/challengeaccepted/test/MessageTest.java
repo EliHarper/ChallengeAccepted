@@ -16,7 +16,7 @@ public class MessageTest {
 	private EntityManagerFactory emf;
 	private EntityManager em;
 	private Message m;
-	
+
 	@BeforeEach
 	void setUp() throws Exception {
 		emf = Persistence.createEntityManagerFactory("ChallengeAccepted");
@@ -33,5 +33,9 @@ public class MessageTest {
 	@Test
 	void test_message_associations() {
 		assertEquals("AlexTheDestroyer", m.getSender().getUsername());
+	}
+	@Test
+	void test_message_associations_receiver() {
+		assertEquals("DoraTheExplora", m.getReceiver().getUsername());
 	}
 }
