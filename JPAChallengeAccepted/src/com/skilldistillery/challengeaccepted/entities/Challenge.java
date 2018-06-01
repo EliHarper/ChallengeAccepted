@@ -29,6 +29,12 @@ public class Challenge {
 	private String description;
 	private int wager;
 	
+	@Column(name="min_number_of_challengers")
+	private int minNumberOfChallengers;
+	
+	@Column(name="max_number_of_challengers")
+	private int maxNumberOfChallengers;
+	
 	@ManyToMany(mappedBy="challenges")
 	private List <User> users;
 	
