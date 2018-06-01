@@ -26,6 +26,7 @@ public class Challenge {
 	private boolean active;
 	private String location;
 	private String name;
+	private String description;
 	private int wager;
 	
 	@ManyToMany(mappedBy="challenges")
@@ -58,69 +59,125 @@ public class Challenge {
 	public Challenge() {
 	}
 
-	public Skill getSkill() {
-		return skill;
-	}
-	
-	public void setSkill(Skill skill) {
-		this.skill = skill;
-	}
-
 	public boolean isActive() {
 		return active;
 	}
+
 
 	public void setActive(boolean active) {
 		this.active = active;
 	}
 
+
 	public String getLocation() {
 		return location;
 	}
+
 
 	public void setLocation(String location) {
 		this.location = location;
 	}
 
+
 	public String getName() {
 		return name;
 	}
+
 
 	public void setName(String name) {
 		this.name = name;
 	}
 
+
+	public String getDescription() {
+		return description;
+	}
+
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+
 	public int getWager() {
 		return wager;
 	}
+
 
 	public void setWager(int wager) {
 		this.wager = wager;
 	}
 
+
 	public List<User> getUsers() {
 		return users;
 	}
 
-	public void setUser(List<User> users) {
+
+	public void setUsers(List<User> users) {
 		this.users = users;
 	}
+
+
+	public List<Tag> getTags() {
+		return tags;
+	}
+
+
+	public void setTags(List<Tag> tags) {
+		this.tags = tags;
+	}
+
+
+	public User getChallengeAcceptor() {
+		return challengeAcceptor;
+	}
+
+
+	public void setChallengeAcceptor(User challengeAcceptor) {
+		this.challengeAcceptor = challengeAcceptor;
+	}
+
+
+	public Skill getSkill() {
+		return skill;
+	}
+
+
+	public void setSkill(Skill skill) {
+		this.skill = skill;
+	}
+
 
 	public boolean isChallengerWon() {
 		return challengerWon;
 	}
 
+
 	public void setChallengerWon(boolean challengerWon) {
 		this.challengerWon = challengerWon;
 	}
+
+
+	public List<UserChallenge> getUserChallenges() {
+		return userChallenges;
+	}
+
+
+	public void setUserChallenges(List<UserChallenge> userChallenges) {
+		this.userChallenges = userChallenges;
+	}
+
 
 	public Date getTimeCreated() {
 		return timeCreated;
 	}
 
+
 	public void setTimeCreated(Date timeCreated) {
 		this.timeCreated = timeCreated;
 	}
+
 
 	public int getId() {
 		return id;
@@ -148,6 +205,5 @@ public class Challenge {
 		builder.append("]");
 		return builder.toString();
 	}
-	
 	
 }
