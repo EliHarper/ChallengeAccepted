@@ -17,6 +17,7 @@ import { FallbackComponent } from './fallback/fallback.component';
 import { ChallengeViewComponent } from './challenge-view/challenge-view.component';
 import { HomeComponent } from './home/home.component';
 import { CompletedStatusPipe } from './pipes/completed-status.pipe';
+import { TopSkillsPipe } from './pipes/top-skills.pipe';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { CompletedStatusPipe } from './pipes/completed-status.pipe';
     FallbackComponent,
     ChallengeViewComponent,
     HomeComponent,
-    CompletedStatusPipe
+    CompletedStatusPipe,
+    TopSkillsPipe
   ],
   imports: [
     BrowserModule,

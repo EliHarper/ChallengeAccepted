@@ -1,3 +1,4 @@
+import { TopSkillsPipe } from './../pipes/top-skills.pipe';
 import { UserChallengeService } from './../user-challenge.service';
 import { CompletedStatusPipe } from './../pipes/completed-status.pipe';
 import { Component, OnInit } from '@angular/core';
@@ -10,7 +11,7 @@ import { User } from '../models/user';
 })
 export class UserProfileComponent implements OnInit {
 
-  title = 'User Profile';
+  title = 'Profile of {{ user.username }}';
 
   user = new User();
 
@@ -18,8 +19,13 @@ export class UserProfileComponent implements OnInit {
     return this.completedChallenges.transform(this.user.challenges).length;
   };
 
+  getTopSkills = function() {
+    return this.topSkills.transform(this.user.skills);
+  };
+
   constructor(private userChallengeService: UserChallengeService,
-              private completedChallenges: CompletedStatusPipe) { }
+              private completedChallenges: CompletedStatusPipe,
+              private topSkills: TopSkillsPipe) { }
 
   ngOnInit() {
   }
