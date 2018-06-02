@@ -52,7 +52,4 @@ public class UserChallengeController {
 	public List<UserChallenge> allAcceptsForUser(@RequestBody User user, String username){
 		return userChallengeService.challengesUserHasParticipatedIn(user, username);
 	}
-
-	
-
 }
