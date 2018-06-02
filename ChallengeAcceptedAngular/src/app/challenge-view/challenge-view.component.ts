@@ -1,3 +1,5 @@
+import { Challenge } from './../models/challenge';
+import { ChallengeService } from './../challenge.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,7 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChallengeViewComponent implements OnInit {
 
-  constructor() { }
+  displayChallenge = new Challenge();
+
+
+
+
+  constructor(private challengeService: ChallengeService) { }
 
   ngOnInit() {
   }
