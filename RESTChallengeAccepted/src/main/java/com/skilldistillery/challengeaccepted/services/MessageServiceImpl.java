@@ -19,11 +19,17 @@ public class MessageServiceImpl implements MessageService{
 	private UserRepository userRepo;
 
 	@Override
-	public Set<Message> index(String username) {
+	public Set<Message> indexThreads(int id) {
 		
-		return messageRepo.findByUserUsername(username);
+		return messageRepo.getMessageThreadByUserId(id);
 	}
 
+	@Override
+	public Set<Message> indexThreadMessages(int tid) {
+		
+		return messageRepo.findByThreadId(tid);
+	}
+	
 	@Override
 	public Message show(String username, int mid) {
 		
@@ -57,8 +63,7 @@ public class MessageServiceImpl implements MessageService{
 		}
 		
 	}
-	
-		
+
 	
 	
 }

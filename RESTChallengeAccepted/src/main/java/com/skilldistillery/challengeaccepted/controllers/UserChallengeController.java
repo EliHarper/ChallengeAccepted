@@ -24,7 +24,7 @@ public class UserChallengeController {
 	private UserChallengeService userChallengeService;
 	
 	@RequestMapping(path="/challenge/{id}/accept", method=RequestMethod.POST)
-	public UserChallenge createUserChallenge(UserChallenge userChallenge, String username) {
+	public UserChallenge createUserChallenge(@RequestBody UserChallenge userChallenge, String username) {
 		return userChallengeService.create(userChallenge, username);
 	}
 	
