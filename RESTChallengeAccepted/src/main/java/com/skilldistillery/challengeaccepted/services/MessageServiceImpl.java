@@ -18,23 +18,23 @@ public class MessageServiceImpl implements MessageService{
 	@Autowired
 	private UserRepository userRepo;
 
-	@Override
-	public Set<Message> indexThreads(int id) {
-		
-		return messageRepo.getMessageThreadByUserId(id);
-	}
-
-	@Override
-	public Set<Message> indexThreadMessages(int tid) {
-		
-		return messageRepo.findByThreadId(tid);
-	}
+//	@Override
+//	public Set<Message> indexThreads(int id) {
+//		
+//		return messageRepo.getMessageThreadByUserId(id);
+//	}
+//
+//	@Override
+//	public Set<Message> indexThreadMessages(int tid) {
+//		
+//		return messageRepo.findByThreadId(tid);
+//	}
 	
-	@Override
-	public Message show(String username, int mid) {
-		
-		return messageRepo.findByIdAndUserUsername(mid, username);
-	}
+//	@Override
+//	public Message show(String username, int mid) {
+//		
+//		return messageRepo.findByIdAndUserUsername(mid, username);
+//	}
 
 	@Override
 	public Message create(Message message) {
