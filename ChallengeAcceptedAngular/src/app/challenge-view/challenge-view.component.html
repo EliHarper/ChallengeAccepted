@@ -1,3 +1,13 @@
 <h1>{{displayChallenge.name}}</h1>
 <p>{{displayChallenge.description}}</p>
 <p>{{displayChallenge.location}}</p>
+<h3>Who has accepted this challenge?</h3>
+<h4>{{displayChallenge.minNumberOfChallengers}} minimum of {{displayChallenge.maxNumberOfChallengers}} maximum</h4>
+<div *ngIf="displayChallenge.acceptors.length > 0">
+  <ul>
+    <li *ngFor="let accept of displayChallenge.acceptors">
+      <p>accept.invited_user_id</p><p>accept.accept_time</p>
+    </li>
+  </ul>
+</div>
+<button (click)="acceptChallenge(displayChallenge.id)">ACCEPT THIS CHALLENGE</button>

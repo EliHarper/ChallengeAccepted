@@ -11,6 +11,9 @@ export class ChallengeViewComponent implements OnInit {
 
   displayChallenge = new Challenge();
 
+  acceptChallenge (id) {
+
+  }
 
 
 
