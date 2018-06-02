@@ -3,6 +3,7 @@ package com.skilldistillery.challengeaccepted.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.skilldistillery.challengeaccepted.entities.Challenge;
 import com.skilldistillery.challengeaccepted.entities.User;
@@ -11,6 +12,7 @@ import com.skilldistillery.challengeaccepted.repositories.ChallengeRepository;
 import com.skilldistillery.challengeaccepted.repositories.UserChallengeRepository;
 import com.skilldistillery.challengeaccepted.repositories.UserRepository;
 
+@Service
 public class UserChallengeServiceImpl implements UserChallengeService{
 
 	 @Autowired
