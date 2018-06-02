@@ -1,4 +1,7 @@
+import { UserChallengeService } from './../user-challenge.service';
+import { CompletedStatusPipe } from './../pipes/completed-status.pipe';
 import { Component, OnInit } from '@angular/core';
+import { User } from '../models/user';
 
 @Component({
   selector: 'app-user-profile',
@@ -7,7 +10,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserProfileComponent implements OnInit {
 
-  constructor() { }
+  title = 'User Profile';
+
+  user = new User();
+
+  getNumChallenges = function() {
+    return this.completedChallenges.transform(this.user.challenges).length;
+  };
+
+  constructor(private userChallengeService: UserChallengeService,
+              private completedChallenges: CompletedStatusPipe) { }
 
   ngOnInit() {
   }
