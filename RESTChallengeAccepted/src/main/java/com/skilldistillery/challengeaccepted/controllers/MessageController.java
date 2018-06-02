@@ -8,13 +8,13 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.challengeaccepted.entities.Message;
 import com.skilldistillery.challengeaccepted.services.MessageService;
-import com.skilldistillery.challengeaccepted.services.UserService;
 
 @RestController
 @RequestMapping("api")
@@ -23,9 +23,6 @@ public class MessageController {
 	
 	@Autowired
 	private MessageService messageServ;
-	
-	@Autowired
-	private UserService userServ;
 	
 	@RequestMapping(path="ping", method=RequestMethod.GET)
 	public String ping() {
@@ -61,6 +58,11 @@ public class MessageController {
 		}
 		res.setStatus(404);
 		return null;
+	}
+	
+	@RequestMapping(path="messages", method=RequestMethod.POST)
+	public Message create(HttpServletRequest req, HttpServletResponse res, @RequestBody Message message) {
+		return messageServ.create(message);
 	}
 }
 
