@@ -2419,6 +2419,11 @@ ul.nav-tabs.nav-tabs-right > li:last-child {
   background-attachment: fixed;
 }
 
-.img-slide {
+.img-slide1 {
+  width: 60%;
+}
+
+.img-slide2 {
   padding-top: 70px;
 }
+
