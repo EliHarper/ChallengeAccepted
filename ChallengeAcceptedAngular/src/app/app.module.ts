@@ -11,6 +11,7 @@ import { LogoutComponent } from './logout/logout.component';
 import { RegisterComponent } from './register/register.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FallbackComponent } from './fallback/fallback.component';
+import { ChallengeViewComponent } from './challenge-view/challenge-view.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { FallbackComponent } from './fallback/fallback.component';
     LogoutComponent,
     RegisterComponent,
     NavbarComponent,
-    FallbackComponent
+    FallbackComponent,
+    ChallengeViewComponent
   ],
   imports: [
     BrowserModule,
