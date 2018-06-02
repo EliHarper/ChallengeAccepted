@@ -11,6 +11,7 @@ import { LogoutComponent } from './logout/logout.component';
 import { RegisterComponent } from './register/register.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FallbackComponent } from './fallback/fallback.component';
+import { ChallengeViewComponent } from './challenge-view/challenge-view.component';
 import { HomeComponent } from './home/home.component';
 
 @NgModule({
@@ -24,6 +25,7 @@ import { HomeComponent } from './home/home.component';
     RegisterComponent,
     NavbarComponent,
     FallbackComponent,
+    ChallengeViewComponent,
     HomeComponent
   ],
   imports: [
