@@ -12,6 +12,7 @@ import { RegisterComponent } from './register/register.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FallbackComponent } from './fallback/fallback.component';
 import { ChallengeViewComponent } from './challenge-view/challenge-view.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ChallengeViewComponent } from './challenge-view/challenge-view.componen
     RegisterComponent,
     NavbarComponent,
     FallbackComponent,
-    ChallengeViewComponent
+    ChallengeViewComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

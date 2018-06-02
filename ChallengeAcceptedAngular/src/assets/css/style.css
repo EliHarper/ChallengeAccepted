@@ -1802,8 +1802,9 @@ a.btn-hh-trigger.target-open:after {
   text-shadow: none;
   line-height: 1;
   background: url(../img/logo.png) left top no-repeat;
-  height: 30px;
-  width: 145px;
+  height: 45px;
+  width: 200px;
+  background-size: 90%;
 }
 .navbar-brand:hover {
   text-decoration: none;
