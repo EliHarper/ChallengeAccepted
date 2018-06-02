@@ -64,5 +64,11 @@ public class MessageController {
 	public Message create(HttpServletRequest req, HttpServletResponse res, @RequestBody Message message) {
 		return messageServ.create(message);
 	}
+	
+	@RequestMapping(path="messages/{mid}", method=RequestMethod.DELETE)
+	public void destroy(HttpServletRequest req, HttpServletResponse res, @PathVariable int mid) {
+		String username = "AlexTheDestroyer";
+		messageServ.destroy(username, mid);
+	}
 }
 

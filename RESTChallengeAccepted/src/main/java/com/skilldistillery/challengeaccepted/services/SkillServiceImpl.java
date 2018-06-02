@@ -50,4 +50,6 @@ public class SkillServiceImpl implements SkillService {
 			return false;
 		}
 	}
+	
+	// Need query to return list of skills for a user, need to order by points descending (most-to-least)
 }
