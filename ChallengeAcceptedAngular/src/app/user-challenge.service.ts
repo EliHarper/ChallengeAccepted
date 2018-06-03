@@ -10,11 +10,20 @@ import {catchError} from 'rxjs/operators';
 })
 export class UserChallengeService {
 
-  url = 'http://localhost:8080';
+  url = 'http://localhost:8080/api';
 
 
   acceptingAMarketChallenge(acceptedChallenge) {
-    this.http.post<UserChallenge>(this.url, acceptedChallenge).pipe(
+    return this.http.post<UserChallenge>(`${this.url}/challenge/${acceptedChallenge.id}/accept`, acceptedChallenge).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(err);
+      })
+    );
+  }
+
+  acceptingAPersonalChallenge(acceptedChallenge) {
+    this.http.patch<UserChallenge>(`${this.url}/challenge/${acceptedChallenge.id}/accept`, acceptedChallenge).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(err);
