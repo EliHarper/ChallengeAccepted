@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS `challenge` (
   `name` VARCHAR(45) NULL,
   `location` VARCHAR(100) NULL,
   `time_created` TIMESTAMP NOT NULL DEFAULT current_timestamp,
-  `wager` INT NULL,
+  `wager` INT NOT NULL DEFAULT 0,
   `min_number_of_challengers` INT NULL,
   `max_number_of_challengers` INT NULL,
   `expiration` DATETIME NULL,
@@ -255,13 +255,13 @@ CREATE USER 'challengeUser'@'localhost' IDENTIFIED BY 'challenge';
 GRANT SELECT, INSERT, TRIGGER, UPDATE, DELETE ON TABLE * TO 'challengeUser'@'localhost';
 SHOW WARNINGS;
 SET SQL_MODE = '';
-GRANT USAGE ON *.* TO challengeAdmin;
- DROP USER challengeAdmin;
+GRANT USAGE ON *.* TO challengeAdmin@localhost;
+ DROP USER challengeAdmin@localhost;
 SET SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 SHOW WARNINGS;
-CREATE USER 'challengeAdmin' IDENTIFIED BY 'challenge';
+CREATE USER 'challengeAdmin'@'localhost' IDENTIFIED BY 'challenge';
 
-GRANT ALL ON * TO 'challengeAdmin';
+GRANT ALL ON * TO 'challengeAdmin'@'localhost';
 SHOW WARNINGS;
 
 SET SQL_MODE=@OLD_SQL_MODE;
@@ -329,11 +329,11 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `challengedb`;
-INSERT INTO `challenge` (`id`, `creator_id`, `skill_id`, `status_id`, `name`, `location`, `time_created`, `wager`, `min_number_of_challengers`, `max_number_of_challengers`, `expiration`, `description`, `image`) VALUES (1, 1, 1, 2, 'Drinking Challenge', 'The bar', DEFAULT, NULL, 2, 2, NULL, 'Drink against Me!', NULL);
-INSERT INTO `challenge` (`id`, `creator_id`, `skill_id`, `status_id`, `name`, `location`, `time_created`, `wager`, `min_number_of_challengers`, `max_number_of_challengers`, `expiration`, `description`, `image`) VALUES (2, 2, 2, 1, 'Lift Me Bro', 'The gym', DEFAULT, NULL, 2, 3, NULL, 'I can outlift you bro', NULL);
-INSERT INTO `challenge` (`id`, `creator_id`, `skill_id`, `status_id`, `name`, `location`, `time_created`, `wager`, `min_number_of_challengers`, `max_number_of_challengers`, `expiration`, `description`, `image`) VALUES (3, 3, 3, 1, 'Crossfit', 'The gym', DEFAULT, NULL, 2, 3, NULL, 'I can do more cardio than anyone with a heart', NULL);
-INSERT INTO `challenge` (`id`, `creator_id`, `skill_id`, `status_id`, `name`, `location`, `time_created`, `wager`, `min_number_of_challengers`, `max_number_of_challengers`, `expiration`, `description`, `image`) VALUES (4, 4, 4, 1, '8 Ball', 'The bar', DEFAULT, NULL, 2, 4, NULL, 'I\'m pretty good at pool', NULL);
-INSERT INTO `challenge` (`id`, `creator_id`, `skill_id`, `status_id`, `name`, `location`, `time_created`, `wager`, `min_number_of_challengers`, `max_number_of_challengers`, `expiration`, `description`, `image`) VALUES (5, 5, 5, 3, 'Ping Pang', 'The bar', DEFAULT, NULL, 2, 2, NULL, 'I wanna play someone at Ping Pong!', NULL);
+INSERT INTO `challenge` (`id`, `creator_id`, `skill_id`, `status_id`, `name`, `location`, `time_created`, `wager`, `min_number_of_challengers`, `max_number_of_challengers`, `expiration`, `description`, `image`) VALUES (1, 1, 1, 2, 'Drinking Challenge', 'The bar', DEFAULT, DEFAULT, 2, 2, NULL, 'Drink against Me!', NULL);
+INSERT INTO `challenge` (`id`, `creator_id`, `skill_id`, `status_id`, `name`, `location`, `time_created`, `wager`, `min_number_of_challengers`, `max_number_of_challengers`, `expiration`, `description`, `image`) VALUES (2, 2, 2, 1, 'Lift Me Bro', 'The gym', DEFAULT, DEFAULT, 2, 3, NULL, 'I can outlift you bro', NULL);
+INSERT INTO `challenge` (`id`, `creator_id`, `skill_id`, `status_id`, `name`, `location`, `time_created`, `wager`, `min_number_of_challengers`, `max_number_of_challengers`, `expiration`, `description`, `image`) VALUES (3, 3, 3, 1, 'Crossfit', 'The gym', DEFAULT, DEFAULT, 2, 3, NULL, 'I can do more cardio than anyone with a heart', NULL);
+INSERT INTO `challenge` (`id`, `creator_id`, `skill_id`, `status_id`, `name`, `location`, `time_created`, `wager`, `min_number_of_challengers`, `max_number_of_challengers`, `expiration`, `description`, `image`) VALUES (4, 4, 4, 1, '8 Ball', 'The bar', DEFAULT, DEFAULT, 2, 4, NULL, 'I\'m pretty good at pool', NULL);
+INSERT INTO `challenge` (`id`, `creator_id`, `skill_id`, `status_id`, `name`, `location`, `time_created`, `wager`, `min_number_of_challengers`, `max_number_of_challengers`, `expiration`, `description`, `image`) VALUES (5, 5, 5, 3, 'Ping Pang', 'The bar', DEFAULT, DEFAULT, 2, 2, NULL, 'I wanna play someone at Ping Pong!', NULL);
 
 COMMIT;
 
