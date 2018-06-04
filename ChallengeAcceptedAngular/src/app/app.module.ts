@@ -21,6 +21,7 @@ import { TopSkillsPipe } from './pipes/top-skills.pipe';
 import { TestingComponent } from './testing/testing.component';
 import { ChallengesAcceptedPipe } from './pipes/challenges-accepted.pipe';
 import { ChallengesCreatedPipe } from './pipes/challenges-created.pipe';
+import { MatButtonModule, MatCheckboxModule, MatProgressBarModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -35,13 +36,16 @@ import { ChallengesCreatedPipe } from './pipes/challenges-created.pipe';
     FallbackComponent,
     ChallengeViewComponent,
     HomeComponent,
-    TestingComponent,
+    TestingComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatProgressBarModule
   ],
   providers: [CompletedStatusPipe,
     TopSkillsPipe,

@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../models/user';
 import { ChallengesCreatedPipe } from '../pipes/challenges-created.pipe';
 import { userInfo } from 'os';
+import {MatButtonModule, MatCheckboxModule} from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../user.service';
 
