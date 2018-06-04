@@ -10,7 +10,7 @@ public interface ChallengeService {
 
 	public Challenge create(ChallengeDTO cDTO); 
 	
-	public Challenge update(Challenge c);
+	public Challenge update(Challenge c, int cid);
 	
 	public List <Challenge> index();
 	
