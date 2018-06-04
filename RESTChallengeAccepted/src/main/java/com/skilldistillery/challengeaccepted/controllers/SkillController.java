@@ -1,13 +1,16 @@
 package com.skilldistillery.challengeaccepted.controllers;
 
+import java.util.List;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.skilldistillery.challengeaccepted.services.ChallengeService;
+import com.skilldistillery.challengeaccepted.entities.Skill;
 import com.skilldistillery.challengeaccepted.services.SkillService;
-import com.skilldistillery.challengeaccepted.services.UserService;
 
 @RestController
 @RequestMapping("api")
@@ -17,10 +20,12 @@ public class SkillController {
 	@Autowired
 	private SkillService skillzServ;
 	
-	@Autowired
-	private UserService userServ;
+	@RequestMapping(path="skills", method = RequestMethod.GET)
+	public List<Skill> allSkills(){
+		return skillzServ.index();
+	}
 	
-	@Autowired
-	private ChallengeService chaServ;
 
+	
+	
 }
