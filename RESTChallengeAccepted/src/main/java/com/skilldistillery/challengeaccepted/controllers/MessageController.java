@@ -29,6 +29,7 @@ public class MessageController {
 		return "pong";
 	}
 	
+	//show single message
 	@RequestMapping(path="messages/{mid}", method=RequestMethod.GET)
 	public Message show(HttpServletRequest req, HttpServletResponse res, @PathVariable int mid, Integer uid) {
 	uid = 1;
@@ -40,6 +41,7 @@ public class MessageController {
 	return null;
 	}
 	
+	// show all messages in a single thread
 	@RequestMapping(path="messages/threads/{tid}", method=RequestMethod.GET)
 	public Set<Message> indexThreadMessages(HttpServletRequest req, HttpServletResponse res, @PathVariable int tid) {
 		if(messageServ.indexThreadMessages(tid) != null) {
@@ -50,6 +52,7 @@ public class MessageController {
 		return null;
 	}
 	
+	// show the first message of every thread for a user
 	@RequestMapping(path="messages/heads/{uid}", method=RequestMethod.GET)
 	public Set<Message> indexThreads(HttpServletRequest req, HttpServletResponse res, @PathVariable int uid) {
 		if(messageServ.indexThreads(uid) != null) {
@@ -60,11 +63,13 @@ public class MessageController {
 		return null;
 	}
 	
+	// create a new message
 	@RequestMapping(path="messages", method=RequestMethod.POST)
 	public Message create(HttpServletRequest req, HttpServletResponse res, @RequestBody Message message) {
 		return messageServ.create(message);
 	}
 	
+	// delete a message
 	@RequestMapping(path="messages/{mid}", method=RequestMethod.DELETE)
 	public void destroy(HttpServletRequest req, HttpServletResponse res, @PathVariable int mid) {
 		String username = "AlexTheDestroyer";
