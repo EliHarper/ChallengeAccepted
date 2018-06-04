@@ -11,8 +11,8 @@ export class UserSkillService {
 
   url = 'http://localhost:8080/api';
 
-  findUserSkillById(usid) {
-    return this.http.get<UserSkill>(`${this.url}/user/${usid}`).pipe(
+  findUserSkillById(uid) {
+    return this.http.get<UserSkill>(`${this.url}/userskills/${uid}`).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(err);
