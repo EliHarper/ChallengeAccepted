@@ -24,7 +24,7 @@ apply plugin: 'war'
 war {
   enabled = true
   archiveName = "${baseName}.war"
-  destinationDir = file("./")   
+  destinationDir = file("./")
 }
 
 group = 'com.skilldistillery'
@@ -38,17 +38,13 @@ repositories {
 
 dependencies {
     compile project(':JPAChallengeAccepted')
-    
+
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
     compile('org.springframework.boot:spring-boot-starter-web')
     runtime('mysql:mysql-connector-java')
     testCompile('org.springframework.boot:spring-boot-starter-test')
 
 //    compile('org.springframework.boot:spring-boot-starter-security')
-<<<<<<< HEAD
-
-=======
->>>>>>> 09571694e2c59ed96e7b15caa4bea9e6733b6a4c
     
     compile 'org.junit.jupiter:junit-jupiter-api:5.0.1'
       testCompile('org.apiguardian:apiguardian-api:1.0.0')
@@ -71,7 +67,7 @@ task deploy(dependsOn: war, group: 'build') {
   description = 'Deploy WAR file to remote server'
   ssh.settings {
     knownHosts = addHostKey(file("${System.properties['user.home']}/.ssh/known_hosts"))
-  }  
+  }
   doLast {
     logger.lifecycle("Deploying $war.archivePath to $remotes.ec2host.host")
     ssh.run {
