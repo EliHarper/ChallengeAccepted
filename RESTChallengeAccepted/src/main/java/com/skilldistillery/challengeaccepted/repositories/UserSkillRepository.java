@@ -10,5 +10,5 @@ public interface UserSkillRepository extends JpaRepository<UserSkill, Integer> {
 	
 	public Set<UserSkill> findByUserId(int uid); 
 	
-	public UserSkill findById(int id); 
+	public UserSkill findById(int id);
 }
