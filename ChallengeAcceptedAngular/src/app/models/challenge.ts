@@ -16,7 +16,7 @@ export class Challenge {
   tags: Tag[];
   creator: User;
   skill: Skill;
-  userChallenges: UserChallenge[];
+  users: UserChallenge[];
   timeCreated: Date;
 
 }

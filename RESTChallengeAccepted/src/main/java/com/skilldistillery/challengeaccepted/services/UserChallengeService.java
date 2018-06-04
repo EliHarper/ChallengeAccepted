@@ -16,4 +16,5 @@ public interface UserChallengeService {
 	public UserChallenge show(int id, String username);
 	public List<UserChallenge> getTheChallengeAcceptorsForAChallenge(int cid, String username);
 	public List<UserChallenge> challengesUserHasParticipatedIn(int uid, String username);
+	public UserChallenge checkIfUserHasAcceptedChallenge(int cid, int uid);
 }

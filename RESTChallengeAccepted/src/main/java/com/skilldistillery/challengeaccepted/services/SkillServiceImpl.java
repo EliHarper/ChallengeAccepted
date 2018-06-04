@@ -19,4 +19,8 @@ public class SkillServiceImpl implements SkillService {
 		return skillzRepo.findAll();
 	}
 	
+	public Skill findSkillById(int sid) {
+		return skillzRepo.findById(sid);
+	}
+	
 }

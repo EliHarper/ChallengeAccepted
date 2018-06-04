@@ -8,12 +8,13 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.challengeaccepted.entities.UserSkill;
-import com.skilldistillery.challengeaccepted.repositories.UserSkillRepository;
+import com.skilldistillery.challengeaccepted.services.UserSkillService;
 
 @RestController
 @RequestMapping("api")
@@ -21,16 +22,34 @@ import com.skilldistillery.challengeaccepted.repositories.UserSkillRepository;
 public class UserSkillController {
 	
 	@Autowired
-	private UserSkillRepository userSkillRepo;
+	private UserSkillService userSkillSvc;
 	
 	// returns list of all user_skill records based on user id
-	@RequestMapping(path="users/{uid}/skills", method=RequestMethod.GET)
+	@RequestMapping(path="userskills/{uid}", method=RequestMethod.GET)
 	public Set<UserSkill> getUserSkillsByUserId(HttpServletRequest req, HttpServletResponse res, @PathVariable int uid) {
-		if (userSkillRepo.findByUserId(uid) != null) {
+		if (userSkillSvc.getUserSkillsByUserId(uid) != null) {
 			res.setStatus(200);
-			return userSkillRepo.findByUserId(uid);
+			return userSkillSvc.getUserSkillsByUserId(uid);
 		}
 		res.setStatus(404);
 		return null;
+	}
+	
+	// create a new UserSkill record
+	@RequestMapping(path="userskills", method=RequestMethod.POST)
+	public UserSkill create(HttpServletRequest req, HttpServletResponse res, @RequestBody UserSkill us) {
+		return userSkillSvc.create(us); 
+	}
+	
+	// update points on an existing UserSkill record
+	@RequestMapping(path="userskills/{id}/{newPoints}", method=RequestMethod.PATCH)
+	public UserSkill update(HttpServletRequest req, HttpServletResponse res, @RequestBody UserSkill us, @PathVariable int newPoints) {
+		return userSkillSvc.update(us, newPoints); 
+	}
+	
+	// delete a userskill record by userskill id
+	@RequestMapping(path="userskills/{id}", method=RequestMethod.DELETE)
+	public void destory(HttpServletRequest req, HttpServletResponse res, @PathVariable int id) {
+		userSkillSvc.destory(id);
 	}
 }

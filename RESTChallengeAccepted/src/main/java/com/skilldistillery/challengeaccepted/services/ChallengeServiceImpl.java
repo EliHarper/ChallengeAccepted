@@ -32,7 +32,7 @@ public class ChallengeServiceImpl implements ChallengeService {
 	public Challenge create(ChallengeDTO cDTO) {
 		Challenge c = new Challenge();
 		User user = userRepo.findById(cDTO.getCreatorId()).get();
-		Skill skill = skillzRepo.findById(cDTO.getSkillId()).get();
+		Skill skill = skillzRepo.findById(cDTO.getSkillId());
 		Status status = statusRepo.findById(1).get();
 		c.setLocation(cDTO.getLocation());
 		c.setName(cDTO.getName());
@@ -44,6 +44,7 @@ public class ChallengeServiceImpl implements ChallengeService {
 		c.setCreator(user);
 		c.setSkill(skill);
 		c.setStatus(status);
+
 		chaRepo.saveAndFlush(c);
 		return c;
 	}
