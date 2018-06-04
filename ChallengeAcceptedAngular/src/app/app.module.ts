@@ -19,8 +19,12 @@ import { HomeComponent } from './home/home.component';
 import { CompletedStatusPipe } from './pipes/completed-status.pipe';
 import { TopSkillsPipe } from './pipes/top-skills.pipe';
 import { TestingComponent } from './testing/testing.component';
+<<<<<<< HEAD
 import { ChallengesCreatedPipe } from './challenges-created.pipe';
 import { ChallengesAcceptedPipe } from './pipes/challenges-accepted.pipe';
+=======
+import { ChallengesCreatedPipe } from './pipes/challenges-created.pipe';
+>>>>>>> 5194993fa9b17df1fec6084976cc2513d60e1c2f
 
 @NgModule({
   declarations: [
@@ -47,7 +51,9 @@ import { ChallengesAcceptedPipe } from './pipes/challenges-accepted.pipe';
     FormsModule,
     HttpClientModule
   ],
-  providers: [CompletedStatusPipe, TopSkillsPipe ],
+  providers: [CompletedStatusPipe,
+    TopSkillsPipe,
+    ChallengesCreatedPipe ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -57,7 +57,8 @@ public class Challenge {
 	@ManyToOne
 	@JoinColumn(name="skill_id")
 	private Skill skill;
-
+	
+	@JsonIgnore
 	@OneToMany(mappedBy="challenge")
 	private List <UserChallenge> userChallenges;
 	
