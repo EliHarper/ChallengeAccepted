@@ -19,7 +19,6 @@ import { UserService } from '../user.service';
 export class UserProfileComponent implements OnInit {
 
   title = 'Profile of {{ user.username }}';
-
   user = new User();
 
   getNumCompletedChallenges = function(id) {
