@@ -12,6 +12,6 @@ public interface UserSkillService {
 	
 	public UserSkill update(UserSkill us, int newPoints);
 	
-	public void destroy(int usid);
+	public Boolean destroy(int usid);
 
 }
