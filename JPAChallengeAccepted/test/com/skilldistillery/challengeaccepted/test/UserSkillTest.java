@@ -34,4 +34,5 @@ public class UserSkillTest {
 	void test_user_skill_associations() {
 		assertEquals(5, us.getPoints());
 	}
+	
 }
