@@ -9,14 +9,14 @@ import { User } from '../models/user';
 })
 export class ChallengesAcceptedPipe implements PipeTransform {
 
-  acceptedChallenges = [];
-
   transform(challenges: Challenge[], userChallenges: UserChallenge[], user: User): any {
-    // tslint:disable-next-line:no-shadowed-variable
-    challenges.forEach(element => {
-      if (element.creator.id === user.id ) {
-        this.acceptedChallenges.push(element);
+    const acceptedChallenges = [];
+
+    challenges.forEach(challenge => {
+      if (challenge.creator.id === user.id ) {
+        acceptedChallenges.push(challenge);
       }
     });
+    return acceptedChallenges;
   }
 }
