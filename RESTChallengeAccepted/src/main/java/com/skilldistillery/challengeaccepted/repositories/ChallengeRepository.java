@@ -11,7 +11,7 @@ import com.skilldistillery.challengeaccepted.entities.Challenge;
 public interface ChallengeRepository extends JpaRepository<Challenge, Integer> {
 	
 	// find all challenges by status, passing status id
-	public Set<Challenge> findByStatus(int sid);
+	public Set<Challenge> findByStatusId(int sid);
 	
 //	// find all challenges by status for a single user, passing status id and username
 //	public Set<Challenge> findByStatusAndUserId(int sid, int uid);

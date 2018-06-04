@@ -34,16 +34,16 @@ public class ChallengeController {
 	}
 	
 	// view list of challenges for one status by passing the status id
-		@RequestMapping(path="challenges/status/{sid}", method=RequestMethod.GET)
-		public Set<Challenge> indexChallengesByStatus(@PathVariable int sid) {
-			return chaServ.indexStatusChallenges(sid);
-		}
+	@RequestMapping(path="challenges/status/{sid}", method=RequestMethod.GET)
+	public Set<Challenge> indexChallengesByStatus(@PathVariable int sid) {	
+		return chaServ.indexStatusChallenges(sid);
+	}
 		
 	// view list of challenges for one user by status
-		@RequestMapping(path="challenges/user/{uid}/status/{sid}", method=RequestMethod.GET)
-		public Set<Challenge> indexChallengeByUserAndStatus(@PathVariable int uid, @PathVariable int sid) {
-			return chaServ.indexStatusChallengesByUser(sid, uid);
-		}
+	@RequestMapping(path="challenges/user/{uid}/status/{sid}", method=RequestMethod.GET)
+	public Set<Challenge> indexChallengeByUserAndStatus(@PathVariable int uid, @PathVariable int sid) {
+		return chaServ.indexStatusChallengesByUser(sid, uid);
+	}
 	
 	// create new challenge
 	@RequestMapping(path="challenges", method=RequestMethod.POST) 
