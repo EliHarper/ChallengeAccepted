@@ -20,6 +20,7 @@ import { CompletedStatusPipe } from './pipes/completed-status.pipe';
 import { TopSkillsPipe } from './pipes/top-skills.pipe';
 import { TestingComponent } from './testing/testing.component';
 import { ChallengesCreatedPipe } from './challenges-created.pipe';
+import { ChallengesAcceptedPipe } from './pipes/challenges-accepted.pipe';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { ChallengesCreatedPipe } from './challenges-created.pipe';
     CompletedStatusPipe,
     TopSkillsPipe,
     TestingComponent,
-    ChallengesCreatedPipe
+    ChallengesCreatedPipe,
+    ChallengesAcceptedPipe
   ],
   imports: [
     BrowserModule,
