@@ -8,10 +8,10 @@ import { throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class ChallengeService {
-  url = 'localhost:8080/api';
+  url = 'http://localhost:8080/api';
 
   showOneChallenge(id) {
-    return this.http.get<Challenge>(`${this.url}`).pipe(
+    return this.http.get<Challenge>(`${this.url}/challenge/${id}`).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(err);

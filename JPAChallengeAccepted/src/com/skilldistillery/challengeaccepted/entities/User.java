@@ -11,6 +11,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class User {
 	
@@ -28,6 +30,7 @@ public class User {
 	@JoinTable(name="user_challenge",
 	joinColumns =  @JoinColumn(name="invited_user_id"),
 	inverseJoinColumns=@JoinColumn(name="challenge_id"))
+	@JsonIgnore
 	private List <Challenge> challenges;
 
 	@ManyToMany

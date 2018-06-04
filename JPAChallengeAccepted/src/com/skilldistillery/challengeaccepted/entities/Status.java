@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Status {
 	
@@ -18,6 +20,7 @@ public class Status {
 	private String name;
 	
 	@OneToMany(mappedBy="status")
+	@JsonIgnore
 	private List <Challenge> challenges;
 	
 	public Status() {

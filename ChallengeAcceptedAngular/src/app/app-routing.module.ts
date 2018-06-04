@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
-  {path: 'challenge/:id', component: ChallengeViewComponent}
+  {path: 'challview/:id', component: ChallengeViewComponent}
 ];
 
 @NgModule({

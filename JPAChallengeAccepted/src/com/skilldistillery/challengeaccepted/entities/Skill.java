@@ -23,6 +23,7 @@ public class Skill {
 	
 
 	@ManyToMany(mappedBy="skills")
+	@JsonIgnore
 	private List <User> users;
 	
 	@JsonIgnore

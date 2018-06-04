@@ -18,7 +18,7 @@ export class ChallengeViewComponent implements OnInit {
   user = new User(); // change to localstorage user when ready
   flag = false;
 
-  acceptExternalChallenge () {
+  acceptChallenge () {
     const userChallenge = new UserChallenge(this.user, this.displayChallenge, true, false);
     this.userChallengeService.acceptingAMarketChallenge(userChallenge).subscribe(
       data => {this.flag = true; },
@@ -32,8 +32,8 @@ export class ChallengeViewComponent implements OnInit {
   }
 
   getChallengeData() {
-    this.challengeService.showOneChallenge(1).subscribe( // TEST
-    // this.challengeService.showOneChallenge(this.route.snapshot.paramMap.get('id')).subscribe(
+    console.log(this.route.snapshot.paramMap.get('id'));
+    this.challengeService.showOneChallenge(this.route.snapshot.paramMap.get('id')).subscribe(
       data => {
         this.displayChallenge = data;
       },
