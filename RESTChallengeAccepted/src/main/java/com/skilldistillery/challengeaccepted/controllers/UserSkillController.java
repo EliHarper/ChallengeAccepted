@@ -40,4 +40,10 @@ public class UserSkillController {
 	public UserSkill create(HttpServletRequest req, HttpServletResponse res, @RequestBody UserSkill us) {
 		return userSkillSvc.create(us); 
 	}
+	
+	// update points on an existing UserSkill record
+	@RequestMapping(path="userskillz/{id}/{newPoints}", method=RequestMethod.PATCH)
+	public UserSkill update(HttpServletRequest req, HttpServletResponse res, @RequestBody UserSkill us, @PathVariable int newPoints) {
+		return userSkillSvc.update(us, newPoints); 
+	}
 }

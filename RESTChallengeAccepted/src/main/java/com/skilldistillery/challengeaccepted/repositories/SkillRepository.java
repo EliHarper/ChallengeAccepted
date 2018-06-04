@@ -9,5 +9,4 @@ public interface SkillRepository extends JpaRepository<Skill, Integer> {
 	// find Skill by Skill Id
 	public Skill findById(int sid);
 
-
 }
