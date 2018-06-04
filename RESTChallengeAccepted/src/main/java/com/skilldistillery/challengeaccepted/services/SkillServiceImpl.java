@@ -45,7 +45,6 @@ public class SkillServiceImpl implements SkillService {
 			skillzRepo.deleteById(id);
 			return true;
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
 		}

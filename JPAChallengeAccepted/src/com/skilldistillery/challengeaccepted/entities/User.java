@@ -34,6 +34,7 @@ public class User {
 	private List <Challenge> challenges;
 
 	@ManyToMany
+	@JsonIgnore
 	@JoinTable(name="user_skill",
 	joinColumns = @JoinColumn(name="user_id"),
 	inverseJoinColumns= @JoinColumn(name="skill_id"))
