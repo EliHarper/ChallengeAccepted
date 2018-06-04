@@ -1,5 +1,9 @@
 package com.skilldistillery.challengeaccepted.services;
 
-public interface TagService {
+import java.util.List;
 
+import com.skilldistillery.challengeaccepted.entities.Tag;
+
+public interface TagService {
+	public List<Tag> index();
 }
