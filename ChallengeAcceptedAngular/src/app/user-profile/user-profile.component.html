@@ -19,9 +19,11 @@
                   <th scope="col">Progress</th>
                 </thead>
                 <tbody>
-                  <td>PingPong</td>
-                  <td>86</td>
-                  <td><mat-progress-bar mode="determinate" value="89"></mat-progress-bar></td>
+                  <tr *ngFor="let skill of userSkills">
+                    <td>{{getSkillNameById(skill.id)}}</td>
+                    <td>{{skill.points}}</td>
+                    <td><mat-progress-bar mode="determinate" value="{{getUserProgressToNextLevel(user.id)}}"></mat-progress-bar></td>
+                  </tr>
                 </tbody>
               </table>
           </div>
