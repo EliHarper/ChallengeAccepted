@@ -29,8 +29,12 @@ export class ChallengeViewComponent implements OnInit {
       data => {
         if (!data) {
           this.userChallengeService.acceptingAMarketChallenge(dto).subscribe(
-            data2 => {this.flag = true; },
-            error2 => {console.log(error2); }
+            data2 => {
+              this.getChallengeData();
+            },
+            error2 => {
+              console.log(error2);
+            }
             );
         } else {
           console.log('ALREADY IN THERE');
@@ -50,6 +54,8 @@ export class ChallengeViewComponent implements OnInit {
     this.challengeService.showOneChallenge(this.route.snapshot.paramMap.get('id')).subscribe(
       data => {
         console.log(data);
+        // console.log(data.users);
+        // console.log(data.users[0]);
         this.displayChallenge = data;
       },
       error => {

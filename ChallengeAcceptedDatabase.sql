@@ -29,7 +29,8 @@ CREATE TABLE IF NOT EXISTS `user` (
   `email` VARCHAR(45) NULL,
   `location` VARCHAR(100) NULL,
   `role` VARCHAR(45) NULL,
-  PRIMARY KEY (`id`))
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `UNIQUE` (`username` ASC))
 ENGINE = InnoDB;
 
 SHOW WARNINGS;
