@@ -1,3 +1,4 @@
+import { UserService } from './../user.service';
 import { ChallengeService } from './../challenge.service';
 import { ChallengesAcceptedPipe } from './../pipes/challenges-accepted.pipe';
 import { Challenge } from './../models/challenge';
@@ -43,6 +44,11 @@ export class UserProfileComponent implements OnInit {
     return this.challengesAccepted.transform(this.user.challenges, this.user.userChallenges, this.user);
   };
 
+  getUserLevel = function(id) {
+    this.user = this.UserService.findUserById();
+    return this.user
+  };
+
   getUserData() {
     console.log(this.route.snapshot.paramMap.get('id'));
     this.userService.findUserById(this.route.snapshot.paramMap.get('id')).subscribe(
@@ -61,7 +67,8 @@ export class UserProfileComponent implements OnInit {
     private challengesCreated: ChallengesCreatedPipe,
     private challengeService: ChallengeService,
     private route: ActivatedRoute,
-    private userService: UserService) { }
+    private userService: UserService,
+    private userSkillService: UserSkillService ) { }
 
   ngOnInit() {
     this.getUserData();
