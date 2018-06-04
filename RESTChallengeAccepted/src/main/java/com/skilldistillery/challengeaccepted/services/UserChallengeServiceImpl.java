@@ -1,5 +1,6 @@
 package com.skilldistillery.challengeaccepted.services;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.skilldistillery.challengeaccepted.entities.Challenge;
 import com.skilldistillery.challengeaccepted.entities.User;
 import com.skilldistillery.challengeaccepted.entities.UserChallenge;
+import com.skilldistillery.challengeaccepted.entities.UserChallengeDTO;
 import com.skilldistillery.challengeaccepted.repositories.ChallengeRepository;
 import com.skilldistillery.challengeaccepted.repositories.UserChallengeRepository;
 import com.skilldistillery.challengeaccepted.repositories.UserRepository;
@@ -22,7 +24,14 @@ public class UserChallengeServiceImpl implements UserChallengeService{
 	 @Autowired
 	 private ChallengeRepository challengeRepository;
 	 
-	 public UserChallenge create(UserChallenge uc, String username) {
+	 public UserChallenge create(UserChallengeDTO ucDTO, String username) {
+		 UserChallenge uc = new UserChallenge();
+		 User user = userRepo.findById(ucDTO.getAcceptorId()).get();
+		 Challenge challenge = challengeRepository.findById(ucDTO.getChallengeId()).get();
+		 uc.setAccepted(true);
+		 uc.setAcceptorWon(false);
+		 uc.setChallenge(challenge);
+		 uc.setUser(user);
 		 userChallengeRepo.saveAndFlush(uc);
 		 return uc;
 	 }

@@ -19,12 +19,8 @@ import { HomeComponent } from './home/home.component';
 import { CompletedStatusPipe } from './pipes/completed-status.pipe';
 import { TopSkillsPipe } from './pipes/top-skills.pipe';
 import { TestingComponent } from './testing/testing.component';
-<<<<<<< HEAD
-import { ChallengesCreatedPipe } from './challenges-created.pipe';
 import { ChallengesAcceptedPipe } from './pipes/challenges-accepted.pipe';
-=======
 import { ChallengesCreatedPipe } from './pipes/challenges-created.pipe';
->>>>>>> 5194993fa9b17df1fec6084976cc2513d60e1c2f
 
 @NgModule({
   declarations: [
@@ -39,11 +35,7 @@ import { ChallengesCreatedPipe } from './pipes/challenges-created.pipe';
     FallbackComponent,
     ChallengeViewComponent,
     HomeComponent,
-    CompletedStatusPipe,
-    TopSkillsPipe,
     TestingComponent,
-    ChallengesCreatedPipe,
-    ChallengesAcceptedPipe
   ],
   imports: [
     BrowserModule,
@@ -53,6 +45,9 @@ import { ChallengesCreatedPipe } from './pipes/challenges-created.pipe';
   ],
   providers: [CompletedStatusPipe,
     TopSkillsPipe,
+    ChallengesAcceptedPipe,
+    TopSkillsPipe,
+    CompletedStatusPipe,
     ChallengesCreatedPipe ],
   bootstrap: [AppComponent]
 })

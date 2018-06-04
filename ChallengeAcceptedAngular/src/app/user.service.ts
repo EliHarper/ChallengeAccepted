@@ -1,17 +1,18 @@
-import { catchError } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Challenge } from './models/challenge';
+import { HttpClient } from '@angular/common/http';
+import { User } from './models/user';
 import { throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ChallengeService {
+export class UserService {
+
   url = 'http://localhost:8080/api';
 
-  showOneChallenge(id) {
-    return this.http.get<Challenge>(`${this.url}/challenges/${id}`).pipe(
+  findUserById(id) {
+    return this.http.get<User>(`${this.url}/user/${id}`).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(err);
@@ -20,4 +21,6 @@ export class ChallengeService {
   }
 
   constructor(private http: HttpClient) { }
+
+
 }
