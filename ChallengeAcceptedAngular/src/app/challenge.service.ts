@@ -11,7 +11,7 @@ export class ChallengeService {
   url = 'http://localhost:8080/api';
 
   showOneChallenge(id) {
-    return this.http.get<Challenge>(`${this.url}/challenge/${id}`).pipe(
+    return this.http.get<Challenge>(`${this.url}/challenges/${id}`).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(err);
