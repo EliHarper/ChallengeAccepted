@@ -7,15 +7,15 @@ import { Challenge } from '../models/challenge';
 })
 export class ChallengesCreatedPipe implements PipeTransform {
 
-  createdChallenges = [];
-
   transform(challenges: Challenge[], user: User): any {
+    const createdChallenges = [];
+
     challenges.forEach(element => {
       if (element.creator.id === user.id) {
-        this.createdChallenges.push(element);
+        createdChallenges.push(element);
       }
     });
-    return this.createdChallenges;
+    return createdChallenges;
   }
 
 }
