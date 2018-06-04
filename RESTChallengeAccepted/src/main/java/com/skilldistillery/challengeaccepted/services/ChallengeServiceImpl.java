@@ -16,7 +16,7 @@ public class ChallengeServiceImpl implements ChallengeService {
 	private ChallengeRepository chaRepo;
 
 	
-	public Challenge create(Challenge c) {
+	public Challenge create(Challenge c) {				
 		chaRepo.saveAndFlush(c);
 		return c;
 	}

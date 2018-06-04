@@ -29,6 +29,12 @@ public class UserChallengeController {
 		return userChallengeService.show(id, username);
 	}
 	
+	// check if a user has already accepted a challenge - return the object if user has, else null
+	@RequestMapping(path="/user/challenges/{cid}/user/{uid}/check", method=RequestMethod.GET)
+	public UserChallenge checkIfUserHasAcceptedChallenge(@PathVariable int cid, @PathVariable int uid, String username) {
+		return userChallengeService.checkIfUserHasAcceptedChallenge(uid, cid);
+	}
+	
 	// returns all user_challenge records for one challenge
 	@RequestMapping(path="/challenges/{cid}/accept/all", method=RequestMethod.GET)
 	public List<UserChallenge> allAcceptsForChallenge(@PathVariable int cid, String username){

@@ -24,14 +24,25 @@ export class UserChallengeService {
     );
   }
 
-  acceptingAPersonalChallenge(acceptedChallenge) {
-    this.http.patch<UserChallenge>(`${this.url}/challenges/${acceptedChallenge.id}/accept`, acceptedChallenge).pipe(
+  acceptingAPersonalChallenge(dto) {
+    this.http.patch<UserChallenge>(`${this.url}/challenges/${dto.challengeId}/accept`, dto).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(err);
       })
     );
   }
+
+  hasUserAcceptedChallenge(dto) {
+    return this.http.get<UserChallenge>(`${this.url}/user/challenges/${dto.challengeId}/user/${dto.acceptorId}/check`).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(err);
+      })
+    );
+  }
+
+
 
   constructor(private http: HttpClient) { }
 }
