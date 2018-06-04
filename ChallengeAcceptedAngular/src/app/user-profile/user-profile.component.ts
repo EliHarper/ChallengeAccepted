@@ -1,3 +1,4 @@
+import { SkillService } from './../skill.service';
 import { UserSkillService } from './../user-skill.service';
 import { UserService } from './../user.service';
 import { ChallengeService } from './../challenge.service';
@@ -12,6 +13,7 @@ import { ChallengesCreatedPipe } from '../pipes/challenges-created.pipe';
 import { userInfo } from 'os';
 import { ActivatedRoute } from '@angular/router';
 import { UserSkill } from '../models/user-skill';
+import { Skill } from '../models/skill';
 
 @Component({
   selector: 'app-user-profile',
@@ -47,9 +49,15 @@ export class UserProfileComponent implements OnInit {
   };
 
   getUserLevelOfSkill(id) {
-    this.userSkillService.findUserSkillById(id).subscribe(
+    return this.userSkillService.findUserSkillById(id).subscribe(
       data => this.userSkills = data,
       error => this.user = null);
+  }
+
+  getSkillNameById(id) {
+    this.skillService.getSkillById(id).subscribe(
+      data => data,
+      errror => null);
   }
 
   getUserProgressToNextLevel = function(id) {
@@ -76,7 +84,8 @@ export class UserProfileComponent implements OnInit {
     private challengeService: ChallengeService,
     private route: ActivatedRoute,
     private userService: UserService,
-    private userSkillService: UserSkillService ) { }
+    private userSkillService: UserSkillService,
+    private skillService: SkillService ) { }
 
   ngOnInit() {
     this.getUserData();
