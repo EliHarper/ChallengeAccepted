@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.challengeaccepted.entities.Challenge;
+import com.skilldistillery.challengeaccepted.entities.ChallengeDTO;
 import com.skilldistillery.challengeaccepted.services.ChallengeService;
 
 @RestController
@@ -47,8 +48,8 @@ public class ChallengeController {
 	
 	// create new challenge
 	@RequestMapping(path="challenges", method=RequestMethod.POST) 
-	public Challenge newChallenge(@RequestBody Challenge challenge) {
-		return chaServ.create(challenge);
+	public Challenge newChallenge(@RequestBody ChallengeDTO cDTO) {
+		return chaServ.create(cDTO);
 	}
 	
 	// update existing challenge by challenge id

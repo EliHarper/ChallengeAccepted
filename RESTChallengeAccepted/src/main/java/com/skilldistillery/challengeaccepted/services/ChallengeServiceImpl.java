@@ -7,16 +7,43 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.challengeaccepted.entities.Challenge;
+import com.skilldistillery.challengeaccepted.entities.ChallengeDTO;
+import com.skilldistillery.challengeaccepted.entities.Skill;
+import com.skilldistillery.challengeaccepted.entities.Status;
+import com.skilldistillery.challengeaccepted.entities.User;
 import com.skilldistillery.challengeaccepted.repositories.ChallengeRepository;
+import com.skilldistillery.challengeaccepted.repositories.SkillRepository;
+import com.skilldistillery.challengeaccepted.repositories.StatusRepository;
+import com.skilldistillery.challengeaccepted.repositories.UserRepository;
 
 @Service
 public class ChallengeServiceImpl implements ChallengeService {
 
 	@Autowired
 	private ChallengeRepository chaRepo;
+	@Autowired
+	private UserRepository userRepo;
+	@Autowired
+	private SkillRepository skillzRepo;
+	@Autowired
+	private StatusRepository statusRepo;
 
 	
-	public Challenge create(Challenge c) {
+	public Challenge create(ChallengeDTO cDTO) {
+		Challenge c = new Challenge();
+		User user = userRepo.findById(cDTO.getCreatorId()).get();
+		Skill skill = skillzRepo.findById(cDTO.getSkillId()).get();
+		Status status = statusRepo.findById(1).get();
+		c.setLocation(cDTO.getLocation());
+		c.setName(cDTO.getName());
+		c.setDescription(cDTO.getDescription());
+		c.setWager(cDTO.getWager());
+		c.setMinNumberOfChallengers(cDTO.getMinNumberOfChallengers());
+		c.setMaxNumberOfChallengers(cDTO.getMaxNumberOfChallengers());
+		c.setTags(cDTO.getTags());
+		c.setCreator(user);
+		c.setSkill(skill);
+		c.setStatus(status);
 		chaRepo.saveAndFlush(c);
 		return c;
 	}
@@ -54,4 +81,6 @@ public class ChallengeServiceImpl implements ChallengeService {
 	public Set<Challenge> indexStatusChallengesByUser(int uid, int sid) {
 		return chaRepo.getChallengesByUserIdAndStatus(uid, sid);
 	}
+
+
 }
