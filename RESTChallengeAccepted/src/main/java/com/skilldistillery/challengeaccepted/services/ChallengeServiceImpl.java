@@ -49,9 +49,16 @@ public class ChallengeServiceImpl implements ChallengeService {
 		return c;
 	}
 
-	public Challenge update(Challenge c) {
-		chaRepo.saveAndFlush(c);
-		return c;
+	public Challenge update(Challenge c, int cid) {
+		Challenge managedChallenge = chaRepo.findById(cid).get();
+		managedChallenge.setLocation(c.getLocation());
+		managedChallenge.setDescription(c.getDescription());
+		managedChallenge.setName(c.getName());
+		managedChallenge.setMinNumberOfChallengers(c.getMinNumberOfChallengers());
+		managedChallenge.setMaxNumberOfChallengers(c.getMaxNumberOfChallengers());
+		
+		chaRepo.saveAndFlush(managedChallenge);
+		return managedChallenge;
 	}
 	
 	public List <Challenge> index() {

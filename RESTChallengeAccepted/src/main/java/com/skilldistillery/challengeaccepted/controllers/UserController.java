@@ -1,6 +1,5 @@
 package com.skilldistillery.challengeaccepted.controllers;
 
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.challengeaccepted.entities.User;
-import com.skilldistillery.challengeaccepted.services.ChallengeService;
-import com.skilldistillery.challengeaccepted.services.SkillService;
 import com.skilldistillery.challengeaccepted.services.UserService;
 
 @RestController
@@ -26,34 +23,40 @@ public class UserController {
 	@Autowired
 	private UserService userServ;
 	
-	@Autowired
-	private ChallengeService chaServ;
 	
-	@Autowired
-	private SkillService skillzServ;
 	
-	@RequestMapping(path="/user", method=RequestMethod.POST)
+	// finds user by user id
+	@RequestMapping(path="users/{uid}", method=RequestMethod.GET)
+	public User viewUserProfile(HttpServletRequest req, HttpServletResponse res, @PathVariable int uid) {
+		if (userServ.show(uid) != null) {
+			res.setStatus(200);
+			return userServ.show(uid);
+		}
+		res.setStatus(404);
+		return null;
+	}
+	
+	// create new user
+	@RequestMapping(path="users", method=RequestMethod.POST)
 	public User createUser(HttpServletRequest req, HttpServletResponse res, @RequestBody User user) {
-		return userServ.create(user);
-	}
-
-	@RequestMapping(path="/users", method=RequestMethod.GET)
-	public List<User> allUsers() {
-		return userServ.index();
-	}
-	
-	@RequestMapping(path="/user/{id}", method=RequestMethod.GET)
-	public User viewUserProfile(@PathVariable int id, String username) {
-		return userServ.show(id);
+		User newUser = userServ.create(user);
+		if (newUser != null) {
+			res.setStatus(201);
+			return newUser;
+		}
+		res.setStatus(404);
+		return null;
 	}
 	
-	@RequestMapping(path="/user/edit", method=RequestMethod.PATCH)
+	// update existing user w/ user id
+	@RequestMapping(path="users/{uid}", method=RequestMethod.PATCH)
 	public User updateUser(@RequestBody User user) {
 		return userServ.update(user);
 	}
-
-	@RequestMapping(path="/user/{id}/deactivate", method=RequestMethod.DELETE)
-	public Boolean deleteUser(@PathVariable int id, String username) {
+	
+	// delete user by user id
+	@RequestMapping(path="/users/{id}", method=RequestMethod.DELETE)
+	public Boolean deleteUser(@PathVariable int id) {
 		return userServ.delete(id);
 	}
 	

@@ -34,4 +34,24 @@ public class UserTest {
 	void test_user_associations() {
 		assertEquals("AlexTheDestroyer", u.getUsername());
 	}
+	
+	@Test
+	void test_user_has_list_challenges() {
+		assertEquals(2, u.getChallenges().get(0).getId());
+	}
+	
+	@Test
+	void test_user_has_list_skills() {
+		assertEquals("drinking", u.getSkills().get(0).getName());
+	}
+	
+	@Test
+	void test_user_has_list_userChallenges() {
+		assertEquals(2, u.getUserChallenges().get(0).getChallenge().getId());
+	}
+	
+	@Test
+	void test_user_has_list_userSkills() {
+		assertEquals("drinking", u.getUserSkills().get(0).getSkill().getName());
+	}
 }
