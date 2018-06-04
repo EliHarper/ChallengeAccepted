@@ -35,4 +35,14 @@ public class UserSkillTest {
 		assertEquals(5, us.getPoints());
 	}
 	
+	@Test
+	void test_user_skill_user_relationship() {
+		assertEquals("AlexTheDestroyer", us.getUser().getUsername()); 
+	}
+	
+	@Test
+	void test_user_skill_skill_relationship() {
+		assertEquals("drinking", us.getSkill().getName()); 
+	}
+	
 }

@@ -9,6 +9,8 @@ import { User } from '../models/user';
 import { ChallengesCreatedPipe } from '../pipes/challenges-created.pipe';
 import { userInfo } from 'os';
 import {MatButtonModule, MatCheckboxModule} from '@angular/material';
+import { ActivatedRoute } from '@angular/router';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -43,13 +45,27 @@ export class UserProfileComponent implements OnInit {
     return this.challengesAccepted.transform(this.user.challenges, this.user.userChallenges, this.user);
   };
 
-  constructor(private userChallengeService: UserChallengeService,
-              private completedChallenges: CompletedStatusPipe,
-              private topSkills: TopSkillsPipe,
-              private challengesCreated: ChallengesCreatedPipe,
-              private challengeService: ChallengeService) { }
-
-  ngOnInit() {
+  getUserData() {
+    console.log(this.route.snapshot.paramMap.get('id'));
+    this.userService.findUserById(this.route.snapshot.paramMap.get('id')).subscribe(
+      data => {
+        this.user = data;
+      },
+      error => {
+        this.user = null;
+      }
+    );
   }
 
+  constructor(private userChallengeService: UserChallengeService,
+    private completedChallenges: CompletedStatusPipe,
+    private topSkills: TopSkillsPipe,
+    private challengesCreated: ChallengesCreatedPipe,
+    private challengeService: ChallengeService,
+    private route: ActivatedRoute,
+    private userService: UserService) { }
+
+  ngOnInit() {
+    this.getUserData();
+  }
 }

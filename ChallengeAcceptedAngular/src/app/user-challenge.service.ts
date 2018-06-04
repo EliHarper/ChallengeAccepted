@@ -13,12 +13,10 @@ export class UserChallengeService {
 
   url = 'http://localhost:8080/api';
 
-  acceptingAMarketChallenge(acceptedChallenge) {
+  acceptingAMarketChallenge(dto) {
     // const headers = new HttpHeaders({'Content-Type': 'application/json'});
-    console.log('Challenge ID: ' + acceptedChallenge.challenge.id);
-    console.log('User ID: ' + acceptedChallenge.user.id);
 
-    return this.http.post<UserChallenge>(`${this.url}/challenges/${acceptedChallenge.challenge.id}/accept`, acceptedChallenge).pipe(
+    return this.http.post<UserChallenge>(`${this.url}/challenges/${dto.challengeId}/accept`, dto).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(err);
@@ -26,14 +24,25 @@ export class UserChallengeService {
     );
   }
 
-  acceptingAPersonalChallenge(acceptedChallenge) {
-    this.http.patch<UserChallenge>(`${this.url}/challenges/${acceptedChallenge.id}/accept`, acceptedChallenge).pipe(
+  acceptingAPersonalChallenge(dto) {
+    this.http.patch<UserChallenge>(`${this.url}/challenges/${dto.challengeId}/accept`, dto).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(err);
       })
     );
   }
+
+  hasUserAcceptedChallenge(dto) {
+    return this.http.get<UserChallenge>(`${this.url}/user/challenges/${dto.challengeId}/user/${dto.acceptorId}/check`).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(err);
+      })
+    );
+  }
+
+
 
   constructor(private http: HttpClient) { }
 }

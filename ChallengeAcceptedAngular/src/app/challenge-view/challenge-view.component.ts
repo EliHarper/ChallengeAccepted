@@ -18,16 +18,26 @@ export class ChallengeViewComponent implements OnInit {
   displayChallenge: Challenge;
   user = new User(); // change to localstorage user when ready
   flag = false;
-  testUser: User = new User(6, 'test', 'test', 'test@test.com');
+  testUser: User = new User(2);
 
 
 
   acceptChallenge () {
-    console.log(this.displayChallenge.id);
-    const userChallenge = new UserChallenge(this.testUser, this.displayChallenge, true, false);
-    this.userChallengeService.acceptingAMarketChallenge(userChallenge).subscribe(
-      data => {this.flag = true; },
-      error => {console.log(error);
+    const dto = {'challengeId': this.displayChallenge.id,
+    'acceptorId': this.testUser.id};
+    this.userChallengeService.hasUserAcceptedChallenge(dto).subscribe(
+      data => {
+        if (!data) {
+          this.userChallengeService.acceptingAMarketChallenge(dto).subscribe(
+            data2 => {this.flag = true; },
+            error2 => {console.log(error2); }
+            );
+        } else {
+          console.log('ALREADY IN THERE');
+        }
+      },
+      error => {
+        console.log(error);
       }
     );
   }
