@@ -26,6 +26,7 @@ public class UserChallengeController {
 	// creates a new user_challenge record when users accept a challenge?
 	@RequestMapping(path="/challenges/{id}/accept", method=RequestMethod.POST)
 	public UserChallenge createUserChallenge(@RequestBody UserChallenge userChallenge, String username) {
+		System.out.println("******************" + userChallenge + "****************************");
 		return userChallengeService.create(userChallenge, username);
 	}
 	

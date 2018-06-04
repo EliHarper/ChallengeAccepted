@@ -17,6 +17,8 @@ import { FallbackComponent } from './fallback/fallback.component';
 import { ChallengeViewComponent } from './challenge-view/challenge-view.component';
 import { HomeComponent } from './home/home.component';
 import { CompletedStatusPipe } from './pipes/completed-status.pipe';
+import { TopSkillsPipe } from './pipes/top-skills.pipe';
+import { TestingComponent } from './testing/testing.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { CompletedStatusPipe } from './pipes/completed-status.pipe';
     FallbackComponent,
     ChallengeViewComponent,
     HomeComponent,
-    CompletedStatusPipe
+    CompletedStatusPipe,
+    TopSkillsPipe,
+    TestingComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +43,7 @@ import { CompletedStatusPipe } from './pipes/completed-status.pipe';
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [CompletedStatusPipe, TopSkillsPipe ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
