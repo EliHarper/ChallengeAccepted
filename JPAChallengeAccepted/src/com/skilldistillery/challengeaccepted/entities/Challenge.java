@@ -117,11 +117,11 @@ public class Challenge {
 		this.tags = tags;
 	}
 
-	public User getChallengeAcceptor() {
+	public User getCreator() {
 		return creator;
 	}
 
-	public void setChallengeAcceptor(User creator) {
+	public void setCreator(User creator) {
 		this.creator = creator;
 	}
 

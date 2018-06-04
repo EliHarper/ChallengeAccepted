@@ -42,7 +42,18 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
     compile('org.springframework.boot:spring-boot-starter-web')
     runtime('mysql:mysql-connector-java')
+<<<<<<< HEAD
     testCompile('org.springframework.boot:spring-boot-starter-test')    
+=======
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+
+//    compile('org.springframework.boot:spring-boot-starter-security')
+<<<<<<< HEAD
+
+=======
+>>>>>>> 09571694e2c59ed96e7b15caa4bea9e6733b6a4c
+    
+>>>>>>> 6745946e4a37e2b255207b8eae66da4e8c8f5ee6
     compile 'org.junit.jupiter:junit-jupiter-api:5.0.1'
       testCompile('org.apiguardian:apiguardian-api:1.0.0')
       runtime group: 'org.hidetake', name: 'groovy-ssh', version: '2.9.0'
