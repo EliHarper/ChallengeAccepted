@@ -36,4 +36,19 @@ public class UserSkillServiceImpl implements UserSkillService {
 		
 		return userSkillRepo.saveAndFlush(us); 
 	}
+	
+	public UserSkill update(UserSkill us, int newPoints) {
+			User managedUser = userRepo.findByUsername(us.getUser().getUsername());
+			us.setUser(managedUser);
+			Skill managedSkill = skillzRepo.findById(us.getSkill().getId()); 
+			us.setSkill(managedSkill);
+			
+			UserSkill managedUserSkill = userSkillRepo.findById(us.getId()); 
+			int totalPoints = managedUserSkill.getPoints();
+			totalPoints += newPoints;
+			us.setPoints(totalPoints);
+			userSkillRepo.saveAndFlush(us);
+			return us;
+		
+	}
 }
