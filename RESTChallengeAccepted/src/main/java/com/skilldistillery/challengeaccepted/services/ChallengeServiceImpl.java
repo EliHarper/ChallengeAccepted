@@ -41,7 +41,8 @@ public class ChallengeServiceImpl implements ChallengeService {
 	}
 	
 	public Challenge show(int id) {
-		return chaRepo.findById(id).get();
+		Challenge chall = chaRepo.findById(id).get();
+		return chall;
 	}
 	
 	public Boolean delete(int id) {

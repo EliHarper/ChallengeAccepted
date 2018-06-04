@@ -16,6 +16,8 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Challenge {
 
@@ -49,6 +51,7 @@ public class Challenge {
 	
 	@ManyToOne
 	@JoinColumn(name="creator_id")
+	@JsonIgnore
 	private User creator;
 	
 	@ManyToOne

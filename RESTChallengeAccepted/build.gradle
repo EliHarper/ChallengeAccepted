@@ -43,11 +43,12 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-web')
     runtime('mysql:mysql-connector-java')
     testCompile('org.springframework.boot:spring-boot-starter-test')
-<<<<<<< HEAD
-    
-=======
+
 //    compile('org.springframework.boot:spring-boot-starter-security')
->>>>>>> 0e35812e7525a1ea0538000ed6d23c10e48afa01
+<<<<<<< HEAD
+
+=======
+>>>>>>> 09571694e2c59ed96e7b15caa4bea9e6733b6a4c
     
     compile 'org.junit.jupiter:junit-jupiter-api:5.0.1'
       testCompile('org.apiguardian:apiguardian-api:1.0.0')

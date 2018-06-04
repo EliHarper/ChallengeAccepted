@@ -18,23 +18,23 @@ public class MessageServiceImpl implements MessageService{
 	@Autowired
 	private UserRepository userRepo;
 
-//	@Override
-//	public Set<Message> indexThreads(int id) {
-//		
-//		return messageRepo.getMessageThreadByUserId(id);
-//	}
-//
-//	@Override
-//	public Set<Message> indexThreadMessages(int tid) {
-//		
-//		return messageRepo.findByThreadId(tid);
-//	}
+	@Override
+	public Set<Message> indexThreads(int id) {
+		
+		return messageRepo.getMessageThreadByUserId(id);
+	}
+
+	@Override
+	public Set<Message> indexThreadMessages(int tid) {
+		
+		return messageRepo.findByThreadId(tid);
+	}
 	
-//	@Override
-//	public Message show(String username, int mid) {
-//		
-//		return messageRepo.findByIdAndUserUsername(mid, username);
-//	}
+	@Override
+	public Message show(int mid, int uid) {
+		
+		return messageRepo.getMessageByIdAndUserId(mid, uid);
+	}
 
 	@Override
 	public Message create(Message message) {
@@ -45,22 +45,16 @@ public class MessageServiceImpl implements MessageService{
 		return messageRepo.saveAndFlush(message);
 	}
 
-//	@Override
-//	public Message update(String username, int mid, Message message) {
-//		
-//		return null;
-//	}
-
 	@Override
 	public void destroy(String username, int mid) {
-		Message managedMessage = messageRepo.findById(mid).get();
-		if(managedMessage.getSender().getUsername() == username || managedMessage.getReceiver().getUsername() == username) {
+//		Message managedMessage = messageRepo.findById(mid).get();
+//		if(managedMessage.getSender().getUsername() == username || managedMessage.getReceiver().getUsername() == username) {
 			try {
 				messageRepo.deleteById(mid);
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
-		}
+//		}
 		
 	}
 

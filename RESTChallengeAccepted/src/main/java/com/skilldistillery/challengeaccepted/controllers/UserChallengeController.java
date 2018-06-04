@@ -23,32 +23,39 @@ public class UserChallengeController {
 	@Autowired
 	private UserChallengeService userChallengeService;
 	
-	@RequestMapping(path="/challenge/{id}/accept", method=RequestMethod.POST)
+	// creates a new user_challenge record when users accept a challenge
+	@RequestMapping(path="/challenges/{id}/accept", method=RequestMethod.POST)
 	public UserChallenge createUserChallenge(@RequestBody UserChallenge userChallenge, String username) {
+		System.out.println("******************" + userChallenge + "****************************");
 		return userChallengeService.create(userChallenge, username);
 	}
 	
-	@RequestMapping(path="/user/challenge/accept/{id}", method=RequestMethod.GET)
+	// users can view challenges they have accepted
+	@RequestMapping(path="/user/challenges/accept/{id}", method=RequestMethod.GET)
 	public UserChallenge viewUserChallenge(@PathVariable int id, String username) {
 		return userChallengeService.show(id, username);
 	}
 	
-	@RequestMapping(path="/challenge/accept/{id}", method=RequestMethod.PATCH)
+	// update an accepted challenge
+	@RequestMapping(path="/challenges/accept/{id}", method=RequestMethod.PATCH)
 	public UserChallenge updateUserChallenge(@RequestBody UserChallenge userChallenge, String username) {
 		return userChallengeService.create(userChallenge, username);
 	}
 	
-	@RequestMapping(path="/challenge/{cid}/accept/{id}", method=RequestMethod.DELETE)
+	// delete a user challenge record
+	@RequestMapping(path="/challenges/{cid}/accept/{id}", method=RequestMethod.DELETE)
 	public Boolean deleteUserChallenge(@PathVariable int id, String username) {
 		return userChallengeService.delete(id, username);
 	}
 	
-	@RequestMapping(path="/challenge/{cid}/accept/all", method=RequestMethod.GET)
+	// returns all user_challenge records for one challenge
+	@RequestMapping(path="/challenges/{cid}/accept/all", method=RequestMethod.GET)
 	public List<UserChallenge> allAcceptsForChallenge(@RequestBody Challenge challenge, String username){
 		return userChallengeService.getTheChallengeAcceptorsForAChallenge(challenge, username);
 	}
 	
-	@RequestMapping(path="/user/challenge/{cid}/accept/all", method=RequestMethod.GET)
+	// returns all challenges a user has accepted, active and inactive
+	@RequestMapping(path="/user/challenges/{cid}/accept/all", method=RequestMethod.GET)
 	public List<UserChallenge> allAcceptsForUser(@RequestBody User user, String username){
 		return userChallengeService.challengesUserHasParticipatedIn(user, username);
 	}

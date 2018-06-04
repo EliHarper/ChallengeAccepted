@@ -16,6 +16,9 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { FallbackComponent } from './fallback/fallback.component';
 import { ChallengeViewComponent } from './challenge-view/challenge-view.component';
 import { HomeComponent } from './home/home.component';
+import { CompletedStatusPipe } from './pipes/completed-status.pipe';
+import { TopSkillsPipe } from './pipes/top-skills.pipe';
+import { TestingComponent } from './testing/testing.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,10 @@ import { HomeComponent } from './home/home.component';
     NavbarComponent,
     FallbackComponent,
     ChallengeViewComponent,
-    HomeComponent
+    HomeComponent,
+    CompletedStatusPipe,
+    TopSkillsPipe,
+    TestingComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +43,7 @@ import { HomeComponent } from './home/home.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [CompletedStatusPipe, TopSkillsPipe ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
