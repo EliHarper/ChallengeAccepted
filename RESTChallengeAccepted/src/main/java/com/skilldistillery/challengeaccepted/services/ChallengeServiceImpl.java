@@ -1,30 +1,20 @@
 package com.skilldistillery.challengeaccepted.services;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.challengeaccepted.entities.Challenge;
 import com.skilldistillery.challengeaccepted.repositories.ChallengeRepository;
-import com.skilldistillery.challengeaccepted.repositories.SkillRepository;
-import com.skilldistillery.challengeaccepted.repositories.TagRepository;
-import com.skilldistillery.challengeaccepted.repositories.UserRepository;
 
 @Service
 public class ChallengeServiceImpl implements ChallengeService {
 
 	@Autowired
 	private ChallengeRepository chaRepo;
-	
-	@Autowired
-	private UserRepository userRepo;
-	
-	@Autowired
-	private SkillRepository skillRepo;
-	
-	@Autowired
-	private TagRepository tagRepo;
+
 	
 	public Challenge create(Challenge c) {
 		chaRepo.saveAndFlush(c);
@@ -53,5 +43,15 @@ public class ChallengeServiceImpl implements ChallengeService {
 			e.printStackTrace();
 			return false;
 		}
+	}
+	
+	// view all challenges by status id
+	public Set<Challenge> indexStatusChallenges (int sid) {
+		return chaRepo.findByStatus(sid);
+	}
+	
+	//view all challenges for a user by status id
+	public Set<Challenge> indexStatusChallengesByUser(int sid, int uid) {
+		return chaRepo.findByStatusAndUserUsername(sid, username);
 	}
 }
