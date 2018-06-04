@@ -20,6 +20,8 @@ export class ChallengeViewComponent implements OnInit {
   flag = false;
   testUser: User = new User(6, 'test', 'test', 'test@test.com');
 
+
+
   acceptChallenge () {
     console.log(this.displayChallenge.id);
     const userChallenge = new UserChallenge(this.testUser, this.displayChallenge, true, false);
