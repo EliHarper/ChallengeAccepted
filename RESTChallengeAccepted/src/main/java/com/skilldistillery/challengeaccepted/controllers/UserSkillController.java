@@ -46,4 +46,10 @@ public class UserSkillController {
 	public UserSkill update(HttpServletRequest req, HttpServletResponse res, @RequestBody UserSkill us, @PathVariable int newPoints) {
 		return userSkillSvc.update(us, newPoints); 
 	}
+	
+	// delete a userskill record by userskill id
+	@RequestMapping(path="userskillz/{id}", method=RequestMethod.DELETE)
+	public void destory(HttpServletRequest req, HttpServletResponse res, @PathVariable int id) {
+		userSkillSvc.destory(id);
+	}
 }
