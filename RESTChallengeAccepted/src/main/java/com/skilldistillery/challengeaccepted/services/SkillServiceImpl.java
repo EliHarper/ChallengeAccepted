@@ -22,5 +22,10 @@ public class SkillServiceImpl implements SkillService {
 	public Skill findSkillById(int sid) {
 		return skillzRepo.findById(sid);
 	}
+
+	@Override
+	public Skill oneSkill(int id) {
+		return skillzRepo.findById(id);
+	}
 	
 }
