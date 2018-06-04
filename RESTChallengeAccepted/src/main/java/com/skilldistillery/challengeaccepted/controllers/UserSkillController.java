@@ -25,7 +25,7 @@ public class UserSkillController {
 	private UserSkillService userSkillSvc;
 	
 	// returns list of all user_skill records based on user id
-	@RequestMapping(path="userskillz/{uid}", method=RequestMethod.GET)
+	@RequestMapping(path="userskills/{uid}", method=RequestMethod.GET)
 	public Set<UserSkill> getUserSkillsByUserId(HttpServletRequest req, HttpServletResponse res, @PathVariable int uid) {
 		if (userSkillSvc.getUserSkillsByUserId(uid) != null) {
 			res.setStatus(200);
@@ -36,14 +36,20 @@ public class UserSkillController {
 	}
 	
 	// create a new UserSkill record
-	@RequestMapping(path="userskillz", method=RequestMethod.POST)
+	@RequestMapping(path="userskills", method=RequestMethod.POST)
 	public UserSkill create(HttpServletRequest req, HttpServletResponse res, @RequestBody UserSkill us) {
 		return userSkillSvc.create(us); 
 	}
 	
 	// update points on an existing UserSkill record
-	@RequestMapping(path="userskillz/{id}/{newPoints}", method=RequestMethod.PATCH)
+	@RequestMapping(path="userskills/{id}/{newPoints}", method=RequestMethod.PATCH)
 	public UserSkill update(HttpServletRequest req, HttpServletResponse res, @RequestBody UserSkill us, @PathVariable int newPoints) {
 		return userSkillSvc.update(us, newPoints); 
+	}
+	
+	// delete a userskill record by userskill id
+	@RequestMapping(path="userskills/{id}", method=RequestMethod.DELETE)
+	public void destory(HttpServletRequest req, HttpServletResponse res, @PathVariable int id) {
+		userSkillSvc.destory(id);
 	}
 }

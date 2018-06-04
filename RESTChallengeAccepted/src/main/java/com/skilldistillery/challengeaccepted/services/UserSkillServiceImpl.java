@@ -51,4 +51,13 @@ public class UserSkillServiceImpl implements UserSkillService {
 			return us;
 		
 	}
+	
+	public void destory(int usid) {
+		try {
+			userSkillRepo.deleteById(usid);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

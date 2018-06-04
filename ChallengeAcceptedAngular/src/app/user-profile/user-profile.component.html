@@ -8,16 +8,15 @@
           {{ user.username }}
         </h2>
         <h4>Location: {{ user.location }}</h4>
+        <hr>
         <div class="row">
-          <div class="col-md-4 text-center">
-            <h3>
-              {{ user.username }}'s top skills:
-            </h3>
-            <table>
+          <div class="col-md-4">
+            <h3>{{ user.username }}'s top skills:</h3>
+            <table class="table">
               <thead>
-                  <th>Skill</th>
-                  <th>Level</th>
-                  <th>Progress</th>
+                  <th scope="col">Skill</th>
+                  <th scope="col">Level</th>
+                  <th scope="col">Progress</th>
                 </thead>
                 <tbody>
                   <td>PingPong</td>
