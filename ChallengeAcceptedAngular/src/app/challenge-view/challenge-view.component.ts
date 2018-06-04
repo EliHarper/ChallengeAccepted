@@ -47,9 +47,9 @@ export class ChallengeViewComponent implements OnInit {
   }
 
   getChallengeData() {
-    console.log(this.route.snapshot.paramMap.get('id'));
     this.challengeService.showOneChallenge(this.route.snapshot.paramMap.get('id')).subscribe(
       data => {
+        console.log(data);
         this.displayChallenge = data;
       },
       error => {

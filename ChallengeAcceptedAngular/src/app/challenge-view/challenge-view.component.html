@@ -5,8 +5,8 @@
 <h4>{{displayChallenge.minNumberOfChallengers}} minimum of {{displayChallenge.maxNumberOfChallengers}} maximum</h4>
 <div>
   <ul>
-    <li *ngFor="let accept of displayChallenge.userChallenges">
-      <p>{{accept.user.username}}</p><p>{{accept.user.location}}</p>
+    <li *ngFor="let accept of displayChallenge.users">
+      <!-- <p>{{accept.username}}</p><p>{{accept.location}}</p> -->
     </li>
   </ul>
 </div>

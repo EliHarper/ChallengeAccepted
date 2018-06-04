@@ -3,16 +3,12 @@ package com.skilldistillery.challengeaccepted.services;
 import java.util.List;
 import java.util.Set;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.skilldistillery.challengeaccepted.entities.Challenge;
-import com.skilldistillery.challengeaccepted.repositories.ChallengeRepository;
-import com.skilldistillery.challengeaccepted.repositories.TagRepository;
-import com.skilldistillery.challengeaccepted.repositories.UserRepository;
+import com.skilldistillery.challengeaccepted.entities.ChallengeDTO;
 
 public interface ChallengeService {
 
-	public Challenge create(Challenge c); 
+	public Challenge create(ChallengeDTO cDTO); 
 	
 	public Challenge update(Challenge c);
 	

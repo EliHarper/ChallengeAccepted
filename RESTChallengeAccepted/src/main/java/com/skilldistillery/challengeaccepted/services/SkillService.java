@@ -7,5 +7,6 @@ import com.skilldistillery.challengeaccepted.entities.Skill;
 public interface SkillService {
 
 	public List <Skill> index();
+	public Skill oneSkill(int id);
 
 }
