@@ -29,7 +29,7 @@ export class UserProfileComponent implements OnInit {
     return this.topSkills.transform(this.user.skills);
   };
 
-  getChallengesCreated = function() {
+  getChallengesCreated = function(id) {
     return this.challengesCreated.transform(this.user.challenges, this.user);
   };
 
