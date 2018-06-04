@@ -72,5 +72,12 @@ public class UserChallengeServiceImpl implements UserChallengeService{
 	 public List<UserChallenge> challengesUserHasParticipatedIn(int uid, String username) {
 		 return userChallengeRepo.findByUserId(uid);
 	 }
+
+	@Override
+	public UserChallenge checkIfUserHasAcceptedChallenge(int uid, int cid) {
+			UserChallenge uc = userChallengeRepo.findByUserIdAndChallengeId(uid, cid);
+			System.out.println(uc);
+			return uc;
+	}
 	 
 }
