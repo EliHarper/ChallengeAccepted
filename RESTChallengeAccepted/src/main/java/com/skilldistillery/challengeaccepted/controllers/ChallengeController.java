@@ -1,6 +1,7 @@
 package com.skilldistillery.challengeaccepted.controllers;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -12,9 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.challengeaccepted.entities.Challenge;
 import com.skilldistillery.challengeaccepted.services.ChallengeService;
-import com.skilldistillery.challengeaccepted.services.SkillService;
-import com.skilldistillery.challengeaccepted.services.TagService;
-import com.skilldistillery.challengeaccepted.services.UserService;
 
 @RestController
 @RequestMapping("api")
@@ -23,38 +21,47 @@ public class ChallengeController {
 	@Autowired
 	private ChallengeService chaServ;
 
-	@Autowired
-	private UserService userServ;
-	
-	@Autowired
-	private TagService tagServ;
-	
-	@Autowired
-	private SkillService skillzServ;
-	
-	@RequestMapping(path="/challenge/{id}", method=RequestMethod.GET)
+	// view challenge by challenge id
+	@RequestMapping(path="challenges/{id}", method=RequestMethod.GET)
 	public Challenge showChallenge(@PathVariable int id, String username) {
 		return chaServ.show(id);
 	}
 	
-	@RequestMapping(path="/challenge/all", method=RequestMethod.GET)
+	// view all challenges
+	@RequestMapping(path="challenges", method=RequestMethod.GET)
 	public List<Challenge> allChallenges() {
 		return chaServ.index();
 	}
 	
-	@RequestMapping(path="/challenge/new", method=RequestMethod.POST) 
-	public Challenge newMarketplaceChallenge(@RequestBody Challenge challenge) {
+	// view list of challenges for one status by passing the status id
+		@RequestMapping(path="challenges/status/{sid}", method=RequestMethod.GET)
+		public Set<Challenge> indexChallengesByStatus(@PathVariable int sid) {
+			return chaServ.indexStatusChallenges(sid);
+		}
+		
+	// view list of challenges for one user by status
+		@RequestMapping(path="challenges/user/{uid}/status/{sid}", method=RequestMethod.GET)
+		public Set<Challenge> indexChallengeByUserAndStatus(@PathVariable int uid, @PathVariable int sid) {
+			return chaServ.indexStatusChallengesByUser(sid, uid);
+		}
+	
+	// create new challenge
+	@RequestMapping(path="challenges", method=RequestMethod.POST) 
+	public Challenge newChallenge(@RequestBody Challenge challenge) {
 		return chaServ.create(challenge);
 	}
 	
-	@RequestMapping(path="/challenge/update/{id}", method=RequestMethod.PATCH)
+	// update existing challenge by challenge id
+	@RequestMapping(path="challenges/{id}", method=RequestMethod.PATCH)
 	public Challenge updateChallenge(@PathVariable int id, @RequestBody Challenge challenge) {
 		return chaServ.update(challenge);
 	}
 	
-	@RequestMapping(path="/challenge/delete/{id}", method=RequestMethod.DELETE)
+	// delete challenge by challenge id
+	@RequestMapping(path="challenges/{id}", method=RequestMethod.DELETE)
 	public Boolean deleteChallenge(@PathVariable int id) {
 		return chaServ.delete(id);
 	}
-
+	
+	
 }
