@@ -13,15 +13,12 @@ export class UserChallengeService {
 
   url = 'http://localhost:8080/api';
 
-
-
   acceptingAMarketChallenge(acceptedChallenge) {
-    const headers = new HttpHeaders({'Content-Type': 'application/json'});
-    console.log(acceptedChallenge.challenge.id);
-    console.log(acceptedChallenge.user.id);
+    // const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    console.log('Challenge ID: ' + acceptedChallenge.challenge.id);
+    console.log('User ID: ' + acceptedChallenge.user.id);
 
-    return this.http.post<UserChallenge>(`${this.url}/challenge/${acceptedChallenge.challenge.id}/accept`, acceptedChallenge,
-     {headers}).pipe(
+    return this.http.post<UserChallenge>(`${this.url}/challenges/${acceptedChallenge.challenge.id}/accept`, acceptedChallenge).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(err);
@@ -30,7 +27,7 @@ export class UserChallengeService {
   }
 
   acceptingAPersonalChallenge(acceptedChallenge) {
-    this.http.patch<UserChallenge>(`${this.url}/challenge/${acceptedChallenge.id}/accept`, acceptedChallenge).pipe(
+    this.http.patch<UserChallenge>(`${this.url}/challenges/${acceptedChallenge.id}/accept`, acceptedChallenge).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(err);

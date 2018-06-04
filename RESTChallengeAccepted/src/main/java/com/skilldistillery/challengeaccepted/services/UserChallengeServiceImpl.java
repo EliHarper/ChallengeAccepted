@@ -56,12 +56,12 @@ public class UserChallengeServiceImpl implements UserChallengeService{
 		}
 	 }
 	 
-	 public List<UserChallenge> getTheChallengeAcceptorsForAChallenge(Challenge challenge, String username) {
-		 return userChallengeRepo.findByChallengeId(challenge.getId());
+	 public List<UserChallenge> getTheChallengeAcceptorsForAChallenge(int cid, String username) {
+		 return userChallengeRepo.findByChallengeId(cid);
 	 }
 	 
-	 public List<UserChallenge> challengesUserHasParticipatedIn(User user, String username) {
-		 return userChallengeRepo.findByUserId(user.getId());
+	 public List<UserChallenge> challengesUserHasParticipatedIn(int uid, String username) {
+		 return userChallengeRepo.findByUserId(uid);
 	 }
 	 
 }
