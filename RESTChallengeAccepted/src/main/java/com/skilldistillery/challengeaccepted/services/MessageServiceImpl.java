@@ -46,13 +46,15 @@ public class MessageServiceImpl implements MessageService{
 	}
 
 	@Override
-	public void destroy(String username, int mid) {
+	public Boolean destroy(String username, int mid) {
 //		Message managedMessage = messageRepo.findById(mid).get();
 //		if(managedMessage.getSender().getUsername() == username || managedMessage.getReceiver().getUsername() == username) {
 			try {
 				messageRepo.deleteById(mid);
+				return true;
 			}catch (Exception e) {
 				e.printStackTrace();
+				return false;
 			}
 //		}
 		

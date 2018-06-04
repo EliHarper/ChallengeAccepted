@@ -71,9 +71,9 @@ public class MessageController {
 	
 	// delete a message
 	@RequestMapping(path="messages/{mid}", method=RequestMethod.DELETE)
-	public void destroy(HttpServletRequest req, HttpServletResponse res, @PathVariable int mid) {
+	public Boolean destroy(HttpServletRequest req, HttpServletResponse res, @PathVariable int mid) {
 		String username = "AlexTheDestroyer";
-		messageServ.destroy(username, mid);
+		return messageServ.destroy(username, mid);
 	}
 }
 
