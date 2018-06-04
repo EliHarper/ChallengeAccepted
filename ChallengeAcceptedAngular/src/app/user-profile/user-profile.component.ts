@@ -19,6 +19,10 @@ export class UserProfileComponent implements OnInit {
     return this.completedChallenges.transform(this.user.challenges).length;
   };
 
+  getLocation = function() {
+    return this.user.location;
+  };
+
   getTopSkills = function() {
     return this.topSkills.transform(this.user.skills);
   };
