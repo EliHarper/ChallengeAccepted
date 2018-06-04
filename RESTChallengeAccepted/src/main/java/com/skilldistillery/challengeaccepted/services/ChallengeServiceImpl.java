@@ -51,7 +51,7 @@ public class ChallengeServiceImpl implements ChallengeService {
 	}
 	
 	//view all challenges for a user by status id
-	public Set<Challenge> indexStatusChallengesByUser(int sid, int uid) {
-		return chaRepo.findByStatusAndUserId(sid, uid);
+	public Set<Challenge> indexStatusChallengesByUser(int uid, int sid) {
+		return chaRepo.getChallengesByUserIdAndStatus(uid, sid);
 	}
 }
