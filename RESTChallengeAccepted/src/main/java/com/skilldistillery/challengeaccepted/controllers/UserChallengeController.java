@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.skilldistillery.challengeaccepted.entities.User;
 import com.skilldistillery.challengeaccepted.entities.UserChallenge;
+import com.skilldistillery.challengeaccepted.entities.UserChallengeDTO;
 import com.skilldistillery.challengeaccepted.services.UserChallengeService;
 
 @RestController
@@ -45,16 +45,15 @@ public class UserChallengeController {
 	// creates a new user_challenge record when users accept a challenge by passing a challenge id
 
 	@RequestMapping(path="/challenges/{id}/accept", method=RequestMethod.POST)
-	public UserChallenge createUserChallenge(@RequestBody UserChallenge userChallenge, String username) {
-		System.out.println("******************" + userChallenge + "****************************");
-		return userChallengeService.create(userChallenge, username);
+	public UserChallenge createUserChallenge(@RequestBody UserChallengeDTO ucDTO, String username) {
+		return userChallengeService.create(ucDTO, username);
 	}
 	
 	// update an accepted user_challenge record w/ user_challenge id
 
 	@RequestMapping(path="/challenges/accept/{id}", method=RequestMethod.PATCH)
 	public UserChallenge updateUserChallenge(@RequestBody UserChallenge userChallenge, String username) {
-		return userChallengeService.create(userChallenge, username);
+		return userChallengeService.update(userChallenge, username);
 	}
 	
 	// delete a user challenge record w/ the challenge id and user id
