@@ -45,7 +45,7 @@ public class UserController {
 	
 	// delete user by user id
 	@RequestMapping(path="/users/{id}", method=RequestMethod.DELETE)
-	public Boolean deleteUser(@PathVariable int id, String username) {
+	public Boolean deleteUser(@PathVariable int id) {
 		return userServ.delete(id);
 	}
 	
