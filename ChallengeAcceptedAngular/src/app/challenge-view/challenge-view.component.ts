@@ -1,3 +1,4 @@
+import { HttpHeaders } from '@angular/common/http';
 import { UserChallenge } from './../models/user-challenge';
 import { Challenge } from './../models/challenge';
 import { ChallengeService } from './../challenge.service';
@@ -14,12 +15,14 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class ChallengeViewComponent implements OnInit {
 
-  displayChallenge = new Challenge();
+  displayChallenge: Challenge;
   user = new User(); // change to localstorage user when ready
   flag = false;
+  testUser: User = new User(6, 'test', 'test', 'test@test.com');
 
   acceptChallenge () {
-    const userChallenge = new UserChallenge(this.user, this.displayChallenge, true, false);
+    console.log(this.displayChallenge.id);
+    const userChallenge = new UserChallenge(this.testUser, this.displayChallenge, true, false);
     this.userChallengeService.acceptingAMarketChallenge(userChallenge).subscribe(
       data => {this.flag = true; },
       error => {console.log(error);
