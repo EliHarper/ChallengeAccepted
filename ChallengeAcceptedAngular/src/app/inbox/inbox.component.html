@@ -1,0 +1,38 @@
+
+<app-navbar></app-navbar>
+
+<h1>Inbox</h1>
+
+<h1>My Messages</h1>
+<table>
+  <thead>
+    <tr>
+      <th>
+      Message
+     </th>
+     <th>
+       Original Sender
+     </th>
+      <th>
+      Timestamp
+     </th>
+    </tr>
+  </thead>
+  <tbody>
+    <div *ngFor="let message of allMessages" >
+      <tr (click)="getThreadMessages(message.threadId)">
+        <td>{{message.message}}</td>
+        <td>{{message.sender.username}}</td>
+        <td>{{message.timeSent}}</td>
+        <td>{{message.threadId}}</td>
+      </tr>
+      </div>
+  </tbody>
+</table>
+<ul>
+  <li *ngFor="let message of threadMessages">
+    {{message.message}}
+  </li>
+</ul>
+
+

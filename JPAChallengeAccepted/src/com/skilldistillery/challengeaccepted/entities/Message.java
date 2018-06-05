@@ -78,6 +78,18 @@ public class Message {
 		return id;
 	}
 
+	public int getThreadId() {
+		return threadId;
+	}
+
+	public void setThreadId(int threadId) {
+		this.threadId = threadId;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();

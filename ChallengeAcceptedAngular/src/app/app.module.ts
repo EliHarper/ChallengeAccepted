@@ -28,6 +28,8 @@ import { AuthService } from './auth.service';
 import { ChallengeService } from './challenge.service';
 import { SkillService } from './skill.service';
 import { UserSkillService } from './user-skill.service';
+import { InboxComponent } from './inbox/inbox.component';
+import { InboxService } from './inbox.service';
 
 
 @NgModule({
@@ -44,8 +46,9 @@ import { UserSkillService } from './user-skill.service';
     FallbackComponent,
     ChallengeViewComponent,
     HomeComponent,
-    TestingComponent
-  ],
+    TestingComponent,
+    InboxComponent
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -65,7 +68,8 @@ import { UserSkillService } from './user-skill.service';
     SkillService,
     UserSkillService,
     AuthService,
-    UserService ],
+    UserService,
+    InboxService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
