@@ -129,11 +129,19 @@
             <a class="nav-link" [routerLink]="['/userprofile/' + accept.id]">
             {{accept.username}}
             </a>
+            <div *ngIf="displayChallenge.status.id===2">
+              <form>
+                Winner: <input type="checkbox" (change)="updateUserIdList(accept.id)">
+              </form>
+            </div>
           </h4>
 
         </div>
       </div>
       <hr>
+      <div>
+          <button type="button" class="btn btn-primary btn-block" (click)="updateWholeUserList(displayChallenge.id)">Tally Results of {{displayChallenge.id}}</button>
+      </div>
         <div>
             <button type="button" class="btn btn-primary btn-block" (click)="acceptChallenge()">Accept This Challenge</button>
         </div>
