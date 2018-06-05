@@ -27,9 +27,10 @@ public class UserChallengeController {
 
 	// users can view challenges they have accepted by challenge id
 	@RequestMapping(path = "user/challenges/accept/{cid}", method = RequestMethod.GET)
-	public UserChallenge viewUserChallenge(HttpServletRequest req, HttpServletResponse res, @PathVariable int cid, String username) {
+	public UserChallenge viewUserChallenge(HttpServletRequest req, HttpServletResponse res, @PathVariable int cid,
+			String username) {
 		UserChallenge uc = userChallengeService.show(cid, username);
-		if(uc != null) {
+		if (uc != null) {
 			res.setStatus(200);
 			return uc;
 		}
@@ -42,19 +43,27 @@ public class UserChallengeController {
 	@RequestMapping(path = "user/challenges/{cid}/user/{uid}/check", method = RequestMethod.GET)
 	public UserChallenge checkIfUserHasAcceptedChallenge(HttpServletRequest req, HttpServletResponse res,
 			@PathVariable int cid, @PathVariable int uid, String username) {
-		
-			return userChallengeService.checkIfUserHasAcceptedChallenge(uid, cid);
+		UserChallenge uc = userChallengeService.checkIfUserHasAcceptedChallenge(uid, cid);
+		if (uc != null) {
+			res.setStatus(200);
+			return uc;
+		}
+		res.setStatus(400);
+		return null;
 	}
 
 	// returns all user_challenge records for one challenge
 	@RequestMapping(path = "challenges/{cid}/accept/all", method = RequestMethod.GET)
 	public List<UserChallenge> allAcceptsForChallenge(HttpServletRequest req, HttpServletResponse res,
 			@PathVariable int cid, String username) {
-		
-			return userChallengeService.getTheChallengeAcceptorsForAChallenge(cid, username);
-
+		List<UserChallenge> luc = userChallengeService.getTheChallengeAcceptorsForAChallenge(cid, username);
+		if (luc != null) {
+			res.setStatus(200);
+			return luc;
 		}
-	
+		res.setStatus(400);
+		return null;
+	}
 
 	// returns all challenges a user has accepted, active and inactive
 	@RequestMapping(path = "user/{uid}/challenges/accept/all", method = RequestMethod.GET)
@@ -74,17 +83,21 @@ public class UserChallengeController {
 	@RequestMapping(path = "challenges/{cid}/accept", method = RequestMethod.POST)
 	public UserChallenge createUserChallenge(HttpServletRequest req, HttpServletResponse res,
 			@RequestBody UserChallengeDTO ucDTO, String username, @PathVariable int cid) {
-		
-			return userChallengeService.create(ucDTO, username);
+		UserChallenge uc = userChallengeService.create(ucDTO, username);
+		if (uc != null) {
+			res.setStatus(201);
+			return uc;
+		}
+		res.setStatus(400);
+		return null;
 	}
 
 	// update an accepted user_challenge record w/ user_challenge id
 
 	@RequestMapping(path = "challenges/accept/{ucid}", method = RequestMethod.PATCH)
 	public UserChallenge updateUserChallenge(@RequestBody UserChallenge userChallenge, String username, @PathVariable int ucid) {
-				
 		return userChallengeService.update(userChallenge, username);
-		
+
 	}
 	
 	// update a user_challenge record based on user id and challenge id
@@ -93,12 +106,12 @@ public class UserChallengeController {
 		return userChallengeService.updateUCRecord(cid, uid);
 	}
 
+
 	// delete a user challenge record w/ the challenge id and user challenge id
 	@RequestMapping(path = "challenges/{cid}/accept/{ucid}", method = RequestMethod.DELETE)
 	public Boolean deleteUserChallenge(@PathVariable int cid, @PathVariable int ucid,
 			String username) {
 		
 		return userChallengeService.delete(ucid, username);
-	
 	}
 }

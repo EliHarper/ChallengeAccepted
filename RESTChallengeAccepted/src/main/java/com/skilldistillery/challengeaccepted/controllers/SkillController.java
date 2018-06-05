@@ -17,28 +17,33 @@ import com.skilldistillery.challengeaccepted.services.SkillService;
 
 @RestController
 @RequestMapping("api")
-@CrossOrigin({"*", "http://localhost:4200"})
+@CrossOrigin({ "*", "http://localhost:4200" })
 public class SkillController {
-	
+
 	@Autowired
 	private SkillService skillzServ;
-	
-	@RequestMapping(path="skills", method = RequestMethod.GET)
-	public List<Skill> allSkills( HttpServletRequest req, HttpServletResponse res){
-		if(skillzServ.index() != null) {
+
+	@RequestMapping(path = "skills", method = RequestMethod.GET)
+	public List<Skill> allSkills(HttpServletRequest req, HttpServletResponse res) {
+		List<Skill> ls = skillzServ.index();
+		if (ls != null) {
 			res.setStatus(200);
-			return skillzServ.index();
+			return ls;
+
 		}
 		res.setStatus(404);
 		return null;
 	}
-	
-	@RequestMapping(path="skills/{id}", method = RequestMethod.GET)
-	public Skill skillById(@PathVariable int id) {
-		return skillzServ.oneSkill(id);
-	}
-	
 
-	
-	
+	@RequestMapping(path = "skills/{id}", method = RequestMethod.GET)
+	public Skill skillById(HttpServletRequest req, HttpServletResponse res, @PathVariable int id) {
+		Skill skill = skillzServ.oneSkill(id);
+		if (skill != null) {
+			res.setStatus(200);
+			return skill;
+		}
+		res.setStatus(400);
+		return null;
+	}
+
 }

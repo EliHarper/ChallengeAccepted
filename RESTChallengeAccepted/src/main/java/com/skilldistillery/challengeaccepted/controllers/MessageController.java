@@ -18,53 +18,56 @@ import com.skilldistillery.challengeaccepted.services.MessageService;
 
 @RestController
 @RequestMapping("api")
-@CrossOrigin({"*", "http://localhost:4200"})
+@CrossOrigin({ "*", "http://localhost:4200" })
 public class MessageController {
-	
+
 	@Autowired
 	private MessageService messageServ;
-	
-	@RequestMapping(path="ping", method=RequestMethod.GET)
+
+	@RequestMapping(path = "ping", method = RequestMethod.GET)
 	public String ping() {
 		return "pong";
 	}
-	
-	//show single message
-	@RequestMapping(path="messages/{mid}", method=RequestMethod.GET)
+
+	// show single message
+	@RequestMapping(path = "messages/{mid}", method = RequestMethod.GET)
 	public Message show(HttpServletRequest req, HttpServletResponse res, @PathVariable int mid, Integer uid) {
-	uid = 1;
-	if(messageServ.show(mid, uid) != null) {
-		res.setStatus(200);
-		return messageServ.show(mid, uid);
+		uid = 1;
+		Message mes = messageServ.show(mid, uid);
+		if (mes != null) {
+			res.setStatus(200);
+			return mes;
 		}
-	res.setStatus(404);
-	return null;
+		res.setStatus(404);
+		return null;
 	}
-	
+
 	// show all messages in a single thread
-	@RequestMapping(path="messages/threads/{tid}", method=RequestMethod.GET)
+	@RequestMapping(path = "messages/threads/{tid}", method = RequestMethod.GET)
 	public Set<Message> indexThreadMessages(HttpServletRequest req, HttpServletResponse res, @PathVariable int tid) {
-		if(messageServ.indexThreadMessages(tid) != null) {
+		Set<Message> sm =messageServ.indexThreadMessages(tid);
+		if (sm != null) {
 			res.setStatus(200);
-			return messageServ.indexThreadMessages(tid);
+			return sm;
 		}
 		res.setStatus(404);
 		return null;
 	}
-	
+
 	// show the first message of every thread for a user
-	@RequestMapping(path="messages/heads/{uid}", method=RequestMethod.GET)
+	@RequestMapping(path = "messages/heads/{uid}", method = RequestMethod.GET)
 	public Set<Message> indexThreads(HttpServletRequest req, HttpServletResponse res, @PathVariable int uid) {
-		if(messageServ.indexThreads(uid) != null) {
+		Set<Message> sm = messageServ.indexThreads(uid);
+		if (sm != null) {
 			res.setStatus(200);
-			return messageServ.indexThreads(uid);
+			return sm;
 		}
 		res.setStatus(404);
 		return null;
 	}
-	
+
 	// create a new message
-	@RequestMapping(path="messages", method=RequestMethod.POST)
+	@RequestMapping(path = "messages", method = RequestMethod.POST)
 	public Message create(HttpServletRequest req, HttpServletResponse res, @RequestBody Message message) {
 		Message newMessage = messageServ.create(message);
 		if (newMessage != null) {
@@ -74,12 +77,11 @@ public class MessageController {
 		res.setStatus(404);
 		return null;
 	}
-	
+
 	// delete a message
-	@RequestMapping(path="messages/{mid}", method=RequestMethod.DELETE)
+	@RequestMapping(path = "messages/{mid}", method = RequestMethod.DELETE)
 	public Boolean destroy(HttpServletRequest req, HttpServletResponse res, @PathVariable int mid) {
 		String username = "AlexTheDestroyer";
 		return messageServ.destroy(username, mid);
 	}
 }
-
