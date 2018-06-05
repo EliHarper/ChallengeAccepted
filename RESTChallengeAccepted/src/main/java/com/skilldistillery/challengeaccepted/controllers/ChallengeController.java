@@ -29,9 +29,10 @@ public class ChallengeController {
 	@RequestMapping(path = "challenges/{id}", method = RequestMethod.GET)
 	public Challenge showChallenge(HttpServletRequest req, HttpServletResponse res, @PathVariable int id,
 			String username) {
-		if (chaServ.show(id) != null) {
+		Challenge cha = chaServ.show(id);
+		if (cha != null) {
 			res.setStatus(200);
-			return chaServ.show(id);
+			return cha;
 		}
 		res.setStatus(404);
 		return null;
@@ -40,9 +41,10 @@ public class ChallengeController {
 	// view all challenges
 	@RequestMapping(path = "challenges", method = RequestMethod.GET)
 	public List<Challenge> allChallenges(HttpServletRequest req, HttpServletResponse res) {
-		if (chaServ.index() != null) {
+		List<Challenge> lc = chaServ.index();
+		if (lc != null) {
 			res.setStatus(200);
-			return chaServ.index();
+			return lc;
 		}
 		res.setStatus(404);
 		return null;
@@ -52,22 +54,36 @@ public class ChallengeController {
 	@RequestMapping(path = "challenges/status/{sid}", method = RequestMethod.GET)
 	public Set<Challenge> indexChallengesByStatus(HttpServletRequest req, HttpServletResponse res,
 			@PathVariable int sid) {
-		return chaServ.indexStatusChallenges(sid);
+		Set<Challenge> sc = chaServ.indexStatusChallenges(sid);
+		if (sc != null) {
+			res.setStatus(200);
+			return sc;
+		}
+		res.setStatus(404);
+		return null;
 	}
-	
+
 	// update the status of a challenge, using challenge id and status id
 	@RequestMapping(path = "challenges/{cid}/status/{sid}", method = RequestMethod.PATCH)
-	public Challenge updateChallengeStatus(HttpServletRequest req, HttpServletResponse res, @PathVariable int cid, @PathVariable int sid) {
-		return chaServ.updateStatus(cid, sid); 
+	public Challenge updateChallengeStatus(HttpServletRequest req, HttpServletResponse res, @PathVariable int cid,
+			@PathVariable int sid) {
+		Challenge cha = chaServ.updateStatus(cid, sid);
+		if (cha != null) {
+			res.setStatus(201);
+			return cha;
+		}
+		res.setStatus(404);
+		return null;
 	}
 
 	// view list of challenges for one user by status
 	@RequestMapping(path = "challenges/user/{uid}/status/{sid}", method = RequestMethod.GET)
 	public Set<Challenge> indexChallengeByUserAndStatus(HttpServletRequest req, HttpServletResponse res,
 			@PathVariable int uid, @PathVariable int sid) {
-		if (chaServ.indexStatusChallengesByUser(sid, uid) != null) {
+		Set<Challenge> sc = chaServ.indexStatusChallengesByUser(sid, uid);
+		if (sc != null) {
 			res.setStatus(200);
-			return chaServ.indexStatusChallengesByUser(sid, uid);
+			return sc;
 		}
 		res.setStatus(404);
 		return null;
@@ -76,9 +92,10 @@ public class ChallengeController {
 	// create new challenge
 	@RequestMapping(path = "challenges", method = RequestMethod.POST)
 	public Challenge newChallenge(HttpServletRequest req, HttpServletResponse res, @RequestBody ChallengeDTO cDTO) {
-		if (chaServ.create(cDTO) != null) {
+		Challenge cha = chaServ.create(cDTO);
+		if (cha != null) {
 			res.setStatus(200);
-			return chaServ.create(cDTO);
+			return cha;
 		}
 		res.setStatus(404);
 		return null;
@@ -86,11 +103,11 @@ public class ChallengeController {
 
 	// update existing challenge by challenge id
 	@RequestMapping(path = "challenges/{id}", method = RequestMethod.PATCH)
-	public Challenge updateChallenge(HttpServletRequest req, HttpServletResponse res, @PathVariable int id,
-			@RequestBody Challenge challenge) {
-		if (chaServ.update(challenge, id) != null) {
+	public Challenge updateChallenge(HttpServletRequest req, HttpServletResponse res, @PathVariable int id, @RequestBody Challenge challenge) {
+		Challenge cha = chaServ.update(challenge, id);
+		if (cha != null) {
 			res.setStatus(200);
-			return chaServ.update(challenge, id);
+			return cha;
 		}
 		res.setStatus(404);
 		return null;
