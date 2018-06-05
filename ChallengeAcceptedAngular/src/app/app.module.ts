@@ -22,6 +22,13 @@ import { TestingComponent } from './testing/testing.component';
 import { ChallengesAcceptedPipe } from './pipes/challenges-accepted.pipe';
 import { ChallengesCreatedPipe } from './pipes/challenges-created.pipe';
 import { MatButtonModule, MatCheckboxModule, MatProgressBarModule } from '@angular/material';
+import { UserChallengeService } from './user-challenge.service';
+import { UserService } from './user.service';
+import { AuthService } from './auth.service';
+import { ChallengeService } from './challenge.service';
+import { SkillService } from './skill.service';
+import { UserSkillService } from './user-skill.service';
+
 
 @NgModule({
   declarations: [
@@ -52,7 +59,13 @@ import { MatButtonModule, MatCheckboxModule, MatProgressBarModule } from '@angul
     ChallengesAcceptedPipe,
     TopSkillsPipe,
     CompletedStatusPipe,
-    ChallengesCreatedPipe ],
+    ChallengesCreatedPipe,
+    UserChallengeService,
+    ChallengeService,
+    SkillService,
+    UserSkillService,
+    AuthService,
+    UserService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

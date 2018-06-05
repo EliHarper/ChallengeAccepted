@@ -1,3 +1,4 @@
+import { UserService } from './../user.service';
 import { HttpHeaders } from '@angular/common/http';
 import { UserChallenge } from './../models/user-challenge';
 import { Challenge } from './../models/challenge';
@@ -19,6 +20,7 @@ export class ChallengeViewComponent implements OnInit {
   user = new User(); // change to localstorage user when ready
   flag = false;
   testUser: User = new User(2);
+  userIdList: number[] = [];
 
 
 
@@ -97,6 +99,44 @@ export class ChallengeViewComponent implements OnInit {
     );
   }
 
+  updateUserIdList(id: number) {
+    console.log(this.userIdList.indexOf(id));
+
+    if (this.userIdList.includes(id)) {
+      this.userIdList.splice(this.userIdList.indexOf(id) , 1);
+    } else {
+      this.userIdList.push(id);
+    }
+    console.log(this.userIdList);
+
+  }
+
+  tallyResults(challenge) {
+    this.userChallengeService.calculateSkills(challenge).subscribe(
+      data => {
+        this.setChallengeToCompleted(challenge.id);
+      },
+      error => {
+        console.log(error);
+      }
+
+    );
+  }
+
+  updateWholeUserList(id) {
+    console.log(this.userIdList);
+    this.userIdList.forEach(function(element, index) {
+      this.userChallengeService.updateUserWinner(id, element).subscribe(
+        data => {
+          this.tallyResults(this.displayChallenge);
+          console.log(data);
+        },
+        error => {
+          console.log(error);
+        }
+      );
+    });
+  }
 
   constructor(private challengeService: ChallengeService,
   private userChallengeService: UserChallengeService,
