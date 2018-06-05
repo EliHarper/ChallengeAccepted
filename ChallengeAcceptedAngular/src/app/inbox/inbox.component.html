@@ -8,10 +8,7 @@
   <thead>
     <tr>
       <th>
-      Message
-     </th>
-     <th>
-       Original Sender
+      Original Sender
      </th>
       <th>
       Timestamp
@@ -21,10 +18,8 @@
   <tbody>
     <div *ngFor="let message of allMessages" >
       <tr (click)="getThreadMessages(message.threadId)">
-        <td>{{message.message}}</td>
         <td>{{message.sender.username}}</td>
         <td>{{message.timeSent}}</td>
-        <td>{{message.threadId}}</td>
       </tr>
       </div>
   </tbody>
