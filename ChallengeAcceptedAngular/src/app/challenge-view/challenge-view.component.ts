@@ -111,31 +111,33 @@ export class ChallengeViewComponent implements OnInit {
 
   }
 
-  tallyResults(challenge) {
-    this.userChallengeService.calculateSkills(challenge).subscribe(
-      data => {
-        this.setChallengeToCompleted(challenge.id);
-      },
-      error => {
-        console.log(error);
-      }
+  // tallyResults(challenge) {
+  //   this.userChallengeService.calculateSkills(challenge).subscribe(
+  //     data => {
+  //       this.setChallengeToCompleted(challenge.id);
+  //     },
+  //     error => {
+  //       console.log(error);
+  //     }
 
-    );
-  }
+  //   );
+  // }
 
-  updateWholeUserList(id) {
-    console.log(this.userIdList);
-    this.userIdList.forEach(function(element, index) {
-      this.userChallengeService.updateUserWinner(id, element).subscribe(
+  updateWholeUserList(id, challenge) {
+    console.log(challenge);
+
+    for (let index = 0; index < this.userIdList.length; index++) {
+      this.userChallengeService.updateUserWinner(id, this.userIdList[index], this.displayChallenge).subscribe(
         data => {
-          this.tallyResults(this.displayChallenge);
-          console.log(data);
+          if (this.userIdList[this.userIdList.length - 1] === data.id) {
+            this.setChallengeToCompleted(this.displayChallenge.id);
+          }
         },
         error => {
           console.log(error);
         }
       );
-    });
+    }
   }
 
   constructor(private challengeService: ChallengeService,
