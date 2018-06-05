@@ -1,0 +1,14 @@
+<div class="">
+  <form >
+    <input type="text" name="location" [(ngModel)]="challenge.location" placeholder="Location">
+    <input type="text" name="name" [(ngModel)]="challenge.name" placeholder="Name">
+    <input type="textarea" name="description" [(ngModel)]="challenge.description" placeholder="description">
+    <input type="number" name="wager" [(ngModel)]="wager" placeholder="wager" placeholder="$">
+
+  <label>Minumum number of Challengers</label>  <input type="text" min="1" name="minNumberofChallengers" [(ngModel)]="challenge.minNumberofChallengers">
+  <label>Maximum number of Challengers</label>  <input type="text" name="maxNumberofChallengers" [(ngModel)]="challenge.maxNumberofChallengers">
+    <div *ngFor"let tag of tags">
+      <label>Choose Tags:</label>
+      <input type="radio" name="tags" >
+</div>
+</form>

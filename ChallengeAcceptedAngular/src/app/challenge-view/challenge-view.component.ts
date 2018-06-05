@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+import { TagsService } from './../tags.service';
+=======
 import { UserService } from './../user.service';
+>>>>>>> 32dafa26bde6e2fdc3b555372dfa6f11191296ba
 import { HttpHeaders } from '@angular/common/http';
 import { UserChallenge } from './../models/user-challenge';
 import { Challenge } from './../models/challenge';
@@ -7,6 +11,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserChallengeService } from '../user-challenge.service';
 import { User } from '../models/user';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Tag } from '../models/tag';
 
 
 @Component({
@@ -20,7 +25,11 @@ export class ChallengeViewComponent implements OnInit {
   user = new User(); // change to localstorage user when ready
   flag = false;
   testUser: User = new User(2);
+<<<<<<< HEAD
+  tags: Tag[] = [];
+=======
   userIdList: number[] = [];
+>>>>>>> 32dafa26bde6e2fdc3b555372dfa6f11191296ba
 
 
 
@@ -99,6 +108,21 @@ export class ChallengeViewComponent implements OnInit {
     );
   }
 
+<<<<<<< HEAD
+  getTags() {
+    this.tagService.getAllTags().subscribe(
+      data => {
+        console.log(data);
+        this.tags = data;
+      },
+      error => {
+        this.tags = null;
+        console.log(error);
+
+      }
+    );
+  }
+=======
   updateUserIdList(id: number) {
     console.log(this.userIdList.indexOf(id));
 
@@ -139,10 +163,12 @@ export class ChallengeViewComponent implements OnInit {
       );
     }
   }
+>>>>>>> 32dafa26bde6e2fdc3b555372dfa6f11191296ba
 
   constructor(private challengeService: ChallengeService,
   private userChallengeService: UserChallengeService,
-  private route: ActivatedRoute) { }
+  private route: ActivatedRoute,
+  private tagService: TagsService) { }
 
   ngOnInit() {
     this.getChallengeData();
