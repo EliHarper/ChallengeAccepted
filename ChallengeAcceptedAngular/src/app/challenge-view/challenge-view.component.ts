@@ -1,3 +1,4 @@
+import { TagsService } from './../tags.service';
 import { UserService } from './../user.service';
 import { HttpHeaders } from '@angular/common/http';
 import { UserChallenge } from './../models/user-challenge';
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserChallengeService } from '../user-challenge.service';
 import { User } from '../models/user';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Tag } from '../models/tag';
 
 
 @Component({
@@ -20,6 +22,7 @@ export class ChallengeViewComponent implements OnInit {
   user = new User(); // change to localstorage user when ready
   flag = false;
   testUser: User = new User(2);
+  tags: Tag[] = [];
   userIdList: number[] = [];
 
 
@@ -99,6 +102,19 @@ export class ChallengeViewComponent implements OnInit {
     );
   }
 
+  getTags() {
+    this.tagService.getAllTags().subscribe(
+      data => {
+        console.log(data);
+        this.tags = data;
+      },
+      error => {
+        this.tags = null;
+        console.log(error);
+
+      }
+    );
+  }
   updateUserIdList(id: number) {
     console.log(this.userIdList.indexOf(id));
 
@@ -111,36 +127,27 @@ export class ChallengeViewComponent implements OnInit {
 
   }
 
-  tallyResults(challenge) {
-    this.userChallengeService.calculateSkills(challenge).subscribe(
-      data => {
-        this.setChallengeToCompleted(challenge.id);
-      },
-      error => {
-        console.log(error);
-      }
+  updateWholeUserList(id, challenge) {
+    console.log(challenge);
 
-    );
-  }
-
-  updateWholeUserList(id) {
-    console.log(this.userIdList);
-    this.userIdList.forEach(function(element, index) {
-      this.userChallengeService.updateUserWinner(id, element).subscribe(
+    for (let index = 0; index < this.userIdList.length; index++) {
+      this.userChallengeService.updateUserWinner(id, this.userIdList[index], this.displayChallenge).subscribe(
         data => {
-          this.tallyResults(this.displayChallenge);
-          console.log(data);
+          if (this.userIdList[this.userIdList.length - 1] === data.id) {
+            this.setChallengeToCompleted(this.displayChallenge.id);
+          }
         },
         error => {
           console.log(error);
         }
       );
-    });
+    }
   }
 
   constructor(private challengeService: ChallengeService,
   private userChallengeService: UserChallengeService,
-  private route: ActivatedRoute) { }
+  private route: ActivatedRoute,
+  private tagService: TagsService) { }
 
   ngOnInit() {
     this.getChallengeData();

@@ -330,7 +330,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `challengedb`;
-INSERT INTO `challenge` (`id`, `creator_id`, `skill_id`, `status_id`, `name`, `location`, `time_created`, `wager`, `min_number_of_challengers`, `max_number_of_challengers`, `expiration`, `description`, `image`) VALUES (1, 1, 1, 2, 'Drinking Challenge', 'The bar', DEFAULT, DEFAULT, 2, 2, NULL, 'Drink against Me!', NULL);
+INSERT INTO `challenge` (`id`, `creator_id`, `skill_id`, `status_id`, `name`, `location`, `time_created`, `wager`, `min_number_of_challengers`, `max_number_of_challengers`, `expiration`, `description`, `image`) VALUES (1, 1, 1, 1, 'Drinking Challenge', 'The bar', DEFAULT, DEFAULT, 2, 2, NULL, 'Drink against Me!', NULL);
 INSERT INTO `challenge` (`id`, `creator_id`, `skill_id`, `status_id`, `name`, `location`, `time_created`, `wager`, `min_number_of_challengers`, `max_number_of_challengers`, `expiration`, `description`, `image`) VALUES (2, 2, 2, 1, 'Lift Me Bro', 'The gym', DEFAULT, DEFAULT, 2, 3, NULL, 'I can outlift you bro', NULL);
 INSERT INTO `challenge` (`id`, `creator_id`, `skill_id`, `status_id`, `name`, `location`, `time_created`, `wager`, `min_number_of_challengers`, `max_number_of_challengers`, `expiration`, `description`, `image`) VALUES (3, 3, 3, 1, 'Crossfit', 'The gym', DEFAULT, DEFAULT, 2, 3, NULL, 'I can do more cardio than anyone with a heart', NULL);
 INSERT INTO `challenge` (`id`, `creator_id`, `skill_id`, `status_id`, `name`, `location`, `time_created`, `wager`, `min_number_of_challengers`, `max_number_of_challengers`, `expiration`, `description`, `image`) VALUES (4, 4, 4, 1, '8 Ball', 'The bar', DEFAULT, DEFAULT, 2, 4, NULL, 'I\'m pretty good at pool', NULL);
@@ -427,7 +427,7 @@ INSERT INTO `user_challenge` (`id`, `challenge_id`, `invited_user_id`, `accepted
 INSERT INTO `user_challenge` (`id`, `challenge_id`, `invited_user_id`, `accepted`, `accept_time`, `acceptor_won`) VALUES (7, 3, 2, 1, NULL, 0);
 INSERT INTO `user_challenge` (`id`, `challenge_id`, `invited_user_id`, `accepted`, `accept_time`, `acceptor_won`) VALUES (8, 4, 3, 1, NULL, 0);
 INSERT INTO `user_challenge` (`id`, `challenge_id`, `invited_user_id`, `accepted`, `accept_time`, `acceptor_won`) VALUES (9, 5, 4, 1, NULL, 0);
-INSERT INTO `user_challenge` (`id`, `challenge_id`, `invited_user_id`, `accepted`, `accept_time`, `acceptor_won`) VALUES (10, 1, 5, 1, NULL, 0);
+INSERT INTO `user_challenge` (`id`, `challenge_id`, `invited_user_id`, `accepted`, `accept_time`, `acceptor_won`) VALUES (10, 1, 5, 0, NULL, 0);
 INSERT INTO `user_challenge` (`id`, `challenge_id`, `invited_user_id`, `accepted`, `accept_time`, `acceptor_won`) VALUES (11, 4, 1, 1, NULL, 0);
 
 COMMIT;

@@ -18,9 +18,9 @@
                   <th scope="col">Level</th>
                   <th scope="col">Progress</th>
                 </thead>
-                <tbody *ngFor="let uSkill of user.userSkills | topSkills">
+                <tbody *ngFor="let uSkill of userSkills">
                   <tr>
-                    <td>{{uSkill.name}}</td>
+                    <td>{{uSkill.id}}</td>
                     <td>{{uSkill.points}}</td>
                     <td><mat-progress-bar mode="determinate" value="{{getUserProgressToNextLevel(user.id)}}"></mat-progress-bar></td>
                   </tr>
