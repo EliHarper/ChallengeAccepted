@@ -21,5 +21,7 @@ public interface ChallengeService {
 	public Set<Challenge> indexStatusChallenges( int sid);
 	
 	public Set<Challenge> indexStatusChallengesByUser(int sid, int uid);
+	
+	public Challenge updateStatus(int cid, int sid);
 
 }

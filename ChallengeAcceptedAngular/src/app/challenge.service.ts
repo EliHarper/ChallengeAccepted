@@ -28,5 +28,31 @@ export class ChallengeService {
     );
   }
 
+  setChallengeToActive(id) {
+    return this.http.patch<Challenge>(`${this.url}/challenges/${id}/status/2`, {}).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(err);
+      })
+    );
+  }
+
+  setChallengeToExpired(id) {
+    return this.http.patch<Challenge>(`${this.url}/challenges/${id}/status/4`, {}).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(err);
+      })
+    );
+  }
+  setChallengeToCompleted(id) {
+    return this.http.patch<Challenge>(`${this.url}/challenges/${id}/status/3`, {}).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(err);
+      })
+    );
+  }
+
   constructor(private http: HttpClient) { }
 }

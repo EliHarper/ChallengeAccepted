@@ -89,11 +89,16 @@
 <div id="content">
   <div class="mission text-center block block-pd-sm block-bg-noise">
     <div class="container">
+      <button class="lrg-btn" (click)="setChallengeToActive(displayChallenge.id)">Start Challenge</button>
+      <button class="lrg-btn" (click)="setChallengeToExpired(displayChallenge.id)">Cancel Challenge</button>
       <h2 class="text-shadow-white">
           {{displayChallenge.name}}
       </h2>
       <h2 class="text-shadow-white">
           Skill: {{displayChallenge.skill.name}}
+      </h2>
+      <h2 class="text-shadow-white">
+          Status: {{displayChallenge.status.name}}
       </h2>
       <h2><span *ngFor="let tag of displayChallenge.tags" class="label label-info">{{tag.name}}</span></h2>
     </div>
