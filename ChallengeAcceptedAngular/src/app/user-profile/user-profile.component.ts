@@ -23,6 +23,7 @@ import { Skill } from '../models/skill';
 export class UserProfileComponent implements OnInit {
 
   title = 'Profile of {{ user.username }}';
+  test = '';
   user = new User();
   userSkills: UserSkill[] = [];
 
@@ -33,11 +34,6 @@ export class UserProfileComponent implements OnInit {
   getLocation = function(id) {
     return this.user.location;
   };
-
-  // getTopSkills = function(id) {
-  //   return this.topSkills.transform(this.getUserData()).pipe(
-  //     ;
-  // };
 
   getChallengesCreated = function(id) {
     this.user = this.userService.findUserById();
@@ -61,20 +57,25 @@ export class UserProfileComponent implements OnInit {
       errror => null);
   }
 
+  getUserSkills() {
+    this.userSkillService.getUserSkills(this.route.snapshot.paramMap.get('id')).subscribe(
+      data => {this.userSkills = data;
+      console.log(data); },
+      error => console.log('oh no')
+    );
+  }
+
   getUserProgressToNextLevel = function(id) {
     this.user = this.userService.findUserById(id);
     return this.userSkillService.getUserProgressToNextLevel(this.user);
   };
 
   getUserData() {
-    console.log(this.route.snapshot.paramMap.get('id'));
     this.userService.findUserById(this.route.snapshot.paramMap.get('id')).subscribe(
       data => {
+        console.log(data);
         this.user = data;
-      },
-      error => {
-        this.user = null;
-      }
+      }, error => console.log(error + '*************************************************')
     );
   }
 
@@ -90,18 +91,6 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit() {
     this.getUserData();
-
-    // setTimeout(() => {
-
-      // this.userSkillService.findUserSkillById(this.userSkills).subscribe(
-      //   data => {
-      //     console.log(data);
-      //     this.getTopSkills(this.user.id);
-      //   },
-      //   error => {
-      //     this.getTopSkills = null;
-      //   }
-      // );
-    // }, 3000);
+    this.getUserSkills();
   }
 }

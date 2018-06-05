@@ -130,7 +130,7 @@ CREATE TABLE IF NOT EXISTS `user_skill` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `skill_id` INT NOT NULL,
   `user_id` INT NOT NULL,
-  `points` INT NULL,
+  `points` INT NOT NULL DEFAULT 0,
   INDEX `user_id_to_user_idx` (`user_id` ASC),
   INDEX `category_id_to_category_idx` (`skill_id` ASC),
   PRIMARY KEY (`id`),
@@ -370,6 +370,8 @@ INSERT INTO `user_skill` (`id`, `skill_id`, `user_id`, `points`) VALUES (2, 2, 2
 INSERT INTO `user_skill` (`id`, `skill_id`, `user_id`, `points`) VALUES (3, 3, 3, 15);
 INSERT INTO `user_skill` (`id`, `skill_id`, `user_id`, `points`) VALUES (4, 4, 4, 18);
 INSERT INTO `user_skill` (`id`, `skill_id`, `user_id`, `points`) VALUES (5, 5, 5, 9);
+INSERT INTO `user_skill` (`id`, `skill_id`, `user_id`, `points`) VALUES (6, 1, 5, 5);
+INSERT INTO `user_skill` (`id`, `skill_id`, `user_id`, `points`) VALUES (7, 1, 2, 5);
 
 COMMIT;
 

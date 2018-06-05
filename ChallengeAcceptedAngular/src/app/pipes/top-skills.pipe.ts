@@ -21,10 +21,13 @@ export class TopSkillsPipe implements PipeTransform {
 
   transform(skills: UserSkill[]): any {
     const topSkills = [];
-    skills.forEach(function(skill, idx) {
+    // tslint:disable-next-line:prefer-const
+    let idx = 0;
+    skills.forEach(element => {
       if (idx <= 2) {
-        topSkills.push(skill);
+        topSkills.push(element);
       }
+      idx++;
     });
 
     return topSkills;

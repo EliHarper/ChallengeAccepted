@@ -2,26 +2,25 @@
 
   <!-- ======== @Region: #content ======== -->
     <!---->
-    <p>{{ user | json}}</p>
     <div class="showcase block block-border-bottom-grey">
       <div class="container">
         <h2 class="block-title">
-          {{ user.username }}
+          {{user.username}}
         </h2>
-        <h4>Location: {{ user.location }}</h4>
+        <h4>Location: {{user.location}}</h4>
         <hr>
         <div class="row">
           <div class="col-md-4">
-            <h3>{{ user.username }}'s top skills:</h3>
+            <h3>{{user.username}}'s top skills:</h3>
             <table class="table">
               <thead>
                   <th scope="col">Skill</th>
                   <th scope="col">Level</th>
                   <th scope="col">Progress</th>
                 </thead>
-                <tbody *ngFor="let uSkill of user.userSkills">
+                <tbody *ngFor="let uSkill of userSkills">
                   <tr>
-                    <td>{{ getSkillNameById(uSkill.id) }}</td>
+                    <td>{{uSkill.id}}</td>
                     <td>{{uSkill.points}}</td>
                     <td><mat-progress-bar mode="determinate" value="{{getUserProgressToNextLevel(user.id)}}"></mat-progress-bar></td>
                   </tr>

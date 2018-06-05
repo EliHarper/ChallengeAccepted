@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { TagsService } from './../tags.service';
+=======
+import { UserService } from './../user.service';
+>>>>>>> 32dafa26bde6e2fdc3b555372dfa6f11191296ba
 import { HttpHeaders } from '@angular/common/http';
 import { UserChallenge } from './../models/user-challenge';
 import { Challenge } from './../models/challenge';
@@ -21,7 +25,11 @@ export class ChallengeViewComponent implements OnInit {
   user = new User(); // change to localstorage user when ready
   flag = false;
   testUser: User = new User(2);
+<<<<<<< HEAD
   tags: Tag[] = [];
+=======
+  userIdList: number[] = [];
+>>>>>>> 32dafa26bde6e2fdc3b555372dfa6f11191296ba
 
 
 
@@ -100,6 +108,7 @@ export class ChallengeViewComponent implements OnInit {
     );
   }
 
+<<<<<<< HEAD
   getTags() {
     this.tagService.getAllTags().subscribe(
       data => {
@@ -113,6 +122,46 @@ export class ChallengeViewComponent implements OnInit {
       }
     );
   }
+=======
+  updateUserIdList(id: number) {
+    console.log(this.userIdList.indexOf(id));
+
+    if (this.userIdList.includes(id)) {
+      this.userIdList.splice(this.userIdList.indexOf(id) , 1);
+    } else {
+      this.userIdList.push(id);
+    }
+    console.log(this.userIdList);
+
+  }
+
+  tallyResults(challenge) {
+    this.userChallengeService.calculateSkills(challenge).subscribe(
+      data => {
+        this.setChallengeToCompleted(challenge.id);
+      },
+      error => {
+        console.log(error);
+      }
+
+    );
+  }
+
+  updateWholeUserList(id) {
+    console.log(this.userIdList);
+    this.userIdList.forEach(function(element, index) {
+      this.userChallengeService.updateUserWinner(id, element).subscribe(
+        data => {
+          this.tallyResults(this.displayChallenge);
+          console.log(data);
+        },
+        error => {
+          console.log(error);
+        }
+      );
+    });
+  }
+>>>>>>> 32dafa26bde6e2fdc3b555372dfa6f11191296ba
 
   constructor(private challengeService: ChallengeService,
   private userChallengeService: UserChallengeService,

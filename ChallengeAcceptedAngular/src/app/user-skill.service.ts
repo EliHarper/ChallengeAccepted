@@ -12,7 +12,16 @@ export class UserSkillService {
   url = 'http://localhost:8080/api';
 
   findUserSkillById(usid) {
-    return this.http.get<UserSkill[]>(`${this.url}/user/${usid}`).pipe(
+    return this.http.get<UserSkill[]>(`${this.url}/users/${usid}`).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(err);
+      })
+    );
+  }
+
+  getUserSkills(uid) {
+    return this.http.get<UserSkill[]>(`${this.url}/userskills/${uid}`).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(err);
@@ -24,7 +33,7 @@ export class UserSkillService {
     return userSkill.points / 10;
   }
 
-  getProgressToNextLvl(userSkill: UserSkill) {
+  getUserProgressToNextLevel(userSkill: UserSkill) {
     return userSkill.points % 10;
   }
 
