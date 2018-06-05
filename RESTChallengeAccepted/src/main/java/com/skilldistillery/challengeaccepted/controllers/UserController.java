@@ -27,14 +27,25 @@ public class UserController {
 	
 	// finds user by user id
 	@RequestMapping(path="users/{uid}", method=RequestMethod.GET)
-	public User viewUserProfile(@PathVariable int uid) {
-		return userServ.show(uid);
+	public User viewUserProfile(HttpServletRequest req, HttpServletResponse res, @PathVariable int uid) {
+		if (userServ.show(uid) != null) {
+			res.setStatus(200);
+			return userServ.show(uid);
+		}
+		res.setStatus(404);
+		return null;
 	}
 	
 	// create new user
 	@RequestMapping(path="users", method=RequestMethod.POST)
 	public User createUser(HttpServletRequest req, HttpServletResponse res, @RequestBody User user) {
-		return userServ.create(user);
+		User newUser = userServ.create(user);
+		if (newUser != null) {
+			res.setStatus(201);
+			return newUser;
+		}
+		res.setStatus(404);
+		return null;
 	}
 	
 	// update existing user w/ user id
@@ -45,7 +56,7 @@ public class UserController {
 	
 	// delete user by user id
 	@RequestMapping(path="/users/{id}", method=RequestMethod.DELETE)
-	public Boolean deleteUser(@PathVariable int id, String username) {
+	public Boolean deleteUser(@PathVariable int id) {
 		return userServ.delete(id);
 	}
 	

@@ -10,7 +10,7 @@ import { catchError } from 'rxjs/operators';
 export class UserService {
 
   url = 'http://localhost:8080/api';
-
+//this.url + '/user/' + id
   findUserById(id) {
     return this.http.get<User>(`${this.url}/user/${id}`).pipe(
       catchError((err: any) => {
