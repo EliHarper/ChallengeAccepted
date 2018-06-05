@@ -48,7 +48,6 @@ import { MatButtonModule, MatCheckboxModule, MatProgressBarModule } from '@angul
     MatProgressBarModule
   ],
   providers: [CompletedStatusPipe,
-    TopSkillsPipe,
     ChallengesAcceptedPipe,
     TopSkillsPipe,
     CompletedStatusPipe,
