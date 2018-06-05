@@ -54,6 +54,12 @@ public class ChallengeController {
 			@PathVariable int sid) {
 		return chaServ.indexStatusChallenges(sid);
 	}
+	
+	// update the status of a challenge, using challenge id and status id
+	@RequestMapping(path = "challenges/{cid}/status/{sid}", method = RequestMethod.PATCH)
+	public Challenge updateChallengeStatus(HttpServletRequest req, HttpServletResponse res, @PathVariable int cid, @PathVariable int sid) {
+		return chaServ.updateStatus(cid, sid); 
+	}
 
 	// view list of challenges for one user by status
 	@RequestMapping(path = "challenges/user/{uid}/status/{sid}", method = RequestMethod.GET)
