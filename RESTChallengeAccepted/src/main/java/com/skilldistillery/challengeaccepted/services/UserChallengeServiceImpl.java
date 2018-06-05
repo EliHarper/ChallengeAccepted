@@ -92,7 +92,7 @@ public class UserChallengeServiceImpl implements UserChallengeService {
 			else {
 				newPoints = 2;
 			}
-			UserSkill uSkill = userSkillRepo.findByChallengeIdAndUserId(challenge.getId(), uc.getUser().getId());
+			UserSkill uSkill = userSkillRepo.findBySkillIdAndUserId(challenge.getSkill().getId(), uc.getUser().getId());
 			uSkillImpl.update(uSkill, newPoints);
 			updatedUserSkills.add(uSkill);
 		}
