@@ -45,7 +45,6 @@ public class User {
 	private List <UserChallenge> userChallenges;
 	
 	@OneToMany(mappedBy="user")
-	@JsonIgnore
 	private List <UserSkill> userSkills;
 	
 	// constructor
