@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.skilldistillery.challengeaccepted.entities.Challenge;
 import com.skilldistillery.challengeaccepted.entities.UserChallenge;
 import com.skilldistillery.challengeaccepted.entities.UserChallengeDTO;
 import com.skilldistillery.challengeaccepted.services.UserChallengeService;
@@ -63,6 +64,12 @@ public class UserChallengeController {
 		}
 		res.setStatus(400);
 		return null;
+	}
+	
+	// tally user skill points from user challenge record
+	@RequestMapping(path="challenges/{cid}/userskills", method=RequestMethod.PATCH)
+	public void tallyUserSkillPointsForChallenge(@RequestBody Challenge challenge, @PathVariable int cid) {
+		userChallengeService.tallyUserSkillPointsForChallenge(challenge);
 	}
 
 	// returns all challenges a user has accepted, active and inactive

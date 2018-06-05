@@ -1,6 +1,5 @@
 package com.skilldistillery.challengeaccepted.services;
 
-import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +9,11 @@ import com.skilldistillery.challengeaccepted.entities.Challenge;
 import com.skilldistillery.challengeaccepted.entities.User;
 import com.skilldistillery.challengeaccepted.entities.UserChallenge;
 import com.skilldistillery.challengeaccepted.entities.UserChallengeDTO;
+import com.skilldistillery.challengeaccepted.entities.UserSkill;
 import com.skilldistillery.challengeaccepted.repositories.ChallengeRepository;
 import com.skilldistillery.challengeaccepted.repositories.UserChallengeRepository;
 import com.skilldistillery.challengeaccepted.repositories.UserRepository;
+import com.skilldistillery.challengeaccepted.repositories.UserSkillRepository;
 
 @Service
 public class UserChallengeServiceImpl implements UserChallengeService {
@@ -23,6 +24,10 @@ public class UserChallengeServiceImpl implements UserChallengeService {
 	private UserRepository userRepo;
 	@Autowired
 	private ChallengeRepository challengeRepository;
+	@Autowired
+	private UserSkillRepository userSkillRepo;
+	@Autowired
+	private UserSkillServiceImpl uSkillImpl;
 
 	public UserChallenge create(UserChallengeDTO ucDTO, String username) {
 		UserChallenge uc = new UserChallenge();
@@ -68,9 +73,26 @@ public class UserChallengeServiceImpl implements UserChallengeService {
 			return null;
 		}
 	}
-
+	
+	// gets all user challenge records for a single challenge
 	public List<UserChallenge> getTheChallengeAcceptorsForAChallenge(int cid, String username) {
 		return userChallengeRepo.findByChallengeId(cid);
+	}
+	
+	// tally points for all user skill records for a challenge
+	public void tallyUserSkillPointsForChallenge(Challenge challenge) {
+		List<UserChallenge> userChallenges = userChallengeRepo.findByChallengeId(challenge.getId());
+		int newPoints = 0;
+		for (UserChallenge uc : userChallenges) {
+			if (uc.isAcceptorWon()) {
+				newPoints = 5;	
+			}
+			else {
+				newPoints = 2;
+			}
+			UserSkill uSkill = userSkillRepo.findByChallengeIdAndUserId(challenge.getId(), uc.getUser().getId());
+			uSkillImpl.update(uSkill, newPoints);
+		}
 	}
 
 	public List<UserChallenge> challengesUserHasParticipatedIn(int uid, String username) {

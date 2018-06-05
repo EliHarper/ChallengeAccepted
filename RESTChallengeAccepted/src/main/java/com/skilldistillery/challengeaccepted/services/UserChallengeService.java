@@ -26,4 +26,6 @@ public interface UserChallengeService {
 	public UserChallenge checkIfUserHasAcceptedChallenge(int cid, int uid);
 	
 	public UserChallenge updateUCRecord(int cid, int uid);
+	
+	public void tallyUserSkillPointsForChallenge(Challenge challenge);
 }
