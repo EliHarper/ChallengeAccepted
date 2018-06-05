@@ -42,8 +42,8 @@ export class UserChallengeService {
     );
   }
 
-  updateUserWinner(cid, uid) {
-    return this.http.patch<UserChallenge>(`${this.url}/challenges/${cid}/user/${uid}/`, {}).pipe(
+  updateUserWinner(cid, uid, challenge) {
+    return this.http.patch<UserChallenge>(`${this.url}/challenges/${cid}/user/${uid}/`, challenge).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(err);
@@ -51,14 +51,14 @@ export class UserChallengeService {
     );
   }
 
-  calculateSkills(challenge) {
-    return this.http.patch<UserChallenge>(`${this.url}/challenges/${challenge.id}/userskills`, challenge).pipe(
-      catchError((err: any) => {
-        console.log(err);
-        return throwError(err);
-      })
-    );
-  }
+  // calculateSkills(challenge) {
+  //   return this.http.patch<UserChallenge>(`${this.url}/challenges/${challenge.id}/userskills`, challenge).pipe(
+  //     catchError((err: any) => {
+  //       console.log(err);
+  //       return throwError(err);
+  //     })
+  //   );
+  // }
 
 
   constructor(private http: HttpClient) { }
