@@ -28,9 +28,10 @@ public class UserController {
 	// finds user by user id
 	@RequestMapping(path="users/{uid}", method=RequestMethod.GET)
 	public User viewUserProfile(HttpServletRequest req, HttpServletResponse res, @PathVariable int uid) {
-		if (userServ.show(uid) != null) {
+		User user = userServ.show(uid);
+		if ( user != null) {
 			res.setStatus(200);
-			return userServ.show(uid);
+			return user;
 		}
 		res.setStatus(404);
 		return null;

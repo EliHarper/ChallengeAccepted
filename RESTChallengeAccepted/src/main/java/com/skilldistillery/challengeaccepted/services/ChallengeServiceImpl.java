@@ -28,7 +28,6 @@ public class ChallengeServiceImpl implements ChallengeService {
 	@Autowired
 	private StatusRepository statusRepo;
 
-	
 	public Challenge create(ChallengeDTO cDTO) {
 		Challenge c = new Challenge();
 		User user = userRepo.findById(cDTO.getCreatorId()).get();
@@ -51,15 +50,26 @@ public class ChallengeServiceImpl implements ChallengeService {
 
 	public Challenge update(Challenge c, int cid) {
 		Challenge managedChallenge = chaRepo.findById(cid).get();
-		managedChallenge.setLocation(c.getLocation());
-		managedChallenge.setDescription(c.getDescription());
-		managedChallenge.setName(c.getName());
-		managedChallenge.setMinNumberOfChallengers(c.getMinNumberOfChallengers());
-		managedChallenge.setMaxNumberOfChallengers(c.getMaxNumberOfChallengers());
-		
+		if (c.getLocation() != null && !c.getLocation().equals("")) {
+			managedChallenge.setLocation(c.getLocation());
+		}
+		if (c.getDescription() != null && !c.getDescription().equals("")) {
+			managedChallenge.setDescription(c.getDescription());
+		}
+		if (c.getName() != null && !c.getName().equals("")) {
+			managedChallenge.setName(c.getName());
+		}
+		if (c.getMinNumberOfChallengers() != 0) {
+			managedChallenge.setMinNumberOfChallengers(c.getMinNumberOfChallengers());
+		}
+		if (c.getMaxNumberOfChallengers() != 0) {
+			managedChallenge.setMaxNumberOfChallengers(c.getMaxNumberOfChallengers());
+		}
+
 		chaRepo.saveAndFlush(managedChallenge);
 		return managedChallenge;
 	}
+<<<<<<< HEAD
 	
 	public Challenge updateStatus(int cid, int sid) {
 		Challenge managedChallenge = chaRepo.findById(cid).get();
@@ -70,14 +80,18 @@ public class ChallengeServiceImpl implements ChallengeService {
 	}
 	
 	public List <Challenge> index() {
+=======
+
+	public List<Challenge> index() {
+>>>>>>> aeee54247dd629c3428e72328998dcee80c38ffe
 		return chaRepo.findAll();
 	}
-	
+
 	public Challenge show(int id) {
 		Challenge chall = chaRepo.findById(id).get();
 		return chall;
 	}
-	
+
 	public Boolean delete(int id) {
 		try {
 			chaRepo.deleteById(id);
@@ -87,17 +101,16 @@ public class ChallengeServiceImpl implements ChallengeService {
 			return false;
 		}
 	}
-	
+
 	// view all challenges by status id
-	public Set<Challenge> indexStatusChallenges (int sid) {
+	public Set<Challenge> indexStatusChallenges(int sid) {
 		Set<Challenge> challengeList = chaRepo.findByStatusId(sid);
 		return challengeList;
 	}
-	
-	//view all challenges for a user by status id
+
+	// view all challenges for a user by status id
 	public Set<Challenge> indexStatusChallengesByUser(int uid, int sid) {
 		return chaRepo.getChallengesByUserIdAndStatus(uid, sid);
 	}
-
 
 }

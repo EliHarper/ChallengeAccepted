@@ -31,6 +31,7 @@ import { MatButtonModule, MatCheckboxModule, MatProgressBarModule } from '@angul
     AboutComponent,
     LoginComponent,
     LogoutComponent,
+    TopSkillsPipe,
     RegisterComponent,
     NavbarComponent,
     FallbackComponent,

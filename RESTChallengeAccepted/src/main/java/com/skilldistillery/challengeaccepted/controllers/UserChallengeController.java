@@ -27,12 +27,14 @@ public class UserChallengeController {
 
 	// users can view challenges they have accepted
 	@RequestMapping(path = "/user/challenges/accept/{id}", method = RequestMethod.GET)
-	public UserChallenge viewUserChallenge(HttpServletRequest req, HttpServletResponse res, @PathVariable int id,
-			String username) {
-	
-			return userChallengeService.show(id, username);
-		
-	
+	public UserChallenge viewUserChallenge(HttpServletRequest req, HttpServletResponse res, @PathVariable int id, String username) {
+		UserChallenge uc = userChallengeService.show(id, username);
+		if(uc != null) {
+			res.setStatus(200);
+			return uc;
+		}
+		res.setStatus(400);
+		return null;
 	}
 
 	// check if a user has already accepted a challenge - return the object if user
@@ -74,15 +76,13 @@ public class UserChallengeController {
 			@RequestBody UserChallengeDTO ucDTO, String username) {
 		
 			return userChallengeService.create(ucDTO, username);
-	
 	}
 
 	// update an accepted user_challenge record w/ user_challenge id
 
 	@RequestMapping(path = "/challenges/accept/{id}", method = RequestMethod.PATCH)
 	public UserChallenge updateUserChallenge(@RequestBody UserChallenge userChallenge, String username) {
-		
-			
+				
 		return userChallengeService.update(userChallenge, username);
 		
 	}

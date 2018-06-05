@@ -27,9 +27,10 @@ public class UserSkillController {
 	// returns list of all user_skill records based on user id
 	@RequestMapping(path="userskills/{uid}", method=RequestMethod.GET)
 	public Set<UserSkill> getUserSkillsByUserId(HttpServletRequest req, HttpServletResponse res, @PathVariable int uid) {
-		if (userSkillSvc.getUserSkillsByUserId(uid) != null) {
+		Set<UserSkill> userSkills = userSkillSvc.getUserSkillsByUserId(uid);
+		if (userSkills != null) {
 			res.setStatus(200);
-			return userSkillSvc.getUserSkillsByUserId(uid);
+			return userSkills;
 		}
 		res.setStatus(404);
 		return null;
