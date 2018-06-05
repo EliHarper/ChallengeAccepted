@@ -117,7 +117,7 @@ public class UserChallengeController {
 
 
 	// delete a user challenge record w/ the challenge id and user challenge id
-	@RequestMapping(path = "challenges/{cid}/accept/{ucid}", method = RequestMethod.DELETE)
+	@RequestMapping(path = "challenges/accept/{ucid}", method = RequestMethod.DELETE)
 	public Boolean deleteUserChallenge(@PathVariable int cid, @PathVariable int ucid,
 			String username) {
 		
