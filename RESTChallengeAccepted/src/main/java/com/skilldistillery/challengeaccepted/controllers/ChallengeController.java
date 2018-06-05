@@ -52,12 +52,7 @@ public class ChallengeController {
 	@RequestMapping(path = "challenges/status/{sid}", method = RequestMethod.GET)
 	public Set<Challenge> indexChallengesByStatus(HttpServletRequest req, HttpServletResponse res,
 			@PathVariable int sid) {
-		if (chaServ.indexStatusChallenges(sid) != null) {
-			res.setStatus(200);
-			return chaServ.indexStatusChallenges(sid);
-		}
-		res.setStatus(404);
-		return null;
+		return chaServ.indexStatusChallenges(sid);
 	}
 
 	// view list of challenges for one user by status
