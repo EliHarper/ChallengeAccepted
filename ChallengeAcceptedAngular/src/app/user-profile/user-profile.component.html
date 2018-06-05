@@ -19,7 +19,7 @@
                   <th scope="col">Level</th>
                   <th scope="col">Progress</th>
                 </thead>
-                <tbody *ngFor="let uSkill of user.userSkills | topSkills">
+                <tbody *ngFor="let uSkill of user.userSkills">
                   <tr>
                     <td>{{ getSkillNameById(uSkill.id) }}</td>
                     <td>{{uSkill.points}}</td>

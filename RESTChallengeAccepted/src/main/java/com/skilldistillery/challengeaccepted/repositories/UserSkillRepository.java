@@ -10,8 +10,7 @@ import com.skilldistillery.challengeaccepted.entities.UserSkill;
 
 public interface UserSkillRepository extends JpaRepository<UserSkill, Integer> {
 	
-	@OrderBy("points DESC")
-	public Set<UserSkill> findByUserId(int uid); 
+	public Set<UserSkill> findByUserIdOrderByPointsDesc(int uid); 
 	
 	public UserSkill findById(int id);
 }

@@ -74,15 +74,13 @@ public class UserChallengeController {
 			@RequestBody UserChallengeDTO ucDTO, String username) {
 		
 			return userChallengeService.create(ucDTO, username);
-	
 	}
 
 	// update an accepted user_challenge record w/ user_challenge id
 
 	@RequestMapping(path = "/challenges/accept/{id}", method = RequestMethod.PATCH)
 	public UserChallenge updateUserChallenge(@RequestBody UserChallenge userChallenge, String username) {
-		
-			
+				
 		return userChallengeService.update(userChallenge, username);
 		
 	}
