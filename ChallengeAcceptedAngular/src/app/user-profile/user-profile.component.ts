@@ -35,11 +35,6 @@ export class UserProfileComponent implements OnInit {
     return this.user.location;
   };
 
-  // getTopSkills = function(id) {
-  //   return this.topSkills.transform(this.getUserData()).pipe(
-  //     ;
-  // };
-
   getChallengesCreated = function(id) {
     this.user = this.userService.findUserById();
     return this.challengesCreated.transform(this.user.challenges, this.user);
@@ -62,6 +57,14 @@ export class UserProfileComponent implements OnInit {
       errror => null);
   }
 
+  getUserSkills() {
+    this.userSkillService.getUserSkills(this.route.snapshot.paramMap.get('id')).subscribe(
+      data => {this.userSkills = data;
+      console.log(data); },
+      error => console.log('oh no')
+    );
+  }
+
   getUserProgressToNextLevel = function(id) {
     this.user = this.userService.findUserById(id);
     return this.userSkillService.getUserProgressToNextLevel(this.user);
@@ -72,7 +75,6 @@ export class UserProfileComponent implements OnInit {
       data => {
         console.log(data);
         this.user = data;
-        this.test = 'Hello';
       }, error => console.log(error + '*************************************************')
     );
   }
@@ -89,6 +91,6 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit() {
     this.getUserData();
-    console.log(this.user);
+    this.getUserSkills();
   }
 }
