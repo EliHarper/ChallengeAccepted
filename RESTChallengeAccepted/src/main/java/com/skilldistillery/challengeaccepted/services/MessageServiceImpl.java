@@ -42,7 +42,12 @@ public class MessageServiceImpl implements MessageService{
 		message.setSender(managedSender);
 		User managedReceiver = userRepo.findByUsername(message.getReceiver().getUsername());
 		message.setReceiver(managedReceiver);
-		return messageRepo.saveAndFlush(message);
+		messageRepo.saveAndFlush(message);
+		if (message.getThreadId() == 0) {
+			message.setThreadId(message.getId());
+		}
+		messageRepo.saveAndFlush(message);
+		return message;
 	}
 
 	@Override
