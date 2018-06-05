@@ -23,6 +23,7 @@ import { Skill } from '../models/skill';
 export class UserProfileComponent implements OnInit {
 
   title = 'Profile of {{ user.username }}';
+  test = '';
   user = new User();
   userSkills: UserSkill[] = [];
 
@@ -67,14 +68,12 @@ export class UserProfileComponent implements OnInit {
   };
 
   getUserData() {
-    console.log(this.route.snapshot.paramMap.get('id'));
     this.userService.findUserById(this.route.snapshot.paramMap.get('id')).subscribe(
       data => {
+        console.log(data);
         this.user = data;
-      },
-      error => {
-        this.user = null;
-      }
+        this.test = 'Hello';
+      }, error => console.log(error + '*************************************************')
     );
   }
 
@@ -90,18 +89,6 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit() {
     this.getUserData();
-
-    // setTimeout(() => {
-
-      // this.userSkillService.findUserSkillById(this.userSkills).subscribe(
-      //   data => {
-      //     console.log(data);
-      //     this.getTopSkills(this.user.id);
-      //   },
-      //   error => {
-      //     this.getTopSkills = null;
-      //   }
-      // );
-    // }, 3000);
+    console.log(this.user);
   }
 }

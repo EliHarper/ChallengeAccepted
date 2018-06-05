@@ -24,7 +24,7 @@ export class UserSkillService {
     return userSkill.points / 10;
   }
 
-  getProgressToNextLvl(userSkill: UserSkill) {
+  getUserProgressToNextLevel(userSkill: UserSkill) {
     return userSkill.points % 10;
   }
 
