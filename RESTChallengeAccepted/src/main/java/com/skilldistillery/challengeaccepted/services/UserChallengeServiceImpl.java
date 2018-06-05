@@ -1,6 +1,5 @@
 package com.skilldistillery.challengeaccepted.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,8 +86,11 @@ public class UserChallengeServiceImpl implements UserChallengeService {
 			if (managedUserChallenge.isAcceptorWon()) {
 				newPoints = 5;	
 			}
-			else {
+			else if (!managedUserChallenge.isAcceptorWon() && managedUserChallenge.isAccepted()){
 				newPoints = 2;
+			}
+			else {
+				newPoints = 0;
 			}
 			UserSkill uSkill = userSkillRepo.findBySkillIdAndUserId(challenge.getSkill().getId(), managedUserChallenge.getUser().getId());
 			uSkillImpl.update(uSkill, newPoints);
