@@ -38,7 +38,13 @@ public class UserSkillController {
 	// create a new UserSkill record
 	@RequestMapping(path="userskills", method=RequestMethod.POST)
 	public UserSkill create(HttpServletRequest req, HttpServletResponse res, @RequestBody UserSkill us) {
-		return userSkillSvc.create(us); 
+		UserSkill newUS = userSkillSvc.create(us); 
+		if (newUS != null) {
+			res.setStatus(201);
+			return newUS;
+		}
+		res.setStatus(404);
+		return null;
 	}
 	
 	// update points on an existing UserSkill record (usid = userskill id)
