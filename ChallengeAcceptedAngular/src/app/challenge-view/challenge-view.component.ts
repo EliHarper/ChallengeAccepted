@@ -24,6 +24,7 @@ export class ChallengeViewComponent implements OnInit {
   testUser: User = new User(2);
   tags: Tag[] = [];
   userIdList: number[] = [];
+  challengers: UserChallenge[] = [];
 
 
 
@@ -87,14 +88,23 @@ export class ChallengeViewComponent implements OnInit {
   navigateToUserProfile () {
 
   }
+  getAcceptedData(id) {
+    this.userChallengeService.getAllPendingAndAcceptedChallenges(id).subscribe(
+      data => {
+        this.challengers = data;
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
 
   getChallengeData() {
     this.challengeService.showOneChallenge(this.route.snapshot.paramMap.get('id')).subscribe(
       data => {
         console.log(data);
-        // console.log(data.users);
-        // console.log(data.users[0]);
         this.displayChallenge = data;
+        this.getAcceptedData(data.id);
       },
       error => {
         this.displayChallenge = null;
