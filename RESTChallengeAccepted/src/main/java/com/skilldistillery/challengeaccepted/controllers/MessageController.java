@@ -66,7 +66,13 @@ public class MessageController {
 	// create a new message
 	@RequestMapping(path="messages", method=RequestMethod.POST)
 	public Message create(HttpServletRequest req, HttpServletResponse res, @RequestBody Message message) {
-		return messageServ.create(message);
+		Message newMessage = messageServ.create(message);
+		if (newMessage != null) {
+			res.setStatus(201);
+			return newMessage;
+		}
+		res.setStatus(404);
+		return null;
 	}
 	
 	// delete a message
