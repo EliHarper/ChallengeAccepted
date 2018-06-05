@@ -27,5 +27,5 @@ public interface UserChallengeService {
 	
 	public UserChallenge updateUCRecord(int cid, int uid);
 	
-	public List<UserSkill> tallyUserSkillPointsForChallenge(Challenge challenge);
+	public UserSkill tallyUserSkillPointsForChallenge(Challenge challenge, int uid);
 }

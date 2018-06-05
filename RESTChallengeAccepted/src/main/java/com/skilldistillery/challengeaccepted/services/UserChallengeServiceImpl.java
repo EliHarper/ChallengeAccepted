@@ -81,22 +81,18 @@ public class UserChallengeServiceImpl implements UserChallengeService {
 	}
 	
 	// tally points for all user skill records for a challenge
-	public List<UserSkill> tallyUserSkillPointsForChallenge(Challenge challenge) {
-		List<UserChallenge> userChallenges = userChallengeRepo.findByChallengeId(challenge.getId());
+	public UserSkill tallyUserSkillPointsForChallenge(Challenge challenge, int uid) {
+		UserChallenge managedUserChallenge = userChallengeRepo.findByUserIdAndChallengeId(challenge.getId(), uid);
 		int newPoints = 0;
-		List<UserSkill> updatedUserSkills = new ArrayList<>();
-		for (UserChallenge uc : userChallenges) {
-			if (uc.isAcceptorWon()) {
+			if (managedUserChallenge.isAcceptorWon()) {
 				newPoints = 5;	
 			}
 			else {
 				newPoints = 2;
 			}
-			UserSkill uSkill = userSkillRepo.findBySkillIdAndUserId(challenge.getSkill().getId(), uc.getUser().getId());
+			UserSkill uSkill = userSkillRepo.findBySkillIdAndUserId(challenge.getSkill().getId(), managedUserChallenge.getUser().getId());
 			uSkillImpl.update(uSkill, newPoints);
-			updatedUserSkills.add(uSkill);
-		}
-		return updatedUserSkills;
+		return uSkill;
 	}
 
 	public List<UserChallenge> challengesUserHasParticipatedIn(int uid, String username) {

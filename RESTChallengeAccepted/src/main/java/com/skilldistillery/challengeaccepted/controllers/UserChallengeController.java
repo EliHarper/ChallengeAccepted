@@ -67,11 +67,11 @@ public class UserChallengeController {
 		return null;
 	}
 	
-	// tally user skill points from user challenge record
-	@RequestMapping(path="challenges/{cid}/userskills", method=RequestMethod.PATCH)
-	public List<UserSkill> tallyUserSkillPointsForChallenge(@RequestBody Challenge challenge, @PathVariable int cid) {
-		return userChallengeService.tallyUserSkillPointsForChallenge(challenge);
-	}
+	// tally user skill points from challenge record
+//	@RequestMapping(path="challenges/{cid}/userskills", method=RequestMethod.PATCH)
+//	public List<UserSkill> tallyUserSkillPointsForChallenge(@RequestBody Challenge challenge, @PathVariable int cid) {
+//		return userChallengeService.tallyUserSkillPointsForChallenge(challenge);
+//	}
 
 	// returns all challenges a user has accepted, active and inactive
 	@RequestMapping(path = "user/{uid}/challenges/accept/all", method = RequestMethod.GET)
@@ -110,8 +110,9 @@ public class UserChallengeController {
 	
 	// update a user_challenge record based on user id and challenge id
 	@RequestMapping(path="challenges/{cid}/user/{uid}", method=RequestMethod.PATCH)
-	public UserChallenge updateUserChallengeRecord(HttpServletRequest req, HttpServletResponse res, @PathVariable int cid, @PathVariable int uid) {
-		return userChallengeService.updateUCRecord(cid, uid);
+	public UserSkill updateUserChallengeRecord(HttpServletRequest req, HttpServletResponse res, @PathVariable int cid, @PathVariable int uid, @RequestBody Challenge challenge) {
+		userChallengeService.updateUCRecord(cid, uid);
+		return userChallengeService.tallyUserSkillPointsForChallenge(challenge, uid);
 	}
 
 
