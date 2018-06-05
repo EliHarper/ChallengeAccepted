@@ -1,3 +1,4 @@
+import { UserSkill } from './../models/user-skill';
 import { SkillService } from './../skill.service';
 import { UserSkillService } from './../user-skill.service';
 import { UserService } from './../user.service';
@@ -12,7 +13,6 @@ import { User } from '../models/user';
 import { ChallengesCreatedPipe } from '../pipes/challenges-created.pipe';
 import { userInfo } from 'os';
 import { ActivatedRoute } from '@angular/router';
-import { UserSkill } from '../models/user-skill';
 import { Skill } from '../models/skill';
 
 @Component({
@@ -34,9 +34,10 @@ export class UserProfileComponent implements OnInit {
     return this.user.location;
   };
 
-  getTopSkills = function(id) {
-    return this.topSkills.transform(this.user.skills);
-  };
+  // getTopSkills = function(id) {
+  //   return this.topSkills.transform(this.getUserData()).pipe(
+  //     ;
+  // };
 
   getChallengesCreated = function(id) {
     this.user = this.userService.findUserById();
@@ -89,6 +90,18 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit() {
     this.getUserData();
-    this.userSkillService.findUserSkillById(this.user.id);
+
+    // setTimeout(() => {
+
+      // this.userSkillService.findUserSkillById(this.userSkills).subscribe(
+      //   data => {
+      //     console.log(data);
+      //     this.getTopSkills(this.user.id);
+      //   },
+      //   error => {
+      //     this.getTopSkills = null;
+      //   }
+      // );
+    // }, 3000);
   }
 }

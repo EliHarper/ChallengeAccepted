@@ -1,5 +1,6 @@
 import { Skill } from './../models/skill';
 import { Pipe, PipeTransform } from '@angular/core';
+import { UserSkill } from '../models/user-skill';
 
 @Pipe({
   name: 'topSkills'
@@ -17,16 +18,16 @@ export class TopSkillsPipe implements PipeTransform {
   //   return this.completedChallenges;
   // }
 
-  topSkills = [];
 
-  transform(skills: Skill[]): any {
+  transform(skills: UserSkill[]): any {
+    const topSkills = [];
     skills.forEach(function(skill, idx) {
       if (idx <= 2) {
-        this.topSkills.push(skill);
+        topSkills.push(skill);
       }
     });
 
-    return this.topSkills;
+    return topSkills;
 
   }
 
