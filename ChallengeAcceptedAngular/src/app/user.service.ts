@@ -11,7 +11,7 @@ export class UserService {
 
   url = 'http://localhost:8080/api';
   findUserById(id) {
-    return this.http.get<User>(`${this.url}/user/${id}`).pipe(
+    return this.http.get<User>(`${this.url}/users/${id}`).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(err);
@@ -20,7 +20,7 @@ export class UserService {
   }
 
   findCreatorByChallengeId(id) {
-    return this.http.get<User>(`${this.url}/user/challenge/${id}`).pipe(
+    return this.http.get<User>(`${this.url}/users/challenge/${id}`).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(err);
