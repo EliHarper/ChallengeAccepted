@@ -69,7 +69,6 @@ public class ChallengeServiceImpl implements ChallengeService {
 		chaRepo.saveAndFlush(managedChallenge);
 		return managedChallenge;
 	}
-<<<<<<< HEAD
 	
 	public Challenge updateStatus(int cid, int sid) {
 		Challenge managedChallenge = chaRepo.findById(cid).get();
@@ -79,11 +78,7 @@ public class ChallengeServiceImpl implements ChallengeService {
 		return managedChallenge;
 	}
 	
-	public List <Challenge> index() {
-=======
-
 	public List<Challenge> index() {
->>>>>>> aeee54247dd629c3428e72328998dcee80c38ffe
 		return chaRepo.findAll();
 	}
 

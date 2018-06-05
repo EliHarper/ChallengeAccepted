@@ -46,6 +46,39 @@ export class ChallengeViewComponent implements OnInit {
     );
   }
 
+  setChallengeToActive(id) {
+    this.challengeService.setChallengeToActive(id).subscribe(
+      data => {
+        this.getChallengeData();
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+  setChallengeToExpired(id) {
+    this.challengeService.setChallengeToExpired(id).subscribe(
+      data => {
+        this.getChallengeData();
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+  setChallengeToCompleted(id) {
+    this.challengeService.setChallengeToCompleted(id).subscribe(
+      data => {
+        this.getChallengeData();
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
   navigateToUserProfile () {
 
   }
