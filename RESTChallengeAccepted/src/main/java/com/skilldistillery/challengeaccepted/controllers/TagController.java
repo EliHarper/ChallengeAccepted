@@ -16,17 +16,18 @@ import com.skilldistillery.challengeaccepted.services.TagService;
 
 @RestController
 @RequestMapping("api")
-@CrossOrigin({"*", "http://localhost:4200"})
+@CrossOrigin({ "*", "http://localhost:4200" })
 public class TagController {
-	
+
 	@Autowired
-	private TagService tagServ; 
-	
-	@RequestMapping(path="tags", method=RequestMethod.GET)
-	public List<Tag> index(HttpServletRequest req, HttpServletResponse res){
-		if (tagServ.index() != null) {
+	private TagService tagServ;
+
+	@RequestMapping(path = "tags", method = RequestMethod.GET)
+	public List<Tag> index(HttpServletRequest req, HttpServletResponse res) {
+		List<Tag> lt = tagServ.index();
+		if (lt != null) {
 			res.setStatus(200);
-			return tagServ.index();
+			return lt;
 		}
 		res.setStatus(404);
 		return null;
