@@ -25,7 +25,7 @@ public class UserSkillServiceImpl implements UserSkillService {
 	private SkillRepository skillzRepo;
 	
 	public Set<UserSkill> getUserSkillsByUserId(int uid) {
-		return userSkillRepo.findByUserId(uid); 
+		return userSkillRepo.findByUserIdOrderByPointsDesc(uid); 
 	}
 	
 	public UserSkill create(UserSkill us) {
