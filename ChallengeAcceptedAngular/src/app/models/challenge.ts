@@ -19,4 +19,5 @@ export class Challenge {
   users: UserChallenge[];
   timeCreated: Date;
 
+
 }

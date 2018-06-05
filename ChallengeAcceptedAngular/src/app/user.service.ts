@@ -20,6 +20,15 @@ export class UserService {
     );
   }
 
+  findCreatorByChallengeId(id) {
+    return this.http.get<User>(`${this.url}/user/challenge/${id}`).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(err);
+      })
+    );
+  }
+
   constructor(private http: HttpClient) { }
 
 
