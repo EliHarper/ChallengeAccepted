@@ -19,5 +19,14 @@ export class ChallengeService {
     );
   }
 
+  showChallengesByStatusId(id) {
+    return this.http.get<Challenge[]>(`${this.url}/challenges/status/${id}`).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(err);
+      })
+    );
+  }
+
   constructor(private http: HttpClient) { }
 }

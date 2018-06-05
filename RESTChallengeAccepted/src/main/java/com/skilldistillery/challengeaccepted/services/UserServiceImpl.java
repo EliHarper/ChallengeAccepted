@@ -1,13 +1,10 @@
 package com.skilldistillery.challengeaccepted.services;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.challengeaccepted.entities.User;
-import com.skilldistillery.challengeaccepted.repositories.ChallengeRepository;
-import com.skilldistillery.challengeaccepted.repositories.MessageRepository;
 import com.skilldistillery.challengeaccepted.repositories.UserRepository;
 
 @Service
@@ -16,11 +13,6 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	private UserRepository userRepo;
 	
-	@Autowired
-	private MessageRepository mesRepo;
-	
-	@Autowired 
-	private ChallengeRepository chaRepo;
 
 	public User create(User u) {
 		userRepo.saveAndFlush(u);
@@ -28,16 +20,31 @@ public class UserServiceImpl implements UserService{
 	}
 
 	public User update(User u) {
-		userRepo.saveAndFlush(u);
-		return u;
+		User managedUser = userRepo.findByUsername(u.getUsername());
+		if(u.getChallenges() != null) {
+			managedUser.setChallenges(u.getChallenges());
+		}
+		if(u.getEmail() != null && !u.getEmail().equals("")) {
+			managedUser.setEmail(u.getEmail());
+		}
+		if(u.getLocation() != null && !u.getLocation().equals("")) {
+			managedUser.setLocation(u.getLocation());
+		}
+		if(u.getSkills() != null) {
+			managedUser.setSkills(u.getSkills());
+		}
+		if(u.getUserChallenges() != null) {
+			managedUser.setUserChallenges(u.getUserChallenges());
+		}
+		if(u.getUserSkills() != null) {
+			managedUser.setUserSkills(u.getUserSkills());
+		}
+		userRepo.saveAndFlush(managedUser);
+		return managedUser;
 	}
 	
-	public List <User> index() {
-		return userRepo.findAll();
-	}
-	
-	public User show(int id) {
-		return userRepo.findById(id).get();
+	public User show(int uid) {
+		return userRepo.findById(uid).get();
 	}
 	
 	public Boolean delete(int id) {

@@ -41,14 +41,21 @@ public class User {
 	private List <Skill> skills;
 
 	@OneToMany(mappedBy="user")
+	@JsonIgnore
 	private List <UserChallenge> userChallenges;
 	
 	@OneToMany(mappedBy="user")
+	@JsonIgnore
 	private List <UserSkill> userSkills;
 	
+	// constructor
 	public User() {
 	}
-
+	
+	
+	//gets/sets
+	
+	
 	public String getUsername() {
 		return username;
 	}
@@ -92,7 +99,48 @@ public class User {
 	public int getId() {
 		return id;
 	}
+	
+	public List<Challenge> getChallenges() {
+		return challenges;
+	}
 
+
+	public void setChallenges(List<Challenge> challenges) {
+		this.challenges = challenges;
+	}
+
+
+	public List<Skill> getSkills() {
+		return skills;
+	}
+
+
+	public void setSkills(List<Skill> skills) {
+		this.skills = skills;
+	}
+
+
+	public List<UserChallenge> getUserChallenges() {
+		return userChallenges;
+	}
+
+
+	public void setUserChallenges(List<UserChallenge> userChallenges) {
+		this.userChallenges = userChallenges;
+	}
+
+
+	public List<UserSkill> getUserSkills() {
+		return userSkills;
+	}
+
+
+	public void setUserSkills(List<UserSkill> userSkills) {
+		this.userSkills = userSkills;
+	}
+
+
+	//toString
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();

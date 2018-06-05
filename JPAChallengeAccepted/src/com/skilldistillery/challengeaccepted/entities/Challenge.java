@@ -51,7 +51,7 @@ public class Challenge {
 	
 	@ManyToOne
 	@JoinColumn(name="creator_id")
-	@JsonIgnore
+//	@JsonIgnore
 	private User creator;
 	
 	@ManyToOne

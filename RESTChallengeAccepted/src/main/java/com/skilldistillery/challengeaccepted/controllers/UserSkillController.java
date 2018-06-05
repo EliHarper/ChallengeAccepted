@@ -49,7 +49,7 @@ public class UserSkillController {
 	
 	// delete a userskill record by userskill id
 	@RequestMapping(path="userskills/{id}", method=RequestMethod.DELETE)
-	public void destory(HttpServletRequest req, HttpServletResponse res, @PathVariable int id) {
-		userSkillSvc.destory(id);
+	public Boolean destory(HttpServletRequest req, HttpServletResponse res, @PathVariable int id) {
+		return userSkillSvc.destroy(id);
 	}
 }

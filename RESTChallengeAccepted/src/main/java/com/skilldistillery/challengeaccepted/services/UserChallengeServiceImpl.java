@@ -15,69 +15,73 @@ import com.skilldistillery.challengeaccepted.repositories.UserChallengeRepositor
 import com.skilldistillery.challengeaccepted.repositories.UserRepository;
 
 @Service
-public class UserChallengeServiceImpl implements UserChallengeService{
+public class UserChallengeServiceImpl implements UserChallengeService {
 
-	 @Autowired
-	 private UserChallengeRepository userChallengeRepo;
-	 @Autowired
-	 private UserRepository userRepo;
-	 @Autowired
-	 private ChallengeRepository challengeRepository;
-	 
-	 public UserChallenge create(UserChallengeDTO ucDTO, String username) {
-		 UserChallenge uc = new UserChallenge();
-		 User user = userRepo.findById(ucDTO.getAcceptorId()).get();
-		 Challenge challenge = challengeRepository.findById(ucDTO.getChallengeId()).get();
-		 uc.setAccepted(true);
-		 uc.setAcceptorWon(false);
-		 uc.setChallenge(challenge);
-		 uc.setUser(user);
-		 userChallengeRepo.saveAndFlush(uc);
-		 return uc;
-	 }
-	 
-	 public UserChallenge update(UserChallenge uc, String username) {
-		 userChallengeRepo.saveAndFlush(uc);
-		 return uc;
-	 }
-	 
-	 public Boolean delete(int id, String username) {
-		 try {
+	@Autowired
+	private UserChallengeRepository userChallengeRepo;
+	@Autowired
+	private UserRepository userRepo;
+	@Autowired
+	private ChallengeRepository challengeRepository;
+
+	public UserChallenge create(UserChallengeDTO ucDTO, String username) {
+		UserChallenge uc = new UserChallenge();
+		User user = userRepo.findById(ucDTO.getAcceptorId()).get();
+		Challenge challenge = challengeRepository.findById(ucDTO.getChallengeId()).get();
+		uc.setAccepted(true);
+		uc.setAcceptorWon(false);
+		uc.setChallenge(challenge);
+		uc.setUser(user);
+		userChallengeRepo.saveAndFlush(uc);
+		return uc;
+	}
+
+	public UserChallenge update(UserChallenge uc, String username) {
+		UserChallenge managedUser = userChallengeRepo.findById(uc.getId()).get();
+		managedUser.setAcceptorWon(uc.isAcceptorWon());
+		managedUser.setAccepted(uc.isAccepted());
+		userChallengeRepo.saveAndFlush(managedUser);
+
+		return managedUser;
+	}
+
+	public Boolean delete(int id, String username) {
+		try {
 			userChallengeRepo.deleteById(id);
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
 		}
-	 }
-	 
-	 public List<UserChallenge> index() {
-		 return userChallengeRepo.findAll();
-	 }
-	 
-	 public UserChallenge show(int id, String username) {
-		 try {
+	}
+
+	public List<UserChallenge> index() {
+		return userChallengeRepo.findAll();
+	}
+
+	public UserChallenge show(int id, String username) {
+		try {
 			UserChallenge userChallenge = userChallengeRepo.findById(id).get();
 			return userChallenge;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
-	 }
-	 
-	 public List<UserChallenge> getTheChallengeAcceptorsForAChallenge(int cid, String username) {
-		 return userChallengeRepo.findByChallengeId(cid);
-	 }
-	 
-	 public List<UserChallenge> challengesUserHasParticipatedIn(int uid, String username) {
-		 return userChallengeRepo.findByUserId(uid);
-	 }
+	}
+
+	public List<UserChallenge> getTheChallengeAcceptorsForAChallenge(int cid, String username) {
+		return userChallengeRepo.findByChallengeId(cid);
+	}
+
+	public List<UserChallenge> challengesUserHasParticipatedIn(int uid, String username) {
+		return userChallengeRepo.findByUserId(uid);
+	}
 
 	@Override
 	public UserChallenge checkIfUserHasAcceptedChallenge(int uid, int cid) {
-			UserChallenge uc = userChallengeRepo.findByUserIdAndChallengeId(uid, cid);
-			System.out.println(uc);
-			return uc;
+		UserChallenge uc = userChallengeRepo.findByUserIdAndChallengeId(uid, cid);
+		System.out.println(uc);
+		return uc;
 	}
-	 
+
 }
