@@ -83,5 +83,12 @@ public class UserChallengeServiceImpl implements UserChallengeService {
 		System.out.println(uc);
 		return uc;
 	}
+	
+	public UserChallenge updateUCRecord(int cid, int uid) {
+		UserChallenge uc = userChallengeRepo.findByUserIdAndChallengeId(uid, cid);
+		uc.setAcceptorWon(true);
+		userChallengeRepo.saveAndFlush(uc);
+		return uc;
+	}
 
 }
