@@ -1,5 +1,6 @@
 package com.skilldistillery.challengeaccepted.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,9 +81,10 @@ public class UserChallengeServiceImpl implements UserChallengeService {
 	}
 	
 	// tally points for all user skill records for a challenge
-	public void tallyUserSkillPointsForChallenge(Challenge challenge) {
+	public List<UserSkill> tallyUserSkillPointsForChallenge(Challenge challenge) {
 		List<UserChallenge> userChallenges = userChallengeRepo.findByChallengeId(challenge.getId());
 		int newPoints = 0;
+		List<UserSkill> updatedUserSkills = new ArrayList<>();
 		for (UserChallenge uc : userChallenges) {
 			if (uc.isAcceptorWon()) {
 				newPoints = 5;	
@@ -92,7 +94,9 @@ public class UserChallengeServiceImpl implements UserChallengeService {
 			}
 			UserSkill uSkill = userSkillRepo.findByChallengeIdAndUserId(challenge.getId(), uc.getUser().getId());
 			uSkillImpl.update(uSkill, newPoints);
+			updatedUserSkills.add(uSkill);
 		}
+		return updatedUserSkills;
 	}
 
 	public List<UserChallenge> challengesUserHasParticipatedIn(int uid, String username) {
