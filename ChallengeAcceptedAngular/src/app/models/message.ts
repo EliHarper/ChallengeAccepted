@@ -5,6 +5,6 @@ export class Message {
   sender: User;
   receiver: User;
   message: string;
-  timeSent: DateTimeFormat;
+  timeSent: Date;
   threadId: number;
 }

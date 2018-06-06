@@ -35,6 +35,9 @@ export class InboxComponent implements OnInit {
     this.inboxService.threadMessages(id).subscribe(
       data => {
         this.threadMessages = data;
+        // for (let index = 0; index < this.threadMessages.length; index++) {
+        //   this.threadMessages[index].timeSent.format('MM/DD/YYYY h:mm a');
+        // }
         this.reply.threadId = data[0].threadId;
         console.log(this.threadMessages);
       },
