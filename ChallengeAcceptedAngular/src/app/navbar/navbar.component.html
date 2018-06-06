@@ -36,43 +36,63 @@
               info@challengeaccepted.com
             </address>
           </div> -->
-          <div class="">
-            <h1>Create New Challenge!!!</h1>
-              <mat-form-field appearance="standard">
-                <mat-label>Name</mat-label>
-                <input matInput [(ngModel)]="challenge.name" placeholder="Name of Challenge">
-              </mat-form-field><br>
-              <mat-form-field appearance="standard">
-                <mat-label>Description</mat-label>
-                <input matInput [(ngModel)]="challenge.description" placeholder="Description of Challenge">
-              </mat-form-field><br>
-              <mat-form-field appearance="standard">
-                <mat-label>Location</mat-label>
-                <input matInput [(ngModel)]="challenge.location" placeholder="Location of Challenge">
-              </mat-form-field><br>
-              Number of Challengers:<br>
-              <mat-form-field appearance="standard">
-                <mat-label>Minimum</mat-label>
-                <input type="number" matInput [(ngModel)]="challenge.minNumberOfChallengers" min=1>
-              </mat-form-field> to
-              <mat-form-field appearance="standard">
-                <mat-label>Maximum</mat-label>
-                <input type="number" matInput [(ngModel)]="challenge.maxNumberOfChallengers" min=1>
-              </mat-form-field> <br>
-              <mat-form-field>
-                <mat-select placeholder="Tags" [(ngModel)]="challenge.tags" multiple>
+
+          <h1>Create New Challenge!!!</h1>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <mat-form-field appearance="standard">
+              <mat-label>Name</mat-label>
+              <input matInput [(ngModel)]="challenge.name" placeholder="Name of Challenge" required>
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="standard">
+              <mat-label>Description</mat-label>
+              <input matInput [(ngModel)]="challenge.description" placeholder="Description of Challenge">
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="standard">
+              <mat-label>Location</mat-label>
+              <input matInput [(ngModel)]="challenge.location" placeholder="Location of Challenge" required>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+              <mat-select placeholder="Skill" [(ngModel)]="challenge.skill" required>
+                <mat-option *ngFor="let skill of skills" [value]="skills">{{skill.name}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <br>
+          </div>
+          <div class="col-md-4">
+            <br> Number of Challengers:
+            <br>
+            <mat-form-field appearance="standard">
+              <mat-label>Minimum</mat-label>
+              <input type="number" matInput [(ngModel)]="challenge.minNumberOfChallengers" min=1 required>
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="standard">
+              <mat-label>Maximum</mat-label>
+              <input type="number" matInput [(ngModel)]="challenge.maxNumberOfChallengers" min=1 required>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+              <mat-select placeholder="Tags" [(ngModel)]="challenge.tags" multiple>
                 <mat-option *ngFor="let tag of tags" [value]="tags">{{tag.name}}</mat-option>
               </mat-select>
-              </mat-form-field><br>
-
-
-              <button type="submit" class="btn btn-success">Submit</button>
-
+            </mat-form-field>
+            <br>
+          </div>
+          <div class="col-md-4">
+            <img src="../../assets/img/fistbumpblack.png" class="black-fisty">
+            <br>
+            <p></p>
           </div>
         </div>
       </div>
     </div>
   </div>
+
   <!--Header & navbar-branding region-->
   <div class="header">
     <div class="header-inner container">

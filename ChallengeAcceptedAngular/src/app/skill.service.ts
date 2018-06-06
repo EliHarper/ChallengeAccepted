@@ -19,5 +19,14 @@ export class SkillService {
     );
   }
 
+  getAllSkills() {
+    return this.http.get<Skill[]>(`${this.url}/skills`).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(err);
+      })
+    );
+  }
+
   constructor(private http: HttpClient) { }
 }
