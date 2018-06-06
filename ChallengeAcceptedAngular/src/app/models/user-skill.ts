@@ -1,6 +1,9 @@
+import { Skill } from './skill';
+import { User } from './user';
+
 export class UserSkill {
   id: number;
-  skillId: number;
-  userId: number;
+  skill: Skill;
+  user: User;
   points: number;
 }

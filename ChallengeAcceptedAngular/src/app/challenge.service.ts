@@ -54,5 +54,14 @@ export class ChallengeService {
     );
   }
 
+  getChallengesOfUserAndStatus(uid, sid) {
+    return this.http.get<Challenge[]>(`${this.url}/challenges/user/${uid}/status/${sid}`).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(err);
+      })
+    );
+  }
+
   constructor(private http: HttpClient) { }
 }

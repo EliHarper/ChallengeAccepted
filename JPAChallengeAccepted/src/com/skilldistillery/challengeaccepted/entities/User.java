@@ -25,6 +25,7 @@ public class User {
 	private String email;
 	private String location;
 	private String role;
+	private String enabled;
 	
 	@ManyToMany
 	@JoinTable(name="user_challenge",
@@ -137,6 +138,21 @@ public class User {
 
 	public void setUserSkills(List<UserSkill> userSkills) {
 		this.userSkills = userSkills;
+	}
+
+
+	public String getEnabled() {
+		return enabled;
+	}
+
+
+	public void setEnabled(String enabled) {
+		this.enabled = enabled;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 

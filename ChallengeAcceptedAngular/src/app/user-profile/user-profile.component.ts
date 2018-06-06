@@ -12,7 +12,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../models/user';
 import { ChallengesCreatedPipe } from '../pipes/challenges-created.pipe';
 import { userInfo } from 'os';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Skill } from '../models/skill';
 
 @Component({
@@ -24,8 +24,10 @@ export class UserProfileComponent implements OnInit {
 
   title = 'Profile of {{ user.username }}';
   test = '';
-  user = new User();
+  loadedUser: User;
   userSkills: UserSkill[] = [];
+  pendingChallenges = [];
+  challengesUserHasCompleted = [];
 
   getNumCompletedChallenges = function(id) {
     return this.completedChallenges.transform(this.user.challenges).length;
@@ -48,7 +50,8 @@ export class UserProfileComponent implements OnInit {
   getUserLevelOfSkill(id) {
     return this.userSkillService.findUserSkillById(id).subscribe(
       data => this.userSkills = data,
-      error => this.user = null);
+      error => console.log(error)
+      );
   }
 
   getSkillNameById(id) {
@@ -65,18 +68,59 @@ export class UserProfileComponent implements OnInit {
     );
   }
 
-  getUserProgressToNextLevel = function(id) {
-    this.user = this.userService.findUserById(id);
-    return this.userSkillService.getUserProgressToNextLevel(this.user);
-  };
+  // getUserProgressToNextLevel = function(skillId, userId) {
+  //   const userSkill: UserSkill = this.userService.findUserById(id);
+  //   // The above needs to be a method that finds a user_skill by user_id and skill_id
+  //   return this.userSkillService.getUserProgressToNextLevel(userSkill);
+  // };
+
+  getCurrentLevel(points) {
+    if (points > 0 && points < 10) {
+      points = 10;
+    }
+    const level = Math.floor(points / 10);
+    return level;
+  }
 
   getUserData() {
     this.userService.findUserById(this.route.snapshot.paramMap.get('id')).subscribe(
       data => {
         console.log(data);
-        this.user = data;
+        this.loadedUser = data;
+        this.getUserSkills();
+        this.getChallengesUserHasAccepted();
+        // this.getChallengesUserHasCompleted();
       }, error => console.log(error + '*************************************************')
     );
+  }
+
+  getChallengesUserHasAccepted() {
+    this.challengeService.getChallengesOfUserAndStatus(this.loadedUser.id, 1).subscribe(
+      data => {
+        console.log(data);
+        this.pendingChallenges = data;
+        this.getChallengesUserHasCompleted();
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+  getChallengesUserHasCompleted() {
+    this.challengeService.getChallengesOfUserAndStatus(this.loadedUser.id, 3).subscribe(
+      data => {
+        console.log(data);
+        this.challengesUserHasCompleted = data;
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+  viewChallenge(id) {
+    this.router.navigateByUrl(`challview/${id}`);
   }
 
   constructor(private userChallengeService: UserChallengeService,
@@ -87,10 +131,10 @@ export class UserProfileComponent implements OnInit {
     private route: ActivatedRoute,
     private userService: UserService,
     private userSkillService: UserSkillService,
-    private skillService: SkillService ) { }
+    private skillService: SkillService,
+    private router: Router ) { }
 
-  ngOnInit() {
-    this.getUserData();
-    this.getUserSkills();
+    ngOnInit() {
+      this.getUserData();
   }
 }
