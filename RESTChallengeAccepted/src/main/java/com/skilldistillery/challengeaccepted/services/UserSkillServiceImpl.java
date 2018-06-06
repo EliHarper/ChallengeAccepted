@@ -24,8 +24,11 @@ public class UserSkillServiceImpl implements UserSkillService {
 	@Autowired
 	private SkillRepository skillzRepo;
 	
-	public Set<UserSkill> getUserSkillsByUserId(int uid) {
-		return userSkillRepo.findByUserIdOrderByPointsDesc(uid); 
+	public Set<UserSkill> getUserSkillsByUsername(String username) {
+		
+		User u = userRepo.findByUsername(username);
+		
+		return userSkillRepo.findByUserIdOrderByPointsDesc(u.getId()); 
 	}
 	
 	public UserSkill create(UserSkill us) {

@@ -1,5 +1,6 @@
 package com.skilldistillery.challengeaccepted.controllers;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Set;
 
@@ -28,7 +29,7 @@ public class ChallengeController {
 	// view challenge by challenge id
 	@RequestMapping(path = "challenges/{id}", method = RequestMethod.GET)
 	public Challenge showChallenge(HttpServletRequest req, HttpServletResponse res, @PathVariable int id,
-			String username) {
+			String username, Principal principal) {
 		Challenge cha = chaServ.show(id);
 		if (cha != null) {
 			res.setStatus(200);
@@ -40,7 +41,7 @@ public class ChallengeController {
 
 	// view all challenges
 	@RequestMapping(path = "challenges", method = RequestMethod.GET)
-	public List<Challenge> allChallenges(HttpServletRequest req, HttpServletResponse res) {
+	public List<Challenge> allChallenges(HttpServletRequest req, HttpServletResponse res, Principal principal) {
 		List<Challenge> lc = chaServ.index();
 		if (lc != null) {
 			res.setStatus(200);
@@ -53,7 +54,7 @@ public class ChallengeController {
 	// view list of challenges for one status by passing the status id
 	@RequestMapping(path = "challenges/status/{sid}", method = RequestMethod.GET)
 	public Set<Challenge> indexChallengesByStatus(HttpServletRequest req, HttpServletResponse res,
-			@PathVariable int sid) {
+			@PathVariable int sid, Principal principal) {
 		Set<Challenge> sc = chaServ.indexStatusChallenges(sid);
 		if (sc != null) {
 			res.setStatus(200);
@@ -66,7 +67,7 @@ public class ChallengeController {
 	// update the status of a challenge, using challenge id and status id
 	@RequestMapping(path = "challenges/{cid}/status/{sid}", method = RequestMethod.PATCH)
 	public Challenge updateChallengeStatus(HttpServletRequest req, HttpServletResponse res, @PathVariable int cid,
-			@PathVariable int sid) {
+			@PathVariable int sid, Principal principal) {
 		Challenge cha = chaServ.updateStatus(cid, sid);
 		if (cha != null) {
 			res.setStatus(201);
@@ -77,10 +78,10 @@ public class ChallengeController {
 	}
 
 	// view list of challenges for one user by status
-	@RequestMapping(path = "challenges/user/{uid}/status/{sid}", method = RequestMethod.GET)
+	@RequestMapping(path = "challenges/user/{username}/status/{sid}", method = RequestMethod.GET)
 	public Set<Challenge> indexChallengeByUserAndStatus(HttpServletRequest req, HttpServletResponse res,
-			@PathVariable int uid, @PathVariable int sid) {
-		Set<Challenge> sc = chaServ.indexStatusChallengesByUser(sid, uid);
+			@PathVariable String username, @PathVariable int sid, Principal principal) {
+		Set<Challenge> sc = chaServ.indexStatusChallengesByUser(username, sid);
 		if (sc != null) {
 			res.setStatus(200);
 			return sc;
@@ -91,7 +92,7 @@ public class ChallengeController {
 
 	// create new challenge
 	@RequestMapping(path = "challenges", method = RequestMethod.POST)
-	public Challenge newChallenge(HttpServletRequest req, HttpServletResponse res, @RequestBody ChallengeDTO cDTO) {
+	public Challenge newChallenge(HttpServletRequest req, HttpServletResponse res, @RequestBody ChallengeDTO cDTO, Principal principal) {
 		Challenge cha = chaServ.create(cDTO);
 		if (cha != null) {
 			res.setStatus(200);
@@ -103,7 +104,7 @@ public class ChallengeController {
 
 	// update existing challenge by challenge id
 	@RequestMapping(path = "challenges/{id}", method = RequestMethod.PATCH)
-	public Challenge updateChallenge(HttpServletRequest req, HttpServletResponse res, @PathVariable int id, @RequestBody Challenge challenge) {
+	public Challenge updateChallenge(HttpServletRequest req, HttpServletResponse res, @PathVariable int id, @RequestBody Challenge challenge, Principal principal) {
 		Challenge cha = chaServ.update(challenge, id);
 		if (cha != null) {
 			res.setStatus(200);
@@ -114,8 +115,9 @@ public class ChallengeController {
 	}
 
 	// delete challenge by challenge id
+//	Doesn't work because of foreign keys - would need a cascading delete, not necessary for MVP
 	@RequestMapping(path = "challenges/{id}", method = RequestMethod.DELETE)
-	public Boolean deleteChallenge(HttpServletRequest req, HttpServletResponse res, @PathVariable int id) {
+	public Boolean deleteChallenge(HttpServletRequest req, HttpServletResponse res, @PathVariable int id, Principal principal) {
 		if (chaServ.delete(id) != null) {
 			res.setStatus(200);
 			return chaServ.delete(id);

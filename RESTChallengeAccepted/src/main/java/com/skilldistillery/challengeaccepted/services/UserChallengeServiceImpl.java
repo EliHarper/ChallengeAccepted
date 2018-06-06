@@ -79,37 +79,63 @@ public class UserChallengeServiceImpl implements UserChallengeService {
 		return userChallengeRepo.findByChallengeId(cid);
 	}
 	
-	// tally points for all user skill records for a challenge
-	public UserSkill tallyUserSkillPointsForChallenge(Challenge challenge, int uid) {
-		UserChallenge managedUserChallenge = userChallengeRepo.findByUserIdAndChallengeId(challenge.getId(), uid);
-		int newPoints = 0;
-			if (managedUserChallenge.isAcceptorWon()) {
-				newPoints = 5;	
-			}
-			else if (!managedUserChallenge.isAcceptorWon() && managedUserChallenge.isAccepted()){
-				newPoints = 2;
-			}
-			else {
-				newPoints = 0;
-			}
-			UserSkill uSkill = userSkillRepo.findBySkillIdAndUserId(challenge.getSkill().getId(), managedUserChallenge.getUser().getId());
-			uSkillImpl.update(uSkill, newPoints);
-		return uSkill;
-	}
+	 // tally points for all user skill records for a challenge
+    public UserSkill tallyUserSkillPointsForChallenge(Challenge challenge, String username) {
+    	
+    	User u = userRepo.findByUsername(username);
+        UserChallenge managedUserChallenge = userChallengeRepo.findByUserIdAndChallengeId(challenge.getId(), u.getId());
+        int newPoints = 0;
+            if (managedUserChallenge.isAcceptorWon()) {
+                newPoints = 5;    
+            }
+            else if (!managedUserChallenge.isAcceptorWon() && managedUserChallenge.isAccepted()){
+                newPoints = 2;
+            }
+            else {
+                newPoints = 0;
+            }
+            UserSkill uSkill = userSkillRepo.findBySkillIdAndUserId(challenge.getSkill().getId(), managedUserChallenge.getUser().getId());
+            uSkillImpl.update(uSkill, newPoints);
+        return uSkill;
+    } 
+//=======  			OLD ONE, WORKS.
+//	// tally points for all user skill records for a challenge
+//	public UserSkill tallyUserSkillPointsForChallenge(Challenge challenge, int uid) {
+//		UserChallenge managedUserChallenge = userChallengeRepo.findByUserIdAndChallengeId(challenge.getId(), uid);
+//		int newPoints = 0;
+//			if (managedUserChallenge.isAcceptorWon()) {
+//				newPoints = 5;	
+//			}
+//			else if (!managedUserChallenge.isAcceptorWon() && managedUserChallenge.isAccepted()){
+//				newPoints = 2;
+//			}
+//			else {
+//				newPoints = 0;
+//			}
+//			UserSkill uSkill = userSkillRepo.findBySkillIdAndUserId(challenge.getSkill().getId(), managedUserChallenge.getUser().getId());
+//			uSkillImpl.update(uSkill, newPoints);
+//		return uSkill;
+//	}
+//>>>>>>>
 
-	public List<UserChallenge> challengesUserHasParticipatedIn(int uid, String username) {
-		return userChallengeRepo.findByUserId(uid);
+	public List<UserChallenge> challengesUserHasParticipatedIn(String username) {
+		User u = userRepo.findByUsername(username);
+		return userChallengeRepo.findByUserId(u.getId());
 	}
 
 	@Override
-	public UserChallenge checkIfUserHasAcceptedChallenge(int uid, int cid) {
-		UserChallenge uc = userChallengeRepo.findByUserIdAndChallengeId(uid, cid);
-		System.out.println(uc);
+	public UserChallenge checkIfUserHasAcceptedChallenge(int cid, String username) {
+		System.out.println(username);
+		User u = userRepo.findByUsername(username);
+//		System.out.println(u);
+		UserChallenge uc = userChallengeRepo.findByUserIdAndChallengeId(u.getId(), cid);
+//		System.out.println(uc);
 		return uc;
 	}
 	
-	public UserChallenge updateUCRecord(int cid, int uid) {
-		UserChallenge uc = userChallengeRepo.findByUserIdAndChallengeId(uid, cid);
+	public UserChallenge updateUCRecord(int cid, String username) {
+		User u = userRepo.findByUsername(username);
+		UserChallenge uc = userChallengeRepo.findByUserIdAndChallengeId(u.getId(), cid);
 		uc.setAcceptorWon(true);
 		userChallengeRepo.saveAndFlush(uc);
 		return uc;

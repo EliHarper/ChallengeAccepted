@@ -2,8 +2,10 @@ package com.skilldistillery.challengeaccepted.services;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.skilldistillery.challengeaccepted.entities.User;
 import com.skilldistillery.challengeaccepted.repositories.UserRepository;
 
@@ -12,15 +14,37 @@ public class UserServiceImpl implements UserService{
 	
 	@Autowired
 	private UserRepository userRepo;
-	
 
-	public User create(User u) {
+	@Autowired
+	private PasswordEncoder encoder;
+
+	@Override
+	public User register(String json) {
+		ObjectMapper om = new ObjectMapper();
+		User user = null;
+
+		try {
+			user = om.readValue(json, User.class);
+
+			String encodedPW = encoder.encode(user.getPassword());
+			user.setPassword(encodedPW); // only persist encoded password
+
+			// set other fields to default values
+
+			userRepo.saveAndFlush(user);
+		} catch (Exception e) {
+			System.out.println(e);
+		}		
+		return user;
+	}
+
+	public User create(User u, String username) {
 		userRepo.saveAndFlush(u);
 		return u;
 	}
 
-	public User update(User u) {
-		User managedUser = userRepo.findByUsername(u.getUsername());
+	public User update(User u, String username) {
+		User managedUser = userRepo.findByUsername(username);
 		if(u.getChallenges() != null) {
 			managedUser.setChallenges(u.getChallenges());
 		}
@@ -43,13 +67,17 @@ public class UserServiceImpl implements UserService{
 		return managedUser;
 	}
 	
-	public User show(int uid) {
-		return userRepo.findById(uid).get();
+	public User show(String urlUserName, String principalUsername) {
+		User user = userRepo.findByUsername(urlUserName);
+		return userRepo.findByIdAndUsername(user.getId(), user.getUsername());
 	}
 	
-	public Boolean delete(int id) {
+	public Boolean delete(String username) {
+		
+		User u = userRepo.findByUsername(username);
+		
 		try {
-			userRepo.deleteById(id);
+			userRepo.deleteById(u.getId());
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();

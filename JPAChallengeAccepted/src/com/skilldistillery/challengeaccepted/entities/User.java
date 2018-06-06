@@ -25,7 +25,7 @@ public class User {
 	private String email;
 	private String location;
 	private String role;
-	private String enabled;
+	private Boolean enabled;
 	
 	@ManyToMany
 	@JoinTable(name="user_challenge",
@@ -130,23 +130,20 @@ public class User {
 		this.userChallenges = userChallenges;
 	}
 
-
 	public List<UserSkill> getUserSkills() {
 		return userSkills;
 	}
-
 
 	public void setUserSkills(List<UserSkill> userSkills) {
 		this.userSkills = userSkills;
 	}
 
-
-	public String getEnabled() {
+	public Boolean getEnabled() {
 		return enabled;
 	}
 
 
-	public void setEnabled(String enabled) {
+	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
 	}
 
@@ -172,6 +169,8 @@ public class User {
 		builder.append(location);
 		builder.append(", role=");
 		builder.append(role);
+		builder.append(", enabled=");
+		builder.append(enabled);
 		builder.append("]");
 		return builder.toString();
 	}

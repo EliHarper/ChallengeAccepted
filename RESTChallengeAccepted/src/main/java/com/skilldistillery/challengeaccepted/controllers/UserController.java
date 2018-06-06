@@ -1,6 +1,8 @@
 package com.skilldistillery.challengeaccepted.controllers;
 
 
+import java.security.Principal;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -26,39 +28,47 @@ public class UserController {
 	
 	
 	// finds user by user id
-	@RequestMapping(path="users/{uid}", method=RequestMethod.GET)
-	public User viewUserProfile(HttpServletRequest req, HttpServletResponse res, @PathVariable int uid) {
-		User user = userServ.show(uid);
+	@RequestMapping(path="users/{username}", method=RequestMethod.GET)
+	public User viewUserProfile(HttpServletRequest req, HttpServletResponse res, @PathVariable String username, Principal principal) {
+		User user = userServ.show(username, principal.getName());
 		if ( user != null) {
 			res.setStatus(200);
-			return user;
+			return userServ.show(username, principal.getName());
 		}
 		res.setStatus(404);
 		return null;
 	}
-	
-	// create new user
-	@RequestMapping(path="users", method=RequestMethod.POST)
-	public User createUser(HttpServletRequest req, HttpServletResponse res, @RequestBody User user) {
-		User newUser = userServ.create(user);
-		if (newUser != null) {
-			res.setStatus(201);
-			return newUser;
-		}
-		res.setStatus(404);
-		return null;
-	}
+
+//	NOT NEEDED W/ REGISTER METHOD
+//	// create new user
+//	@RequestMapping(path="users", method=RequestMethod.POST)
+//	public User createUser(HttpServletRequest req, HttpServletResponse res, @RequestBody User user, Principal principal) {
+//		User newUser = userServ.create(user, principal.getName());
+//		if (newUser != null) {
+//			res.setStatus(201);
+//			return newUser;
+//		}
+//		res.setStatus(404);
+//		return null;
+//	}
 	
 	// update existing user w/ user id
-	@RequestMapping(path="users/{uid}", method=RequestMethod.PATCH)
-	public User updateUser(@RequestBody User user) {
-		return userServ.update(user);
+	@RequestMapping(path="users", method=RequestMethod.PATCH)
+	public User updateUser(@RequestBody User user, Principal principal) {
+		return userServ.update(user, principal.getName());
 	}
 	
 	// delete user by user id
-	@RequestMapping(path="/users/{id}", method=RequestMethod.DELETE)
-	public Boolean deleteUser(@PathVariable int id) {
-		return userServ.delete(id);
+//	@RequestMapping(path="users", method=RequestMethod.DELETE)
+//	public Boolean deleteUser(Principal principal) {
+//		System.out.println("*******************************");
+//		return userServ.delete(principal.getName());
+//	}
+	
+	@RequestMapping(path="users", method=RequestMethod.DELETE)
+	public Boolean deleteUser(Principal principal) {
+		System.out.println("*******************************");
+		return userServ.delete(principal.getName());
 	}
 	
 }

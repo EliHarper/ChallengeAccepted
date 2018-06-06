@@ -1,5 +1,6 @@
 package com.skilldistillery.challengeaccepted.controllers;
 
+import java.security.Principal;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,9 +32,8 @@ public class MessageController {
 
 	// show single message
 	@RequestMapping(path = "messages/{mid}", method = RequestMethod.GET)
-	public Message show(HttpServletRequest req, HttpServletResponse res, @PathVariable int mid, Integer uid) {
-		uid = 1;
-		Message mes = messageServ.show(mid, uid);
+	public Message show(HttpServletRequest req, HttpServletResponse res, @PathVariable int mid, Principal principal) {
+		Message mes = messageServ.show(mid, principal.getName());
 		if (mes != null) {
 			res.setStatus(200);
 			return mes;
@@ -44,8 +44,8 @@ public class MessageController {
 
 	// show all messages in a single thread
 	@RequestMapping(path = "messages/threads/{tid}", method = RequestMethod.GET)
-	public Set<Message> indexThreadMessages(HttpServletRequest req, HttpServletResponse res, @PathVariable int tid) {
-		Set<Message> sm =messageServ.indexThreadMessages(tid);
+	public Set<Message> indexThreadMessages(HttpServletRequest req, HttpServletResponse res, @PathVariable int tid, Principal principal) {
+		Set<Message> sm = messageServ.indexThreadMessages(tid);
 		if (sm != null) {
 			res.setStatus(200);
 			return sm;
@@ -55,9 +55,9 @@ public class MessageController {
 	}
 
 	// show the first message of every thread for a user
-	@RequestMapping(path = "messages/heads/{uid}", method = RequestMethod.GET)
-	public Set<Message> indexThreads(HttpServletRequest req, HttpServletResponse res, @PathVariable int uid) {
-		Set<Message> sm = messageServ.indexThreads(uid);
+	@RequestMapping(path = "messages/heads/{username}", method = RequestMethod.GET)
+	public Set<Message> indexThreads(HttpServletRequest req, HttpServletResponse res, @PathVariable String username, Principal principal) {
+		Set<Message> sm = messageServ.indexThreads(username);
 		if (sm != null) {
 			res.setStatus(200);
 			return sm;
@@ -68,7 +68,7 @@ public class MessageController {
 
 	// create a new message
 	@RequestMapping(path = "messages", method = RequestMethod.POST)
-	public Message create(HttpServletRequest req, HttpServletResponse res, @RequestBody Message message) {
+	public Message create(HttpServletRequest req, HttpServletResponse res, @RequestBody Message message, Principal principal) {
 		Message newMessage = messageServ.create(message);
 		if (newMessage != null) {
 			res.setStatus(201);
@@ -80,8 +80,8 @@ public class MessageController {
 
 	// delete a message
 	@RequestMapping(path = "messages/{mid}", method = RequestMethod.DELETE)
-	public Boolean destroy(HttpServletRequest req, HttpServletResponse res, @PathVariable int mid) {
-		String username = "AlexTheDestroyer";
-		return messageServ.destroy(username, mid);
+	public Boolean destroy(HttpServletRequest req, HttpServletResponse res, @PathVariable int mid, Principal principal) {
+		
+		return messageServ.destroy(principal.getName(), mid);
 	}
 }

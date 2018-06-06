@@ -4,12 +4,14 @@ import com.skilldistillery.challengeaccepted.entities.User;
 
 public interface UserService {
 	
-	public User create(User u);
+	public User create(User u, String username);
 	
-	public User update(User u);
+	public User update(User u, String username);
 	
-	public User show(int id);
+	public User show(String urlUserName, String principalUsername);
 	
-	public Boolean delete(int id);
+	public Boolean delete(String username);
+
+	User register(String json);
 	
 }

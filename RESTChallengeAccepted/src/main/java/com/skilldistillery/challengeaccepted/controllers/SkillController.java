@@ -1,5 +1,6 @@
 package com.skilldistillery.challengeaccepted.controllers;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,7 +25,7 @@ public class SkillController {
 	private SkillService skillzServ;
 
 	@RequestMapping(path = "skills", method = RequestMethod.GET)
-	public List<Skill> allSkills(HttpServletRequest req, HttpServletResponse res) {
+	public List<Skill> allSkills(HttpServletRequest req, HttpServletResponse res, Principal principal) {
 		List<Skill> ls = skillzServ.index();
 		if (ls != null) {
 			res.setStatus(200);
@@ -36,7 +37,7 @@ public class SkillController {
 	}
 
 	@RequestMapping(path = "skills/{id}", method = RequestMethod.GET)
-	public Skill skillById(HttpServletRequest req, HttpServletResponse res, @PathVariable int id) {
+	public Skill skillById(HttpServletRequest req, HttpServletResponse res, @PathVariable int id, Principal principal) {
 		Skill skill = skillzServ.oneSkill(id);
 		if (skill != null) {
 			res.setStatus(200);
