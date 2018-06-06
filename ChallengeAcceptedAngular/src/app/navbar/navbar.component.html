@@ -37,7 +37,7 @@
             </address>
           </div> -->
           <div class="">
-
+            <h1>Create New Challenge!!!</h1>
               <mat-form-field appearance="standard">
                 <mat-label>Name</mat-label>
                 <input matInput [(ngModel)]="challenge.name" placeholder="Name of Challenge">
@@ -63,7 +63,11 @@
                 <mat-select placeholder="Tags" [(ngModel)]="challenge.tags" multiple>
                 <mat-option *ngFor="let tag of tags" [value]="tags">{{tag.name}}</mat-option>
               </mat-select>
-              </mat-form-field>
+              </mat-form-field><br>
+
+
+              <button type="submit" class="btn btn-success">Submit</button>
+
           </div>
         </div>
       </div>
