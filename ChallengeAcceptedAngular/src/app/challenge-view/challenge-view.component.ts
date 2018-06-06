@@ -30,7 +30,8 @@ export class ChallengeViewComponent implements OnInit {
   noWinners = false;
 
 
-  acceptChallenge () {
+  acceptChallenge() {
+
     const dto = {'challengeId': this.displayChallenge.id,
     'acceptorId': this.testUser.id};
     this.userChallengeService.hasUserAcceptedChallenge(dto).subscribe(

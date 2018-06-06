@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { throwError } from 'rxjs';
 import {catchError} from 'rxjs/operators';
+import { AuthService } from './auth.service';
 
 
 @Injectable({
@@ -14,60 +15,103 @@ export class UserChallengeService {
   url = 'http://localhost:8080/api';
 
   acceptingAMarketChallenge(dto) {
-    // const headers = new HttpHeaders({'Content-Type': 'application/json'});
-
-    return this.http.post<UserChallenge>(`${this.url}/challenges/${dto.challengeId}/accept`, dto).pipe(
-      catchError((err: any) => {
-        console.log(err);
-        return throwError(err);
-      })
-    );
+    // const headers = new HttpHeaders({'Content-Type': 'application/json'});(don't seem to need this)
+    // Get token
+    const token = this.authService.getToken();
+    // Send token as Authorization header (this is spring security convention for basic auth)
+    const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
+    if (this.authService.checkLogin()) {
+      return this.http.post<UserChallenge>(`${this.url}/challenges/${dto.challengeId}/accept`, dto, {headers}).pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError(err);
+        })
+      );
+    }
   }
 
   acceptingAPersonalChallenge(dto) {
-    this.http.patch<UserChallenge>(`${this.url}/challenges/${dto.challengeId}/accept`, dto).pipe(
-      catchError((err: any) => {
-        console.log(err);
-        return throwError(err);
-      })
-    );
+    // Get token
+    const token = this.authService.getToken();
+    // Send token as Authorization header (this is spring security convention for basic auth)
+    const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
+
+    if (this.authService.checkLogin()) {
+      this.http.patch<UserChallenge>(`${this.url}/challenges/${dto.challengeId}/accept`, dto, {headers}).pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError(err);
+        })
+      );
+    }
   }
 
   hasUserAcceptedChallenge(dto) {
-    return this.http.get<UserChallenge>(`${this.url}/user/challenges/${dto.challengeId}/user/${dto.acceptorId}/check`).pipe(
-      catchError((err: any) => {
-        console.log(err);
-        return throwError(err);
-      })
-    );
+    // Get token
+    const token = this.authService.getToken();
+    // Send token as Authorization header (this is spring security convention for basic auth)
+    const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
+
+    if (this.authService.checkLogin()) {
+      return this.http.get<UserChallenge>(`${this.url}/user/challenges/${dto.challengeId}/user/${dto.acceptorId}/check`, {headers}).pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError(err);
+        })
+      );
+    }
   }
 
   updateUserWinner(cid, uid, challenge) {
-    return this.http.patch<UserChallenge>(`${this.url}/challenges/${cid}/user/${uid}/`, challenge).pipe(
-      catchError((err: any) => {
-        console.log(err);
-        return throwError(err);
-      })
-    );
+    // Get token
+    const token = this.authService.getToken();
+    // Send token as Authorization header (this is spring security convention for basic auth)
+    const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
+
+    if (this.authService.checkLogin()) {
+      return this.http.patch<UserChallenge>(`${this.url}/challenges/${cid}/user/${uid}/`, challenge, {headers}).pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError(err);
+        })
+      );
+    }
   }
 
   getAllPendingAndAcceptedChallenges(cid) {
-    return this.http.get<UserChallenge[]>(`${this.url}/challenges/${cid}/accept/all`).pipe(
-      catchError((err: any) => {
-        console.log(err);
-        return throwError(err);
-      })
-    );
+    // Get token
+    const token = this.authService.getToken();
+    // Send token as Authorization header (this is spring security convention for basic auth)
+    const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
+
+    if (this.authService.checkLogin()) {
+      return this.http.get<UserChallenge[]>(`${this.url}/challenges/${cid}/accept/all`, {headers}).pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError(err);
+        })
+      );
+    }
   }
 
   removeUnacceptedUserChallenges(id) {
-    return this.http.delete<Boolean>(`${this.url}/challenges/accept/${id}`).pipe(
-      catchError((err: any) => {
-        console.log(err);
-        return throwError(err);
-      })
-    );
+    // Get token
+    const token = this.authService.getToken();
+    // Send token as Authorization header (this is spring security convention for basic auth)
+    const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
+
+    if (this.authService.checkLogin()) {
+      return this.http.delete<Boolean>(`${this.url}/challenges/accept/${id}`, {headers}).pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError(err);
+        })
+      );
+    }
   }
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService
+  ) { }
 }
