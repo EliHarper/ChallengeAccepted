@@ -26,6 +26,7 @@ export class ChallengeViewComponent implements OnInit {
   selectedTags: Tag[] = [];
   userIdList: number[] = [];
   challengers: UserChallenge[] = [];
+  showAlreadyAcceptError = false;
 
 
 
@@ -34,21 +35,18 @@ export class ChallengeViewComponent implements OnInit {
     'acceptorId': this.testUser.id};
     this.userChallengeService.hasUserAcceptedChallenge(dto).subscribe(
       data => {
-        if (!data) {
-          this.userChallengeService.acceptingAMarketChallenge(dto).subscribe(
-            data2 => {
-              this.getChallengeData();
-            },
-            error2 => {
-              console.log(error2);
-            }
-            );
-        } else {
-          console.log('ALREADY IN THERE');
-        }
+        console.log(data);
+        this.showAlreadyAcceptError = true;
       },
       error => {
-        console.log(error);
+        this.userChallengeService.acceptingAMarketChallenge(dto).subscribe(
+          data2 => {
+            this.getChallengeData();
+          },
+          error2 => {
+            console.log(error2);
+          }
+          );
       }
     );
   }

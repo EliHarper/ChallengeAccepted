@@ -189,6 +189,7 @@
       </div>
         <div>
             <button type="button" class="btn btn-primary btn-block" (click)="acceptChallenge()">Accept This Challenge</button>
+            <div *ngIf="showAlreadyAcceptError"><h5 style="color:red;">YOU'VE ALREADY ACCEPTED THIS CHALLENGE!</h5></div>
         </div>
 <!-- /content -->
 
