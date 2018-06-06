@@ -54,11 +54,12 @@
           </div>
           <div class="col-md-4">
               <!-- <img id="my-img" src="http://dummyimage.com/100x100/000/fff" onmouseover="hover(this);" onmouseout="unhover(this);" /> -->
-              <a href="#">
-                  <img src="../../assets/img/fistbumpblack1.png"
+              <!-- <button class="create-challenge-button" (click)="createChallenge(challenge)" > -->
+                  <img (click)="createChallenge(challenge)" src="../../assets/img/fistbumpblack1.png"
                   onmouseover="this.src='../../assets/img/fistbumpblack2.png'"
                   onmouseout="this.src='../../assets/img/fistbumpblack1.png'"
-                  border="0" alt=""/></a>
+                  border="0" alt=""/>
+                <!-- </button> -->
             <br>
             <p></p>
           </div>

@@ -9,3 +9,10 @@
   font-family: 'Frijole', cursive;
   color: black;
 }
+
+.create-challenge-button {
+  background-color: transparent;
+  padding: 1px transparent;
+  border: 1px transparent;
+  margin: 1px transparent;
+}
