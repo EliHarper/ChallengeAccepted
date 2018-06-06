@@ -1,6 +1,7 @@
 package com.skilldistillery.challengeaccepted.entities;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -37,7 +38,7 @@ public class Message {
 	
 	@CreationTimestamp
 	@Column(name="time_sent")
-	private Date timeSent;
+	private Timestamp timeSent; //CAREFUL
 
 	public Message() {
 	}
@@ -66,11 +67,11 @@ public class Message {
 		this.receiver = receiver;
 	}
 
-	public Date getTimeSent() {
+	public Timestamp getTimeSent() { //CAREFUL
 		return timeSent;
 	}
 
-	public void setTimeSent(Date timeSent) {
+	public void setTimeSent(Timestamp timeSent) {
 		this.timeSent = timeSent;
 	}
 
