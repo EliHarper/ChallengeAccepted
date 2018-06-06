@@ -400,16 +400,16 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `challengedb`;
-INSERT INTO `message` (`id`, `sender_id`, `receiver_id`, `message`, `time_sent`, `thread_id`) VALUES (1, 1, 2, 'Nice weightlifting bro', '2038-01-19 03:14:07', 1);
-INSERT INTO `message` (`id`, `sender_id`, `receiver_id`, `message`, `time_sent`, `thread_id`) VALUES (2, 2, 1, 'Thx ;)', 'NULL', 1);
-INSERT INTO `message` (`id`, `sender_id`, `receiver_id`, `message`, `time_sent`, `thread_id`) VALUES (3, 2, 3, 'How long does it take you to do your hair like that every morning?', 'NULL', 3);
-INSERT INTO `message` (`id`, `sender_id`, `receiver_id`, `message`, `time_sent`, `thread_id`) VALUES (4, 3, 2, 'I just wake up this way', 'NULL', 3);
-INSERT INTO `message` (`id`, `sender_id`, `receiver_id`, `message`, `time_sent`, `thread_id`) VALUES (5, 3, 4, 'Wanna smoke?', 'NULL', 5);
-INSERT INTO `message` (`id`, `sender_id`, `receiver_id`, `message`, `time_sent`, `thread_id`) VALUES (6, 4, 3, 'You mean vape? I don\'t smoke', 'NULL', 5);
-INSERT INTO `message` (`id`, `sender_id`, `receiver_id`, `message`, `time_sent`, `thread_id`) VALUES (7, 4, 5, 'Why is Alex so mean to me?', 'NULL', 7);
-INSERT INTO `message` (`id`, `sender_id`, `receiver_id`, `message`, `time_sent`, `thread_id`) VALUES (8, 5, 4, 'Because he thinks you\'re cute', 'NULL', 7);
-INSERT INTO `message` (`id`, `sender_id`, `receiver_id`, `message`, `time_sent`, `thread_id`) VALUES (9, 5, 1, 'Do you think Andrew is cute?', 'NULL', 9);
-INSERT INTO `message` (`id`, `sender_id`, `receiver_id`, `message`, `time_sent`, `thread_id`) VALUES (10, 1, 5, 'yea', 'NULL', 9);
+INSERT INTO `message` (`id`, `sender_id`, `receiver_id`, `message`, `time_sent`, `thread_id`) VALUES (1, 1, 2, 'Nice weightlifting bro', NULL, 1);
+INSERT INTO `message` (`id`, `sender_id`, `receiver_id`, `message`, `time_sent`, `thread_id`) VALUES (2, 2, 1, 'Thx ;)', NULL, 1);
+INSERT INTO `message` (`id`, `sender_id`, `receiver_id`, `message`, `time_sent`, `thread_id`) VALUES (3, 2, 3, 'How long does it take you to do your hair like that every morning?', NULL, 3);
+INSERT INTO `message` (`id`, `sender_id`, `receiver_id`, `message`, `time_sent`, `thread_id`) VALUES (4, 3, 2, 'I just wake up this way', NULL, 3);
+INSERT INTO `message` (`id`, `sender_id`, `receiver_id`, `message`, `time_sent`, `thread_id`) VALUES (5, 3, 4, 'Wanna smoke?', NULL, 5);
+INSERT INTO `message` (`id`, `sender_id`, `receiver_id`, `message`, `time_sent`, `thread_id`) VALUES (6, 4, 3, 'You mean vape? I don\'t smoke', NULL, 5);
+INSERT INTO `message` (`id`, `sender_id`, `receiver_id`, `message`, `time_sent`, `thread_id`) VALUES (7, 4, 5, 'Why is Alex so mean to me?', NULL, 7);
+INSERT INTO `message` (`id`, `sender_id`, `receiver_id`, `message`, `time_sent`, `thread_id`) VALUES (8, 5, 4, 'Because he thinks you\'re cute', NULL, 7);
+INSERT INTO `message` (`id`, `sender_id`, `receiver_id`, `message`, `time_sent`, `thread_id`) VALUES (9, 5, 1, 'Do you think Andrew is cute?', NULL, 9);
+INSERT INTO `message` (`id`, `sender_id`, `receiver_id`, `message`, `time_sent`, `thread_id`) VALUES (10, 1, 5, 'yea', NULL, 9);
 
 COMMIT;
 
