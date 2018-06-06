@@ -28,23 +28,23 @@ export class UserService {
     );
   }
 
-  registerUser(user) {
-    return this.http.post<User>(`http://localhost:8080/register`, user).pipe(
-      catchError((err: any) => {
-        console.log(err);
-        return throwError(err);
-      })
-    );
-  }
+  // registerUser(user) {
+  //   return this.http.post<User>(`http://localhost:8080/register`, user).pipe(
+  //     catchError((err: any) => {
+  //       console.log(err);
+  //       return throwError(err);
+  //     })
+  //   );
+  // }
 
-  login(user) {
-    return this.http.post<User>(`http://localhost:8080/login`, user).pipe(
-      catchError((err: any) => {
-        console.log(err);
-        return throwError(err);
-      })
-    );
-  }
+  // login(user) {
+  //   return this.http.post<User>(`http://localhost:8080/login`, user).pipe(
+  //     catchError((err: any) => {
+  //       console.log(err);
+  //       return throwError(err);
+  //     })
+  //   );
+  // }
   constructor(private http: HttpClient) { }
 
 

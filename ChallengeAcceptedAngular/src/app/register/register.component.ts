@@ -1,6 +1,8 @@
+import { AuthService } from './../auth.service';
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { UserService } from '../user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -14,14 +16,16 @@ export class RegisterComponent implements OnInit {
   register() {
     const jsonString = JSON.stringify(this.createdUser);
 
-    this.userService.registerUser(jsonString).subscribe(
-      data => this.userService.login(data),
+    this.authService.register(this.createdUser).subscribe(
+      data => { this.router.navigateByUrl('/home'); },
       error => { console.log(error),
                 this.usernameTaken = true; }
     );
   }
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService,
+              private authService: AuthService,
+              private router: Router) { }
 
   ngOnInit() {
     this.createdUser = new User();

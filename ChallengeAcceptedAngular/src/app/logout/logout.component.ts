@@ -13,7 +13,7 @@ export class LogoutComponent implements OnInit {
     this.authServe.logout();
 
     if (!this.authServe.checkLogin()) {
-      this.router.navigateByUrl('home');
+      this.router.navigateByUrl('/home');
     }
   }
   constructor(private authServe: AuthService,
