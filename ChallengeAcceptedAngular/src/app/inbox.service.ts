@@ -1,3 +1,4 @@
+import { AuthService } from './auth.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Message } from './models/message';
@@ -13,40 +14,71 @@ export class InboxService {
 
 
   allMessageHeads(id) {
-    return this.http.get<Message[]>(`${this.url}messages/heads/${id}`).pipe(
-      catchError((err: any) => {
-        console.log(err);
-        return throwError(err);
-      })
-    );
+    // Get token
+    const token = this.authService.getToken();
+    // Send token as Authorization header (this is spring security convention for basic auth)
+    const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
+
+    if (this.authService.checkLogin()) {
+      return this.http.get<Message[]>(`${this.url}messages/heads/${id}`, {headers}).pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError(err);
+        })
+      );
+    }
   }
 
   threadMessages(id) {
-    return this.http.get<Message[]>(`${this.url}messages/threads/${id}`).pipe(
-      catchError((err: any) => {
-        console.log(err);
-        return throwError(err);
-      })
-    );
+    // Get token
+    const token = this.authService.getToken();
+    // Send token as Authorization header (this is spring security convention for basic auth)
+    const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
+
+    if (this.authService.checkLogin()) {
+      return this.http.get<Message[]>(`${this.url}messages/threads/${id}`, {headers}).pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError(err);
+        })
+      );
+    }
   }
 
   submitReply(reply) {
-    return this.http.post<Message[]>(`${this.url}messages`, reply).pipe(
-      catchError((err: any) => {
-        console.log(err);
-        return throwError(err);
-      })
-    );
+    // Get token
+    const token = this.authService.getToken();
+    // Send token as Authorization header (this is spring security convention for basic auth)
+    const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
+
+    if (this.authService.checkLogin()) {
+      return this.http.post<Message[]>(`${this.url}messages`, reply, { headers }).pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError(err);
+        })
+      );
+    }
   }
 
   deleteMessage(id) {
-    return this.http.delete<Boolean>(`${this.url}messages/${id}`).pipe(
-      catchError((err: any) => {
-        console.log(err);
-        return throwError(err);
-      })
-    );
+    // Get token
+    const token = this.authService.getToken();
+    // Send token as Authorization header (this is spring security convention for basic auth)
+    const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
+
+    if (this.authService.checkLogin()) {
+      return this.http.delete<Boolean>(`${this.url}messages/${id}`, {headers}).pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError(err);
+        })
+      );
+    }
   }
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService
+  ) { }
 }
