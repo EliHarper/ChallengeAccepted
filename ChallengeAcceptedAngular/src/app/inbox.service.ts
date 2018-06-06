@@ -30,5 +30,23 @@ export class InboxService {
     );
   }
 
+  submitReply(reply) {
+    return this.http.post<Message[]>(`${this.url}messages`, reply).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(err);
+      })
+    );
+  }
+
+  deleteMessage(id) {
+    return this.http.delete<Boolean>(`${this.url}messages/${id}`).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(err);
+      })
+    );
+  }
+
   constructor(private http: HttpClient) { }
 }

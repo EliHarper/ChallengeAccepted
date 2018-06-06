@@ -1,33 +1,80 @@
 
 <app-navbar></app-navbar>
 
-<h1>Inbox</h1>
 
-<h1>My Messages</h1>
-<table>
-  <thead>
-    <tr>
-      <th>
-      Original Sender
-     </th>
-      <th>
-      Timestamp
-     </th>
-    </tr>
-  </thead>
-  <tbody>
-    <div *ngFor="let message of allMessages" >
-      <tr (click)="getThreadMessages(message.threadId)">
-        <td>{{message.sender.username}}</td>
-        <td>{{message.timeSent}}</td>
-      </tr>
+
+
+<div id="content">
+    <!-- Mission Statement -->
+    <div class="mission text-center block block-pd-sm block-bg-noise">
+      <div class="container">
+        <h2 class="text-shadow-white">
+          Inbox
+        </h2>
+        <h2>Send a Message!</h2>
+        <form>
+          To (Username): <input type="text" name="receiver" [(ngModel)]="receiver.username">
+          Message: <input type="text" name="receiver" [(ngModel)]="freshThread.message">
+          <button (click)="sendMessage()">SEND</button>
+        </form>
+        <div *ngIf="errorMessage"><h5 style="color:red;">DIDN'T SEND MESSAGE, CHECK USERNAME SPELLING</h5></div>
       </div>
-  </tbody>
+    </div>
+    <!--Active Challenges-->
+    <div class="showcase block block-border-bottom-grey">
+        <div class="container">
+          <table *ngIf="threadMessages.length >0" class="table table-bordered ">
+            <thead class="thead-dark">
+            </thead>
+            <tbody>
+                <tr *ngFor="let message of threadMessages">
+                  <td *ngIf="message.sender.id === 1" style="text-align:right"><h4>{{message.sender.username}} <span class="label label-primary">{{message.message}}</span>
+                    <button *ngIf="message.id === message.threadId" (click)="deleteMessage(message.id)">DELETE THREAD</button>
+                    <button *ngIf="message.id !== message.threadId" (click)="deleteMessage(message.id)">DELETE MESSAGE</button></h4></td>
+                  <td *ngIf="message.sender.id !== 1" style="text-align:left"><h4>{{message.sender.username}} <span class="label label-success">{{message.message}}</span></h4></td>
+                </tr>
+                <tr>
+                    <td>
+                    <form>
+                      Reply: <input type="text" name="message" [(ngModel)]="reply.message">
+                    </form>
+                    <button (click)="sendReply()">REPLY</button>
+                    </td>
+                  </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+<div class="showcase block block-border-bottom-grey">
+    <div class="container">
+ <table>
+
 </table>
-<ul>
-  <li *ngFor="let message of threadMessages">
-    {{message.message}}
-  </li>
-</ul>
+</div>
+</div>
+    <!--LeaderBoards-->
+    <div class="showcase block block-border-bottom-grey">
+      <div class="container">
+        <h2 class="block-title">
+          My Messages
+        </h2>
+        <h4>Select a thread to see its messages</h4>
+        <table class="table table-bordered table-hover">
+          <thead class="thead-dark">
+            <th>Original Sender</th>
+            <th>Timestamp</th>
+            <th>Messages In Thread</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let message of allMessages" (click)="getThreadMessages(message.threadId)">
+                <td>{{message.sender.username}}</td>
+                <td>{{message.timeSent}}</td>
+                <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 
 
