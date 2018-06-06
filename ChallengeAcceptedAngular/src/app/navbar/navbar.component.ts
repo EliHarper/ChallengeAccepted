@@ -58,4 +58,12 @@ export class NavbarComponent implements OnInit {
     this.getTags();
   }
 
+  hover(element) {
+    element.setAttribute('src', 'http://dummyimage.com/100x100/eb00eb/000');
+  }
+
+  unhover(element) {
+    element.setAttribute('src', 'http://dummyimage.com/100x100/000/fff');
+  }
+
 }

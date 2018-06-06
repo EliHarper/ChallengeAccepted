@@ -1,4 +1,11 @@
 .black-fisty {
   height: 55%;
   width: 55%;
+  background-image: url("../../assets/img/fistbumpblack.png");
+  z-index: 99;
+}
+
+.create-challenge-header {
+  font-family: 'Frijole', cursive;
+  color: black;
 }
