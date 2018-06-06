@@ -13,13 +13,12 @@ import { throwError } from 'rxjs';
 export class NavbarComponent implements OnInit {
   challenge: Challenge = new Challenge();
 
-  createPokemon(challenge) {
+  createChallenge(challenge) {
     this.challengeService.create(challenge).subscribe(
       data => this.router.navigateByUrl('challview/' + data.id),
       err => throwError(err)
     );
   }
-
 
   constructor(private challengeService: ChallengeService,
               private router: Router) { }
