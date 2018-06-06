@@ -35,7 +35,7 @@
                   <td *ngIf="message.sender.id === 1" style="text-align:right"><h4>{{message.sender.username}} <span class="label label-primary">{{message.message}}</span>
                     <button *ngIf="message.id === message.threadId" (click)="deleteMessage(message.id)">DELETE THREAD</button>
                     <button *ngIf="message.id !== message.threadId" (click)="deleteMessage(message.id)">DELETE MESSAGE</button></h4></td>
-                  <td *ngIf="message.sender.id !== 1" style="text-align:left"><h4>{{message.sender.username}} <span class="label label-success">{{message.message}}</span></h4></td><td>{{message.timeSent.toLocaleString}}</td>
+                  <td *ngIf="message.sender.id !== 1" style="text-align:left"><h4>{{message.sender.username}} <span class="label label-success">{{message.message}}</span></h4></td>
                 </tr>
                 <tr>
                     <td>
