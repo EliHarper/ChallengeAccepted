@@ -27,7 +27,7 @@ export class ChallengeViewComponent implements OnInit {
   userIdList: number[] = [];
   challengers: UserChallenge[] = [];
   showAlreadyAcceptError = false;
-
+  noWinners = false;
 
 
   acceptChallenge () {
@@ -142,6 +142,7 @@ export class ChallengeViewComponent implements OnInit {
   updateWholeUserList(id, challenge) {
     console.log(challenge);
 
+  if (this.userIdList.length > 0) {
     for (let index = 0; index < this.userIdList.length; index++) {
       this.userChallengeService.updateUserWinner(id, this.userIdList[index], this.displayChallenge).subscribe(
         data => {
@@ -154,6 +155,9 @@ export class ChallengeViewComponent implements OnInit {
         }
       );
     }
+   } else {
+     this.noWinners = true;
+   }
   }
 
   constructor(private challengeService: ChallengeService,
