@@ -17,7 +17,7 @@ export class ChallengeService {
     // Send token as Authorization header (this is spring security convention for basic auth)
     const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
 
-    if (this.authService.checkLogin) {
+    if (this.authService.checkLogin()) {
       return this.http.post(`${this.url}/challenges`, challenge, { headers })
         .pipe(
           catchError((err: any) => {
@@ -34,7 +34,7 @@ export class ChallengeService {
     // Send token as Authorization header (this is spring security convention for basic auth)
     const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
 
-    if (this.authService.checkLogin) {
+    if (this.authService.checkLogin()) {
       return this.http.get<Challenge>(`${this.url}/challenges/${id}`, { headers }).pipe(
         catchError((err: any) => {
           console.log(err);
@@ -60,7 +60,7 @@ export class ChallengeService {
     // Send token as Authorization header (this is spring security convention for basic auth)
     const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
 
-    if (this.authService.checkLogin) {
+    if (this.authService.checkLogin()) {
       return this.http.patch < Challenge > (`${this.url}/challenges/${id}/status/2`, {headers}).pipe(
         catchError((err: any) => {
           console.log(err);
@@ -76,7 +76,7 @@ export class ChallengeService {
     // Send token as Authorization header (this is spring security convention for basic auth)
     const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
 
-    if (this.authService.checkLogin) {
+    if (this.authService.checkLogin()) {
       return this.http.patch < Challenge > (`${this.url}/challenges/${id}/status/4`, {headers}).pipe(
         catchError((err: any) => {
           console.log(err);
@@ -91,7 +91,7 @@ export class ChallengeService {
     // Send token as Authorization header (this is spring security convention for basic auth)
     const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
 
-    if (this.authService.checkLogin) {
+    if (this.authService.checkLogin()) {
       return this.http.patch < Challenge > (`${this.url}/challenges/${id}/status/3`, {headers}).pipe(
         catchError((err: any) => {
           console.log(err);
@@ -107,7 +107,7 @@ export class ChallengeService {
     // Send token as Authorization header (this is spring security convention for basic auth)
     const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
 
-    if (this.authService.checkLogin) { }
+    if (this.authService.checkLogin()) { }
       return this.http.get<Challenge[]>(`${this.url}/challenges/user/${uid}/status/${sid}`, {headers}).pipe(
         catchError((err: any) => {
           console.log(err);
