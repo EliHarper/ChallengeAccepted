@@ -1,22 +1,9 @@
-import {
-  AuthService
-} from './auth.service';
-import {
-  catchError
-} from 'rxjs/operators';
-import {
-  Injectable
-} from '@angular/core';
-import {
-  HttpClient,
-  HttpHeaders
-} from '@angular/common/http';
-import {
-  Challenge
-} from './models/challenge';
-import {
-  throwError
-} from 'rxjs';
+import { AuthService } from './auth.service';
+import { catchError } from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Challenge } from './models/challenge';
+import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -24,24 +11,31 @@ import {
 export class ChallengeService {
   url = 'http://localhost:8080/api';
 
-  create = function(challenge) {
-    return this.http.post(`${this.url}/challenges`, challenge)
-         .pipe(
-           catchError((err: any) => {
-            console.log(err);
-            return throwError(err);
-          })
-      );
-  };
-
-  showOneChallenge(id) {
-    // Getting el token
+  create = function (challenge) {
+    // Get token
     const token = this.authService.getToken();
-
+    // Send token as Authorization header (this is spring security convention for basic auth)
     const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
 
     if (this.authService.checkLogin) {
-      return this.http.get < Challenge > (`${this.url}/challenges/${id}`).pipe(
+      return this.http.post(`${this.url}/challenges`, challenge, { headers })
+        .pipe(
+          catchError((err: any) => {
+            console.log(err);
+            return throwError(err);
+          })
+        );
+    }
+  };
+
+  showOneChallenge(id) {
+    // Get token
+    const token = this.authService.getToken();
+    // Send token as Authorization header (this is spring security convention for basic auth)
+    const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
+
+    if (this.authService.checkLogin) {
+      return this.http.get<Challenge>(`${this.url}/challenges/${id}`, { headers }).pipe(
         catchError((err: any) => {
           console.log(err);
           return throwError(err);
@@ -51,29 +45,23 @@ export class ChallengeService {
   }
 
   showChallengesByStatusId(id) {
-    // Getting el token
-    const token = this.authService.getToken();
 
-    const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
-
-    if (this.authService.checkLogin) {
       return this.http.get < Challenge[] > (`${this.url}/challenges/status/${id}`).pipe(
         catchError((err: any) => {
           console.log(err);
           return throwError(err);
         })
       );
-    }
   }
 
   setChallengeToActive(id) {
-    // Getting el token
+    // Get token
     const token = this.authService.getToken();
-
+    // Send token as Authorization header (this is spring security convention for basic auth)
     const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
 
     if (this.authService.checkLogin) {
-      return this.http.patch < Challenge > (`${this.url}/challenges/${id}/status/2`, {}).pipe(
+      return this.http.patch < Challenge > (`${this.url}/challenges/${id}/status/2`, {headers}).pipe(
         catchError((err: any) => {
           console.log(err);
           return throwError(err);
@@ -83,13 +71,13 @@ export class ChallengeService {
   }
 
   setChallengeToExpired(id) {
-    // Getting el token
+    // Get token
     const token = this.authService.getToken();
-
+    // Send token as Authorization header (this is spring security convention for basic auth)
     const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
 
     if (this.authService.checkLogin) {
-      return this.http.patch < Challenge > (`${this.url}/challenges/${id}/status/4`, {}).pipe(
+      return this.http.patch < Challenge > (`${this.url}/challenges/${id}/status/4`, {headers}).pipe(
         catchError((err: any) => {
           console.log(err);
           return throwError(err);
@@ -98,13 +86,13 @@ export class ChallengeService {
     }
   }
   setChallengeToCompleted(id) {
-    // Getting el token
+    // Get token
     const token = this.authService.getToken();
-
+    // Send token as Authorization header (this is spring security convention for basic auth)
     const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
 
     if (this.authService.checkLogin) {
-      return this.http.patch < Challenge > (`${this.url}/challenges/${id}/status/3`, {}).pipe(
+      return this.http.patch < Challenge > (`${this.url}/challenges/${id}/status/3`, {headers}).pipe(
         catchError((err: any) => {
           console.log(err);
           return throwError(err);
@@ -114,14 +102,23 @@ export class ChallengeService {
   }
 
   getChallengesOfUserAndStatus(uid, sid) {
-    return this.http.get<Challenge[]>(`${this.url}/challenges/user/${uid}/status/${sid}`).pipe(
-      catchError((err: any) => {
-        console.log(err);
-        return throwError(err);
-      })
-    );
-  }
+    // Get token
+    const token = this.authService.getToken();
+    // Send token as Authorization header (this is spring security convention for basic auth)
+    const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
 
-  constructor(private http: HttpClient,
-              private authService: AuthService) { }
+    if (this.authService.checkLogin) { }
+      return this.http.get<Challenge[]>(`${this.url}/challenges/user/${uid}/status/${sid}`, {headers}).pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError(err);
+        })
+      );
+    }
+
+constructor(
+  private http: HttpClient,
+  private authService: AuthService
+  ) { }
+
 }
