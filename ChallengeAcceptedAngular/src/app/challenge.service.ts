@@ -24,6 +24,16 @@ import {
 export class ChallengeService {
   url = 'http://localhost:8080/api';
 
+  create = function(challenge) {
+    return this.http.post(`${this.url}/challenges`, challenge)
+         .pipe(
+           catchError((err: any) => {
+            console.log(err);
+            return throwError(err);
+          })
+      );
+  };
+
   showOneChallenge(id) {
     // Getting el token
     const token = this.authService.getToken();
@@ -103,6 +113,15 @@ export class ChallengeService {
     }
   }
 
+  getChallengesOfUserAndStatus(uid, sid) {
+    return this.http.get<Challenge[]>(`${this.url}/challenges/user/${uid}/status/${sid}`).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(err);
+      })
+    );
+  }
+
   constructor(private http: HttpClient,
-    private authService: AuthService) {}
+              private authService: AuthService) { }
 }

@@ -51,15 +51,23 @@ export class UserChallengeService {
     );
   }
 
-  // calculateSkills(challenge) {
-  //   return this.http.patch<UserChallenge>(`${this.url}/challenges/${challenge.id}/userskills`, challenge).pipe(
-  //     catchError((err: any) => {
-  //       console.log(err);
-  //       return throwError(err);
-  //     })
-  //   );
-  // }
+  getAllPendingAndAcceptedChallenges(cid) {
+    return this.http.get<UserChallenge[]>(`${this.url}/challenges/${cid}/accept/all`).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(err);
+      })
+    );
+  }
 
+  removeUnacceptedUserChallenges(id) {
+    return this.http.delete<Boolean>(`${this.url}/challenges/accept/${id}`).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(err);
+      })
+    );
+  }
 
   constructor(private http: HttpClient) { }
 }

@@ -120,7 +120,7 @@
           Current Challengers
         </h2>
       <div class="row">
-        <div *ngFor="let accept of displayChallenge.users" class="col-md-4 text-center">
+        <!-- <div *ngFor="let accept of displayChallenge.users" class="col-md-4 text-center">
           <span class="fa-stack fa-5x">
             <i class="fa fa-circle fa-stack-2x text-primary"></i>
             <i class="fa fa-group fa-stack-1x fa-inverse"></i>
@@ -136,14 +136,61 @@
             </div>
           </h4>
 
-        </div>
+        </div> -->
+        <div *ngFor="let challenge of challengers" class="col-md-4 text-center">
+          <div *ngIf="(displayChallenge.status.id !== 2)">
+            <span class="fa-stack fa-5x">
+              <i class="fa fa-circle fa-stack-2x text-primary"></i>
+              <i class="fa fa-group fa-stack-1x fa-inverse"></i>
+            </span>
+            <h4 class="text-weight-strong">
+              <a class="nav-link" [routerLink]="['/userprofile/' + challenge.user.username]">
+              {{challenge.user.username}}
+              </a>
+              <div *ngIf="challenge.accepted">
+              <img src="https://cdn1.iconfinder.com/data/icons/all_google_icons_symbols_by_carlosjj-du/100/checkmark-o.png"/>
+              </div>
+              <div *ngIf="!challenge.accepted">
+              <img src="http://www.clker.com/cliparts/9/a/a/Q/0/a/x-cross-icon-th.png"/>
+              </div>
+              <!-- <div *ngIf="displayChallenge.status.id===2">
+                <form>
+                  Winner: <input type="checkbox" (change)="updateUserIdList(challenge.user.id)">
+                </form>
+              </div> -->
+            </h4>
+            </div>
+          <div *ngIf="(displayChallenge.status.id === 2)">
+            <div *ngIf="challenge.accepted">
+            <span class="fa-stack fa-5x">
+              <i class="fa fa-circle fa-stack-2x text-primary"></i>
+              <i class="fa fa-group fa-stack-1x fa-inverse"></i>
+            </span>
+            <h4 class="text-weight-strong">
+              <a class="nav-link" [routerLink]="['/userprofile/' + challenge.user.username]">
+              {{challenge.user.username}}
+              </a>
+              <div *ngIf="challenge.accepted">
+              <img src="https://cdn1.iconfinder.com/data/icons/all_google_icons_symbols_by_carlosjj-du/100/checkmark-o.png"/>
+              </div>
+              <div *ngIf="displayChallenge.status.id===2">
+                <form>
+                  Winner: <input type="checkbox" (change)="updateUserIdList(challenge.user.id)">
+                </form>
+              </div>
+            </h4>
+            </div>
+            </div>
+          </div>
       </div>
       <hr>
-      <div>
-          <button type="button" class="btn btn-primary btn-block" (click)="updateWholeUserList(displayChallenge.id, displayChallenge)">Tally Results of {{displayChallenge.id}}</button>
+      <div *ngIf="displayChallenge.status.id == 2">
+          <button type="button" class="btn btn-primary btn-block" (click)="updateWholeUserList(displayChallenge.id, displayChallenge)">Tally Results!</button>
+          <div *ngIf="noWinners"><h5 style="color:red;">PICK AT LEAST ONE WINNER!</h5></div>
       </div>
         <div>
             <button type="button" class="btn btn-primary btn-block" (click)="acceptChallenge()">Accept This Challenge</button>
+            <div *ngIf="showAlreadyAcceptError"><h5 style="color:red;">YOU'VE ALREADY ACCEPTED THIS CHALLENGE!</h5></div>
         </div>
 <!-- /content -->
 

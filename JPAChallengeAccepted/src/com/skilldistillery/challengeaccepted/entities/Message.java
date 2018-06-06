@@ -37,7 +37,7 @@ public class Message {
 	
 	@CreationTimestamp
 	@Column(name="time_sent")
-	private Date timeSent;
+	private Date timeSent; //CAREFUL
 
 	public Message() {
 	}
@@ -66,7 +66,7 @@ public class Message {
 		this.receiver = receiver;
 	}
 
-	public Date getTimeSent() {
+	public Date getTimeSent() { //CAREFUL
 		return timeSent;
 	}
 
@@ -76,6 +76,18 @@ public class Message {
 
 	public int getId() {
 		return id;
+	}
+
+	public int getThreadId() {
+		return threadId;
+	}
+
+	public void setThreadId(int threadId) {
+		this.threadId = threadId;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	@Override

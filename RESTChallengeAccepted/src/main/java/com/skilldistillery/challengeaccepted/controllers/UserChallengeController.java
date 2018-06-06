@@ -121,7 +121,7 @@ public class UserChallengeController {
 
 	// delete a user challenge record w/ the challenge id and user challenge id
 //	As of right now, we're only hiding user challenge records; not needed for MVP
-	@RequestMapping(path = "challenges/{cid}/accept/{ucid}", method = RequestMethod.DELETE)
+	@RequestMapping(path = "challenges/accept/{ucid}", method = RequestMethod.DELETE)
 	public Boolean deleteUserChallenge(@PathVariable int cid, @PathVariable int ucid,
 			String username, Principal principal) {
 		

@@ -21,13 +21,17 @@ import { TopSkillsPipe } from './pipes/top-skills.pipe';
 import { TestingComponent } from './testing/testing.component';
 import { ChallengesAcceptedPipe } from './pipes/challenges-accepted.pipe';
 import { ChallengesCreatedPipe } from './pipes/challenges-created.pipe';
-import { MatButtonModule, MatCheckboxModule, MatProgressBarModule } from '@angular/material';
+import { MatButtonModule, MatCheckboxModule, MatProgressBarModule, MatFormFieldModule, MatInputModule } from '@angular/material';
+import { MatSelectModule } from '@angular/material';
 import { UserChallengeService } from './user-challenge.service';
 import { UserService } from './user.service';
 import { AuthService } from './auth.service';
 import { ChallengeService } from './challenge.service';
 import { SkillService } from './skill.service';
 import { UserSkillService } from './user-skill.service';
+import { InboxComponent } from './inbox/inbox.component';
+import { InboxService } from './inbox.service';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -44,8 +48,9 @@ import { UserSkillService } from './user-skill.service';
     FallbackComponent,
     ChallengeViewComponent,
     HomeComponent,
-    TestingComponent
-  ],
+    TestingComponent,
+    InboxComponent
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -53,7 +58,11 @@ import { UserSkillService } from './user-skill.service';
     HttpClientModule,
     MatButtonModule,
     MatCheckboxModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatFormFieldModule,
+    MatInputModule,
+    BrowserAnimationsModule,
+    MatSelectModule
   ],
   providers: [CompletedStatusPipe,
     ChallengesAcceptedPipe,
@@ -65,7 +74,8 @@ import { UserSkillService } from './user-skill.service';
     SkillService,
     UserSkillService,
     AuthService,
-    UserService ],
+    UserService,
+    InboxService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

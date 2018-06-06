@@ -1,6 +1,5 @@
 package com.skilldistillery.challengeaccepted.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,6 +98,25 @@ public class UserChallengeServiceImpl implements UserChallengeService {
             uSkillImpl.update(uSkill, newPoints);
         return uSkill;
     } 
+//=======  			OLD ONE, WORKS.
+//	// tally points for all user skill records for a challenge
+//	public UserSkill tallyUserSkillPointsForChallenge(Challenge challenge, int uid) {
+//		UserChallenge managedUserChallenge = userChallengeRepo.findByUserIdAndChallengeId(challenge.getId(), uid);
+//		int newPoints = 0;
+//			if (managedUserChallenge.isAcceptorWon()) {
+//				newPoints = 5;	
+//			}
+//			else if (!managedUserChallenge.isAcceptorWon() && managedUserChallenge.isAccepted()){
+//				newPoints = 2;
+//			}
+//			else {
+//				newPoints = 0;
+//			}
+//			UserSkill uSkill = userSkillRepo.findBySkillIdAndUserId(challenge.getSkill().getId(), managedUserChallenge.getUser().getId());
+//			uSkillImpl.update(uSkill, newPoints);
+//		return uSkill;
+//	}
+//>>>>>>>
 
 	public List<UserChallenge> challengesUserHasParticipatedIn(String username) {
 		User u = userRepo.findByUsername(username);

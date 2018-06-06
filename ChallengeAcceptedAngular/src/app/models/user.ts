@@ -9,23 +9,23 @@ export class User {
   email: string;
   location: string;
   role: string;
-  challenges: Challenge[];
-  skills: Skill[];
-  userChallenges: UserChallenge[];
-  userSkills: UserSkill[];
+  enabled: boolean;
+  // challenges: Challenge[];
+  // skills: Skill[];
+  // userChallenges: UserChallenge[];
+  // userSkills: UserSkill[];
 
   constructor(id?: number, username?: string, password?: string, email?: string, location?: string,
-                role?: string, challenges?: Challenge[], skills?: Skill[], userChallenges?: UserChallenge[],
-                userSkills?: UserSkill[] ) {
+                role?: string) {
     this.id = id;
     this.username = username;
     this.password = password;
     this.email = email;
     this.location = location;
     this.role = role;
-    this.challenges = challenges;
-    this.skills = skills;
-    this.userChallenges = userChallenges;
-    this.userSkills = userSkills;
+    // this.challenges = challenges;
+    // this.skills = skills;
+    // this.userChallenges = userChallenges;
+    // this.userSkills = userSkills;
   }
 }

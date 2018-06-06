@@ -27,16 +27,6 @@ public class User {
 	private String role;
 	private Boolean enabled;
 	
-	public Boolean getEnabled() {
-		return enabled;
-	}
-
-
-	public void setEnabled(Boolean enabled) {
-		this.enabled = enabled;
-	}
-
-
 	@ManyToMany
 	@JoinTable(name="user_challenge",
 	joinColumns =  @JoinColumn(name="invited_user_id"),
@@ -140,14 +130,26 @@ public class User {
 		this.userChallenges = userChallenges;
 	}
 
-
 	public List<UserSkill> getUserSkills() {
 		return userSkills;
 	}
 
-
 	public void setUserSkills(List<UserSkill> userSkills) {
 		this.userSkills = userSkills;
+	}
+
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 

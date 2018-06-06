@@ -1,43 +1,98 @@
- <!-- ======== @Region: #navigation ======== -->
- <div id="navigation" class="wrapper">
-  <!--Hidden Header Region-->
-  <div class="header-hidden collapse">
-    <div class="header-hidden-inner container">
-      <div class="row">
-        <div class="col-md-3">
-          <h3>
-            About Us
-          </h3>
-          <p>Challenge Accepted is the place to be if you want to challenge anyone to anything.</p>
-          <a href="about.html" class="btn btn-more">
-            <i class="fa fa-plus"></i> Learn more</a>
+<!--Change the background class to alter background image, options are: benches, boots, buildings, city, metro -->
+<div id="background-wrapper" class="buildings" data-stellar-background-ratio="0.1">
+  <!-- ======== @Region: #navigation ======== -->
+  <div id="navigation" class="wrapper">
+    <!--Hidden Header Region-->
+    <div class="header-hidden collapse">
+      <div class="header-hidden-inner container">
+        <div class="row">
+          <!-- <div class="col-md-3">
+            <h3>
+              About Us
+            </h3>
+            <p>Challenge Accepted is the place to be if you want to challenge anyone to anything.</p>
+            <a href="about.html" class="btn btn-more">
+              <i class="fa fa-plus"></i> Learn more</a>
+          </div>
+          <div class="col-md-3">
+            <h3>
+              Contact Us
+            </h3>
+            <address>
+              <strong>Challenge Accepted Inc.</strong>
+              <abbr title="Address">
+                <i class="fa fa-pushpin"></i>
+              </abbr>
+              99 Adventure Lane, Denver, CO
+              <br>
+              <abbr title="Phone">
+                <i class="fa fa-phone"></i>
+              </abbr>
+              012 345 6789
+              <br>
+              <abbr title="Email">
+                <i class="fa fa-envelope-alt"></i>
+              </abbr>
+              info@challengeaccepted.com
+            </address>
+          </div> -->
+
+          <h1>Create New Challenge!!!</h1>
         </div>
-        <div class="col-md-3">
-          <!--@todo: replace with company contact details-->
-          <h3>
-            Contact Us
-          </h3>
-          <address>
-            <strong>Challenge Accepted Inc.</strong>
-            <abbr title="Address">
-              <i class="fa fa-pushpin"></i>
-            </abbr>
-            99 Adventure Lane, Denver, CO
+        <div class="row">
+          <div class="col-md-4">
+            <mat-form-field appearance="standard">
+              <mat-label>Name</mat-label>
+              <input matInput [(ngModel)]="challenge.name" placeholder="Name of Challenge" required>
+            </mat-form-field>
             <br>
-            <abbr title="Phone">
-              <i class="fa fa-phone"></i>
-            </abbr>
-            012 345 6789
+            <mat-form-field appearance="standard">
+              <mat-label>Description</mat-label>
+              <input matInput [(ngModel)]="challenge.description" placeholder="Description of Challenge">
+            </mat-form-field>
             <br>
-            <abbr title="Email">
-              <i class="fa fa-envelope-alt"></i>
-            </abbr>
-            info@challengeaccepted.com
-          </address>
+            <mat-form-field appearance="standard">
+              <mat-label>Location</mat-label>
+              <input matInput [(ngModel)]="challenge.location" placeholder="Location of Challenge" required>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+              <mat-select placeholder="Skill" [(ngModel)]="challenge.skill" required>
+                <mat-option *ngFor="let skill of skills" [value]="skills">{{skill.name}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <br>
+          </div>
+          <div class="col-md-4">
+            <br> Number of Challengers:
+            <br>
+            <mat-form-field appearance="standard">
+              <mat-label>Minimum</mat-label>
+              <input type="number" matInput [(ngModel)]="challenge.minNumberOfChallengers" min=1 required>
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="standard">
+              <mat-label>Maximum</mat-label>
+              <input type="number" matInput [(ngModel)]="challenge.maxNumberOfChallengers" min=1 required>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+              <mat-select placeholder="Tags" [(ngModel)]="challenge.tags" multiple>
+                <mat-option *ngFor="let tag of tags" [value]="tags">{{tag.name}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <br>
+          </div>
+          <div class="col-md-4">
+            <img src="../../assets/img/fistbumpblack.png" class="black-fisty">
+            <br>
+            <p></p>
+          </div>
         </div>
       </div>
     </div>
   </div>
+
   <!--Header & navbar-branding region-->
   <div class="header">
     <div class="header-inner container">
@@ -75,4 +130,3 @@
   <div class="container">
   </div>
 </div>
-
