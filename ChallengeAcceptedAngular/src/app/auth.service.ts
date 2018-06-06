@@ -11,8 +11,8 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  login(email, password) {
-    const token = this.generateBasicAuthToken(email, password);
+  login(username, password) {
+    const token = this.generateBasicAuthToken(username, password);
     const headers = new HttpHeaders()
       .set('Authorization', `Basic ${token}`);
 

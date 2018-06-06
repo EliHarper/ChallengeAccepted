@@ -1,5 +1,6 @@
 package com.skilldistillery.challengeaccepted.controllers;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +24,7 @@ public class TagController {
 	private TagService tagServ;
 
 	@RequestMapping(path = "tags", method = RequestMethod.GET)
-	public List<Tag> index(HttpServletRequest req, HttpServletResponse res) {
+	public List<Tag> index(HttpServletRequest req, HttpServletResponse res, Principal principal) {
 		List<Tag> lt = tagServ.index();
 		if (lt != null) {
 			res.setStatus(200);

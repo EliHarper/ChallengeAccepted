@@ -28,6 +28,7 @@ public class ChallengeServiceImpl implements ChallengeService {
 	@Autowired
 	private StatusRepository statusRepo;
 
+	@Override
 	public Challenge create(ChallengeDTO cDTO) {
 		Challenge c = new Challenge();
 		User user = userRepo.findById(cDTO.getCreatorId()).get();
@@ -48,6 +49,7 @@ public class ChallengeServiceImpl implements ChallengeService {
 		return c;
 	}
 
+	@Override
 	public Challenge update(Challenge c, int cid) {
 		Challenge managedChallenge = chaRepo.findById(cid).get();
 		if (c.getLocation() != null && !c.getLocation().equals("")) {
@@ -70,6 +72,7 @@ public class ChallengeServiceImpl implements ChallengeService {
 		return managedChallenge;
 	}
 	
+	@Override
 	public Challenge updateStatus(int cid, int sid) {
 		Challenge managedChallenge = chaRepo.findById(cid).get();
 		Status managedStatus = statusRepo.findById(sid).get();
@@ -87,6 +90,7 @@ public class ChallengeServiceImpl implements ChallengeService {
 		return chall;
 	}
 
+	@Override
 	public Boolean delete(int id) {
 		try {
 			chaRepo.deleteById(id);
@@ -104,8 +108,9 @@ public class ChallengeServiceImpl implements ChallengeService {
 	}
 
 	// view all challenges for a user by status id
-	public Set<Challenge> indexStatusChallengesByUser(int uid, int sid) {
-		return chaRepo.getChallengesByUserIdAndStatus(uid, sid);
+	public Set<Challenge> indexStatusChallengesByUser(String username, int sid) {
+		User u = userRepo.findByUsername(username);
+		return chaRepo.getChallengesByUserIdAndStatus(u.getId(), sid);
 	}
 
 }

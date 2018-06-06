@@ -1,5 +1,6 @@
 package com.skilldistillery.challengeaccepted.controllers;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,11 +28,11 @@ public class UserChallengeController {
 	@Autowired
 	private UserChallengeService userChallengeService;
 
-	// users can view challenges they have accepted by challenge id
+	// users can view a single challenge they have accepted by challenge id - SHOW method.
 	@RequestMapping(path = "user/challenges/accept/{cid}", method = RequestMethod.GET)
 	public UserChallenge viewUserChallenge(HttpServletRequest req, HttpServletResponse res, @PathVariable int cid,
-			String username) {
-		UserChallenge uc = userChallengeService.show(cid, username);
+			Principal principal) {
+		UserChallenge uc = userChallengeService.show(cid, principal.getName());
 		if (uc != null) {
 			res.setStatus(200);
 			return uc;
@@ -42,10 +43,11 @@ public class UserChallengeController {
 
 	// check if a user has already accepted a challenge - return the object if user
 	// has, else null
-	@RequestMapping(path = "user/challenges/{cid}/user/{uid}/check", method = RequestMethod.GET)
+	@RequestMapping(path = "user/challenges/{cid}/user/{username}/check", method = RequestMethod.GET)
 	public UserChallenge checkIfUserHasAcceptedChallenge(HttpServletRequest req, HttpServletResponse res,
-			@PathVariable int cid, @PathVariable int uid, String username) {
-		UserChallenge uc = userChallengeService.checkIfUserHasAcceptedChallenge(uid, cid);
+			@PathVariable int cid, @PathVariable String username, Principal principal) {
+		UserChallenge uc = userChallengeService.checkIfUserHasAcceptedChallenge(cid, username);
+//		System.out.println(username);
 		if (uc != null) {
 			res.setStatus(200);
 			return uc;
@@ -57,7 +59,7 @@ public class UserChallengeController {
 	// returns all user_challenge records for one challenge
 	@RequestMapping(path = "challenges/{cid}/accept/all", method = RequestMethod.GET)
 	public List<UserChallenge> allAcceptsForChallenge(HttpServletRequest req, HttpServletResponse res,
-			@PathVariable int cid, String username) {
+			@PathVariable int cid, String username, Principal principal) {
 		List<UserChallenge> luc = userChallengeService.getTheChallengeAcceptorsForAChallenge(cid, username);
 		if (luc != null) {
 			res.setStatus(200);
@@ -74,12 +76,12 @@ public class UserChallengeController {
 //	}
 
 	// returns all challenges a user has accepted, active and inactive
-	@RequestMapping(path = "user/{uid}/challenges/accept/all", method = RequestMethod.GET)
-	public List<UserChallenge> allAcceptsForUser(HttpServletRequest req, HttpServletResponse res, @PathVariable int uid,
-			String username) {
-		if (userChallengeService.challengesUserHasParticipatedIn(uid, username) != null) {
+	@RequestMapping(path = "user/{username}/challenges/accept/all", method = RequestMethod.GET)
+	public List<UserChallenge> allAcceptsForUser(HttpServletRequest req, HttpServletResponse res,
+			@PathVariable String username, Principal principal) {
+		if (userChallengeService.challengesUserHasParticipatedIn(username) != null) {
 			res.setStatus(200);
-			return userChallengeService.challengesUserHasParticipatedIn(uid, username);
+			return userChallengeService.challengesUserHasParticipatedIn(username);
 		}
 		res.setStatus(404);
 		return null;
@@ -90,8 +92,8 @@ public class UserChallengeController {
 
 	@RequestMapping(path = "challenges/{cid}/accept", method = RequestMethod.POST)
 	public UserChallenge createUserChallenge(HttpServletRequest req, HttpServletResponse res,
-			@RequestBody UserChallengeDTO ucDTO, String username, @PathVariable int cid) {
-		UserChallenge uc = userChallengeService.create(ucDTO, username);
+			@RequestBody UserChallengeDTO ucDTO, @PathVariable int cid, Principal principal) {
+		UserChallenge uc = userChallengeService.create(ucDTO, principal.getName());
 		if (uc != null) {
 			res.setStatus(201);
 			return uc;
@@ -103,23 +105,25 @@ public class UserChallengeController {
 	// update an accepted user_challenge record w/ user_challenge id
 
 	@RequestMapping(path = "challenges/accept/{ucid}", method = RequestMethod.PATCH)
-	public UserChallenge updateUserChallenge(@RequestBody UserChallenge userChallenge, String username, @PathVariable int ucid) {
+	public UserChallenge updateUserChallenge(@RequestBody UserChallenge userChallenge, String username, @PathVariable int ucid, Principal principal) {
 		return userChallengeService.update(userChallenge, username);
 
 	}
 	
 	// update a user_challenge record based on user id and challenge id
-	@RequestMapping(path="challenges/{cid}/user/{uid}", method=RequestMethod.PATCH)
-	public UserSkill updateUserChallengeRecord(HttpServletRequest req, HttpServletResponse res, @PathVariable int cid, @PathVariable int uid, @RequestBody Challenge challenge) {
-		userChallengeService.updateUCRecord(cid, uid);
-		return userChallengeService.tallyUserSkillPointsForChallenge(challenge, uid);
+	@RequestMapping(path="challenges/{cid}/user/{username}", method=RequestMethod.PATCH)
+	public UserSkill updateUserChallengeRecord(HttpServletRequest req, HttpServletResponse res, @PathVariable int cid, 
+			@PathVariable String username, @RequestBody Challenge challenge, Principal principal) {
+		userChallengeService.updateUCRecord(cid, username);
+		return userChallengeService.tallyUserSkillPointsForChallenge(challenge, username);
 	}
 
 
 	// delete a user challenge record w/ the challenge id and user challenge id
+//	As of right now, we're only hiding user challenge records; not needed for MVP
 	@RequestMapping(path = "challenges/{cid}/accept/{ucid}", method = RequestMethod.DELETE)
 	public Boolean deleteUserChallenge(@PathVariable int cid, @PathVariable int ucid,
-			String username) {
+			String username, Principal principal) {
 		
 		return userChallengeService.delete(ucid, username);
 	}

@@ -21,11 +21,11 @@ public interface UserChallengeService {
 	
 	public List<UserChallenge> getTheChallengeAcceptorsForAChallenge(int cid, String username);
 	
-	public List<UserChallenge> challengesUserHasParticipatedIn(int uid, String username);
+	public List<UserChallenge> challengesUserHasParticipatedIn(String username);
 	
-	public UserChallenge checkIfUserHasAcceptedChallenge(int cid, int uid);
+	public UserChallenge checkIfUserHasAcceptedChallenge(int cid, String username);
 	
-	public UserChallenge updateUCRecord(int cid, int uid);
+	public UserChallenge updateUCRecord(int cid, String username);
 	
-	public UserSkill tallyUserSkillPointsForChallenge(Challenge challenge, int uid);
+	public UserSkill tallyUserSkillPointsForChallenge(Challenge challenge, String username);
 }

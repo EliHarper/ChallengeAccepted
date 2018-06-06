@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
   user: User = new User();
 
   login(user) {
-    this.authService.login(user.email, user.password).subscribe(
+    this.authService.login(user.username, user.password).subscribe(
       data => this.router.navigateByUrl('home'),
       err => console.log(err)
     );

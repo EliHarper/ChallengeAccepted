@@ -25,10 +25,11 @@ SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `user` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(45) NOT NULL,
-  `password` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(450) NOT NULL,
   `email` VARCHAR(45) NULL,
   `location` VARCHAR(100) NULL,
-  `role` VARCHAR(45) NULL,
+  `role` VARCHAR(45) NOT NULL DEFAULT 'standard',
+  `enabled` TINYINT NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `UNIQUE` (`username` ASC))
 ENGINE = InnoDB;
@@ -274,11 +275,11 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `challengedb`;
-INSERT INTO `user` (`id`, `username`, `password`, `email`, `location`, `role`) VALUES (1, 'AlexTheDestroyer', 'alex', 'alex@alex.com', 'here', NULL);
-INSERT INTO `user` (`id`, `username`, `password`, `email`, `location`, `role`) VALUES (2, 'DoraTheExplora', 'dora', 'dora@dora.com', 'here', NULL);
-INSERT INTO `user` (`id`, `username`, `password`, `email`, `location`, `role`) VALUES (3, 'EliTheHair', 'eli', 'eli@eli.com', 'here', NULL);
-INSERT INTO `user` (`id`, `username`, `password`, `email`, `location`, `role`) VALUES (4, 'AndrewTheOtherAndrew', 'andrew', 'andrew@andrew.com', 'here', NULL);
-INSERT INTO `user` (`id`, `username`, `password`, `email`, `location`, `role`) VALUES (5, 'MeganTheIncomplete', 'megan', 'megan@megan.com', 'here', NULL);
+INSERT INTO `user` (`id`, `username`, `password`, `email`, `location`, `role`, `enabled`) VALUES (1, 'AlexTheDestroyer', 'alex', 'alex@alex.com', 'here', DEFAULT, DEFAULT);
+INSERT INTO `user` (`id`, `username`, `password`, `email`, `location`, `role`, `enabled`) VALUES (2, 'DoraTheExplora', 'dora', 'dora@dora.com', 'here', DEFAULT, DEFAULT);
+INSERT INTO `user` (`id`, `username`, `password`, `email`, `location`, `role`, `enabled`) VALUES (3, 'EliTheHair', 'eli', 'eli@eli.com', 'here', DEFAULT, DEFAULT);
+INSERT INTO `user` (`id`, `username`, `password`, `email`, `location`, `role`, `enabled`) VALUES (4, 'AndrewTheOtherAndrew', 'andrew', 'andrew@andrew.com', 'here', DEFAULT, DEFAULT);
+INSERT INTO `user` (`id`, `username`, `password`, `email`, `location`, `role`, `enabled`) VALUES (5, 'MeganTheIncomplete', 'megan', 'megan@megan.com', 'here', DEFAULT, DEFAULT);
 
 COMMIT;
 

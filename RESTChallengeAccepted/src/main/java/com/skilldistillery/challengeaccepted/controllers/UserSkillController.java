@@ -1,5 +1,6 @@
 package com.skilldistillery.challengeaccepted.controllers;
 
+import java.security.Principal;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,9 +26,9 @@ public class UserSkillController {
 	private UserSkillService userSkillSvc;
 	
 	// returns list of all user_skill records based on user id
-	@RequestMapping(path="userskills/{uid}", method=RequestMethod.GET)
-	public Set<UserSkill> getUserSkillsByUserId(HttpServletRequest req, HttpServletResponse res, @PathVariable int uid) {
-		Set<UserSkill> userSkills = userSkillSvc.getUserSkillsByUserId(uid);
+	@RequestMapping(path="userskills/{username}", method=RequestMethod.GET)
+	public Set<UserSkill> getUserSkillsByUserId(HttpServletRequest req, HttpServletResponse res, @PathVariable String username, Principal principal) {
+		Set<UserSkill> userSkills = userSkillSvc.getUserSkillsByUsername(username);
 		if (userSkills != null) {
 			res.setStatus(200);
 			return userSkills;
@@ -38,7 +39,7 @@ public class UserSkillController {
 	
 	// create a new UserSkill record
 	@RequestMapping(path="userskills", method=RequestMethod.POST)
-	public UserSkill create(HttpServletRequest req, HttpServletResponse res, @RequestBody UserSkill us) {
+	public UserSkill create(HttpServletRequest req, HttpServletResponse res, @RequestBody UserSkill us, Principal principal) {
 		UserSkill newUS = userSkillSvc.create(us); 
 		if (newUS != null) {
 			res.setStatus(201);
@@ -50,13 +51,14 @@ public class UserSkillController {
 	
 	// update points on an existing UserSkill record (usid = userskill id)
 	@RequestMapping(path="userskills/{usid}/{newPoints}", method=RequestMethod.PATCH)
-	public UserSkill update(HttpServletRequest req, HttpServletResponse res, @RequestBody UserSkill us, @PathVariable int usid, @PathVariable int newPoints) {
+	public UserSkill update(HttpServletRequest req, HttpServletResponse res, @RequestBody UserSkill us, @PathVariable int usid, 
+			@PathVariable int newPoints, Principal principal) {
 		return userSkillSvc.update(us, newPoints); 
 	}
 	
 	// delete a userskill record by userskill id
 	@RequestMapping(path="userskills/{usid}", method=RequestMethod.DELETE)
-	public Boolean destory(HttpServletRequest req, HttpServletResponse res, @PathVariable int usid) {
+	public Boolean destory(HttpServletRequest req, HttpServletResponse res, @PathVariable int usid, Principal principal) {
 		return userSkillSvc.destroy(usid);
 	}
 }

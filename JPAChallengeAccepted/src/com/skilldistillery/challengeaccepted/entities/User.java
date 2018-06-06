@@ -25,7 +25,18 @@ public class User {
 	private String email;
 	private String location;
 	private String role;
+	private Boolean enabled;
 	
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
+
+
 	@ManyToMany
 	@JoinTable(name="user_challenge",
 	joinColumns =  @JoinColumn(name="invited_user_id"),
@@ -156,6 +167,8 @@ public class User {
 		builder.append(location);
 		builder.append(", role=");
 		builder.append(role);
+		builder.append(", enabled=");
+		builder.append(enabled);
 		builder.append("]");
 		return builder.toString();
 	}

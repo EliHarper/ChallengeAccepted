@@ -20,7 +20,7 @@ public interface ChallengeService {
 	
 	public Set<Challenge> indexStatusChallenges( int sid);
 	
-	public Set<Challenge> indexStatusChallengesByUser(int sid, int uid);
+	public Set<Challenge> indexStatusChallengesByUser(String username, int sid);
 	
 	public Challenge updateStatus(int cid, int sid);
 
