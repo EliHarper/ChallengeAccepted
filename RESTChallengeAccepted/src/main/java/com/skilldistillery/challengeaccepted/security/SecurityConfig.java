@@ -35,6 +35,7 @@ protected void configure(HttpSecurity http) throws Exception {
         .antMatchers(HttpMethod.GET, "/api/challenges").permitAll()
 //        challenges/status/{sid}
         .antMatchers(HttpMethod.GET, "/api/challenges/status/**").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/challenges/**").permitAll()
         .antMatchers("/login").permitAll()
         .antMatchers("/register").permitAll()
         .anyRequest().authenticated()
