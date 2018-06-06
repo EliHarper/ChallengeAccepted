@@ -37,19 +37,33 @@
             </address>
           </div> -->
           <div class="">
-            <form>
-              Name of Challenge: <input type="text" name="name" [(ngModel)]="challenge.name" placeholder="Name"><br>
-              Description: <input type="textarea" name="description" [(ngModel)]="challenge.description" placeholder="Description"><br>
-              Location: <input type="text" name="location" [(ngModel)]="challenge.location" placeholder="Location"><br>
 
-              <label>Minumum number of Challengers</label>
-              <input type="text" min="1" name="minNumberofChallengers" [(ngModel)]="challenge.minNumberOfChallengers">
-              <label>Maximum number of Challengers</label>
-              <input type="text" name="maxNumberofChallengers" [(ngModel)]="challenge.maxNumberOfChallengers">
-              <label>Choose Tags:</label>
-              <!-- <input type="radio" name="tags" value="tag.id" [(ngModel)]=""> -->
-
-            </form>
+              <mat-form-field appearance="standard">
+                <mat-label>Name</mat-label>
+                <input matInput [(ngModel)]="challenge.name" placeholder="Name of Challenge">
+              </mat-form-field><br>
+              <mat-form-field appearance="standard">
+                <mat-label>Description</mat-label>
+                <input matInput [(ngModel)]="challenge.description" placeholder="Description of Challenge">
+              </mat-form-field><br>
+              <mat-form-field appearance="standard">
+                <mat-label>Location</mat-label>
+                <input matInput [(ngModel)]="challenge.location" placeholder="Location of Challenge">
+              </mat-form-field><br>
+              Number of Challengers:<br>
+              <mat-form-field appearance="standard">
+                <mat-label>Minimum</mat-label>
+                <input type="number" matInput [(ngModel)]="challenge.minNumberOfChallengers" min=1>
+              </mat-form-field> to
+              <mat-form-field appearance="standard">
+                <mat-label>Maximum</mat-label>
+                <input type="number" matInput [(ngModel)]="challenge.maxNumberOfChallengers" min=1>
+              </mat-form-field> <br>
+              <mat-form-field>
+                <mat-select placeholder="Tags" [(ngModel)]="challenge.tags" multiple>
+                <mat-option *ngFor="let tag of tags" [value]="tags">{{tag.name}}</mat-option>
+              </mat-select>
+              </mat-form-field>
           </div>
         </div>
       </div>

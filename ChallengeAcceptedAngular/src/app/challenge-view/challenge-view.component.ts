@@ -128,6 +128,7 @@ export class ChallengeViewComponent implements OnInit {
       }
     );
   }
+
   updateUserIdList(id: number) {
     console.log(this.userIdList.indexOf(id));
 
