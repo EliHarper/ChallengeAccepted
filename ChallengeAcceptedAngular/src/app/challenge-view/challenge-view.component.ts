@@ -23,6 +23,7 @@ export class ChallengeViewComponent implements OnInit {
   flag = false;
   testUser: User = new User(2);
   tags: Tag[] = [];
+  selectedTags: Tag[] = [];
   userIdList: number[] = [];
   challengers: UserChallenge[] = [];
 
@@ -103,6 +104,8 @@ export class ChallengeViewComponent implements OnInit {
     this.challengeService.showOneChallenge(this.route.snapshot.paramMap.get('id')).subscribe(
       data => {
         console.log(data);
+        // console.log(data.users);
+        // console.log(data.users[0]);
         this.displayChallenge = data;
         this.getAcceptedData(data.id);
       },
@@ -125,6 +128,7 @@ export class ChallengeViewComponent implements OnInit {
       }
     );
   }
+
   updateUserIdList(id: number) {
     console.log(this.userIdList.indexOf(id));
 
