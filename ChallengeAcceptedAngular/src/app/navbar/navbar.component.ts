@@ -71,6 +71,15 @@ export class NavbarComponent implements OnInit {
     this.router.navigateByUrl(`userprofile/${un}`);
   }
 
+  userInbox() {
+    const token = this.authService.getToken();
+    const unpw = atob(token);
+    console.log(unpw);
+    const un = unpw.split(':')[0];
+    this.router.navigateByUrl(`messages/${un}`);
+
+  }
+
   constructor(private challengeService: ChallengeService,
               private router: Router,
               private tagService: TagsService,

@@ -1,9 +1,3 @@
-
-<app-navbar></app-navbar>
-
-
-
-
 <div id="content">
     <!-- Mission Statement -->
     <div class="mission text-center block block-pd-sm block-bg-noise">
@@ -14,7 +8,7 @@
         <h2>Send a Message!</h2>
         <form>
           To (Username): <input type="text" name="receiver" [(ngModel)]="receiver.username">
-          Message: <input type="text" name="receiver" [(ngModel)]="freshThread.message">
+          Message: <input type="text" name="threadMessage" [(ngModel)]="freshThread.message">
           <button (click)="sendMessage()">SEND</button>
         </form>
         <div *ngIf="errorMessage"><h5 style="color:red;">DIDN'T SEND MESSAGE, CHECK USERNAME SPELLING</h5></div>
@@ -32,10 +26,11 @@
             </thead>
             <tbody>
                 <tr *ngFor="let message of threadMessages">
-                  <td *ngIf="message.sender.id === 1" style="text-align:right"><h4>{{message.sender.username}} <span class="label label-primary">{{message.message}}</span>
+                  <td *ngIf="message.sender.id === loggedInUser.id" style="text-align:right"><h4>{{message.sender.username}} <span class="label label-primary">{{message.message}}</span>
                     <button *ngIf="message.id === message.threadId" (click)="deleteMessage(message.id)">DELETE THREAD</button>
-                    <button *ngIf="message.id !== message.threadId" (click)="deleteMessage(message.id)">DELETE MESSAGE</button></h4></td>
-                  <td *ngIf="message.sender.id !== 1" style="text-align:left"><h4>{{message.sender.username}} <span class="label label-success">{{message.message}}</span></h4></td>
+                    <button *ngIf="message.id !== message.threadId" (click)="deleteMessage(message.id)">DELETE MESSAGE</button></h4>
+                  </td>
+                  <td *ngIf="message.sender.id !== loggedInUser.id" style="text-align:left"><h4>{{message.sender.username}} <span class="label label-success">{{message.message}}</span></h4></td>
                 </tr>
                 <tr>
                     <td>
@@ -56,7 +51,7 @@
 </table>
 </div>
 </div>
-    <!--LeaderBoards-->
+    <!--Thread Table-->
     <div class="showcase block block-border-bottom-grey">
       <div class="container">
         <h2 class="block-title">
@@ -70,10 +65,10 @@
             <th>Messages In Thread</th>
           </thead>
           <tbody>
-            <tr *ngFor="let message of allMessages" (click)="getThreadMessages(message.threadId)">
-                <td>{{message.sender.username}}</td>
-                <td>{{message.timeSent}}</td>
-                <td></td>
+            <tr *ngFor="let message of allMessages; let i = index" [attr.data-index]="i">
+                <td (click)="getThreadMessages(message.threadId)">{{message.sender.username}}</td>
+                <td (click)="getThreadMessages(message.threadId)">{{message.timeSent}}</td>
+                <td><button *ngIf="!showingThreadMessages[i].show" (click)="showNumberOfMessages(message.id)">Check Number Of Messages in Thread</button><span *ngIf="showingThreadMessages[i].show" class="label label-primary">{{showingThreadMessages[i].number}}</span></td>
             </tr>
           </tbody>
         </table>

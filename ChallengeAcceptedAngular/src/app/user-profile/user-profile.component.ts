@@ -71,11 +71,18 @@ export class UserProfileComponent implements OnInit {
     );
   }
 
-  // getUserProgressToNextLevel = function(skillId, userId) {
-  //   const userSkill: UserSkill = this.userService.findUserById(id);
-  //   // The above needs to be a method that finds a user_skill by user_id and skill_id
-  //   return this.userSkillService.getUserProgressToNextLevel(userSkill);
-  // };
+  getUserProgressToNextLevel = function(skillId, userId) {
+    return this.userSkillService.findUserSkillBySAndUId(skillId, userId).subscribe(
+      data => {
+        return this.userSkillService.getUserProgressToNextLevel(data);
+      },
+      error => {
+
+      }
+    );
+    // The above needs to be a method that finds a user_skill by user_id and skill_id
+
+  };
 
   getCurrentLevel(points) {
     if (points > 0 && points < 10) {

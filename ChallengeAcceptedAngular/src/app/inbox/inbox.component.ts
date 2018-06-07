@@ -1,3 +1,4 @@
+import { UserService } from './../user.service';
 import { Message } from './../models/message';
 import { Router, ActivatedRoute } from '@angular/router';
 import { InboxService } from './../inbox.service';
@@ -18,12 +19,18 @@ export class InboxComponent implements OnInit {
   freshThread = new Message();
   receiver = new User();
   errorMessage = false;
+  loggedInUser: User;
+  showingThreadMessages = [];
 
   getAllMessageHeadsOfUser() {
     this.inboxService.allMessageHeads(this.route.snapshot.paramMap.get('id')).subscribe(
       data => {
         console.log(data);
         this.allMessages = data;
+        for (let index = 0; index < this.allMessages.length; index++) {
+          const hold = {id: this.allMessages[index].id, show: false, number: 0};
+          this.showingThreadMessages.push(hold);
+        }
       },
       error => {
         console.log(error);
@@ -45,18 +52,16 @@ export class InboxComponent implements OnInit {
     );
   }
 
-  sendReply() {
-    // for (let index = 0; index < this.threadMessages.length; index++) {
-      if (this.threadMessages[0].sender.username !== 'AlexTheDestroyer') { // Get the 1 value from logged in user
+  sendReply() {                                          // Changed this
+      if (this.threadMessages[0].sender.username !== this.loggedInUser.username) {
         this.reply.receiver = new User();
         this.reply.receiver.username = this.threadMessages[0].sender.username;
       } else {
         this.reply.receiver = new User();
         this.reply.receiver.username = this.threadMessages[0].receiver.username;
       }
-    // }
     this.reply.sender = new User();
-    this.reply.sender.username = 'AlexTheDestroyer'; // Get this from logged in user
+    this.reply.sender.username = this.loggedInUser.username; // changed this from AlexTheDestroyer
     this.inboxService.submitReply(this.reply).subscribe(
       data => {
         this.getThreadMessages(this.reply.threadId);
@@ -71,7 +76,7 @@ export class InboxComponent implements OnInit {
   sendMessage() {
     this.freshThread.receiver = this.receiver;
     const sender = new User();
-    sender.username = 'AlexTheDestroyer'; // change to logged in user's name
+    sender.username = this.loggedInUser.username; // changed from AlexTheDestroyer
     this.freshThread.sender = sender;
     console.log(this.freshThread);
     this.inboxService.submitReply(this.freshThread).subscribe(
@@ -83,6 +88,8 @@ export class InboxComponent implements OnInit {
       },
       error => {
         console.log(error);
+        this.freshThread = new Message();
+        this.receiver = new User();
         this.errorMessage = true;
       }
     );
@@ -100,16 +107,54 @@ export class InboxComponent implements OnInit {
     );
   }
 
+  getMessagesInThread(threadId, index) {
+    this.inboxService.threadMessages(threadId).subscribe(
+      data => {
+        console.log(data);
+        this.setMNumber(data, threadId, index);
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+  setMNumber(data, threadId, index) {
+    console.log(this.showingThreadMessages.indexOf({id: threadId}));
+    this.showingThreadMessages[index].number = data.length;
+  }
+
+  showNumberOfMessages(id) {
+    for (let index = 0; index < this.showingThreadMessages.length; index++) {
+      if (this.showingThreadMessages[index].id === id) {
+        const mNumber = this.getMessagesInThread(id, index);
+        this.showingThreadMessages[index].number = mNumber;
+        this.showingThreadMessages[index].show = true;
+        console.log(mNumber);
+
+      }
+    }
+  }
+
   constructor(private inboxService: InboxService,
     private route: ActivatedRoute,
     private authService: AuthService,
-    private router: Router) { }
+    private router: Router,
+    private userService: UserService) { }
 
   ngOnInit() {
     if (!this.authService.checkLogin()) {
       this.router.navigateByUrl('/home');
     }
-    this.getAllMessageHeadsOfUser();
+    this.userService.findUserByUsername(this.authService.getLoggedInUserName()).subscribe(
+      data => {
+        this.loggedInUser = data;
+        this.getAllMessageHeadsOfUser();
+      },
+      error => {
+        this.router.navigateByUrl('/home');
+      }
+    );
     this.reply = new Message();
     this.errorMessage = false;
 

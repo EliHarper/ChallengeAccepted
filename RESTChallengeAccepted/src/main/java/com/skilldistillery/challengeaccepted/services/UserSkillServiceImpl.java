@@ -68,4 +68,9 @@ public class UserSkillServiceImpl implements UserSkillService {
 			return false;
 		}
 	}
+
+	@Override
+	public UserSkill getOneUserSkill(int sid, int uid) {
+		return userSkillRepo.findBySkillIdAndUserId(sid, uid);
+	}
 }

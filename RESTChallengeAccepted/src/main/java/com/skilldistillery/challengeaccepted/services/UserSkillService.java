@@ -13,5 +13,7 @@ public interface UserSkillService {
 	public Boolean destroy(int usid);
 
 	public Set<UserSkill> getUserSkillsByUsername(String username);
+	
+	public UserSkill getOneUserSkill(int sid, int uid);
 
 }

@@ -52,6 +52,20 @@ export class UserSkillService {
     return userSkill.points % 10;
   }
 
+  findUserSkillBySAndUId(skillId, userId) {
+        // Get token
+        const token = this.authService.getToken();
+        // Send token as Authorization header (this is spring security convention for basic auth)
+        const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
+
+    return this.http.get<UserSkill>(`${this.url}/userskill/one/${skillId}/${userId}`, {headers}).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(err);
+      })
+    );
+  }
+
 
   constructor(
     private http: HttpClient,

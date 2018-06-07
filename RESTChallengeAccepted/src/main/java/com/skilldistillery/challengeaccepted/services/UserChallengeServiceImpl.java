@@ -82,8 +82,6 @@ public class UserChallengeServiceImpl implements UserChallengeService {
 	 // tally points for all user skill records for a challenge
 	//also changing this back to uid, have the ID don't need the username
     public UserSkill tallyUserSkillPointsForChallenge(Challenge challenge, int uid) {
-    	System.out.println("****************  " + challenge + "  ***************");
-    	System.out.println("****************  " + uid + "  ***************");
     	User u = userRepo.findById(uid).get();
         UserChallenge managedUserChallenge = userChallengeRepo.findByUserIdAndChallengeId(challenge.getId(), u.getId());
         int newPoints = 0;
