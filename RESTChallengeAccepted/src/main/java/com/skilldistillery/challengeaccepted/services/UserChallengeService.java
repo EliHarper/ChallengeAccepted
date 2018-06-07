@@ -23,7 +23,8 @@ public interface UserChallengeService {
 	
 	public List<UserChallenge> challengesUserHasParticipatedIn(String username);
 	
-	public UserChallenge checkIfUserHasAcceptedChallenge(int cid, String username);
+	// Need this method to take an acceptor id, the user object is previously retrieved
+	public UserChallenge checkIfUserHasAcceptedChallenge(int cid, int aid);
 	
 	public UserChallenge updateUCRecord(int cid, String username);
 	

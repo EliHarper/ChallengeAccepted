@@ -124,9 +124,10 @@ public class UserChallengeServiceImpl implements UserChallengeService {
 	}
 
 	@Override
-	public UserChallenge checkIfUserHasAcceptedChallenge(int cid, String username) {
-		System.out.println(username);
-		User u = userRepo.findByUsername(username);
+	//changed from taking a username to taking a user ID - the logged in user ID is previously grabbed from DB
+	public UserChallenge checkIfUserHasAcceptedChallenge(int cid, int aid) {
+		System.out.println(aid);
+		User u = userRepo.findById(aid).get();
 //		System.out.println(u);
 		UserChallenge uc = userChallengeRepo.findByUserIdAndChallengeId(u.getId(), cid);
 //		System.out.println(uc);

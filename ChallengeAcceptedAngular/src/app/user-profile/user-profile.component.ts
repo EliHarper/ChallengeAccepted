@@ -29,6 +29,7 @@ export class UserProfileComponent implements OnInit {
   userSkills: UserSkill[] = [];
   pendingChallenges = [];
   challengesUserHasCompleted = [];
+  loggedInUser: User;
 
   getNumCompletedChallenges = function(id) {
     return this.completedChallenges.transform(this.user.challenges).length;
@@ -140,6 +141,14 @@ export class UserProfileComponent implements OnInit {
       if (!this.authService.checkLogin()) {
         this.router.navigateByUrl('/home');
       }
+      this.userService.findUserByUsername(this.authService.getLoggedInUserName()).subscribe(
+        data => {
+          this.loggedInUser = data;
+        },
+        error => {
+          this.router.navigateByUrl('/home');
+        }
+      );
       this.getUserData();
   }
 }

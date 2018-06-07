@@ -42,11 +42,11 @@ public class UserChallengeController {
 	}
 
 	// check if a user has already accepted a challenge - return the object if user
-	// has, else null
-	@RequestMapping(path = "user/challenges/{cid}/user/{username}/check", method = RequestMethod.GET)
+	// has, else null                                   aid is acceptor ID, from an already-retrieved logged-in user object (whole thing, not jsut principle)
+	@RequestMapping(path = "user/challenges/{cid}/user/{aid}/check", method = RequestMethod.GET)
 	public UserChallenge checkIfUserHasAcceptedChallenge(HttpServletRequest req, HttpServletResponse res,
-			@PathVariable int cid, @PathVariable String username, Principal principal) {
-		UserChallenge uc = userChallengeService.checkIfUserHasAcceptedChallenge(cid, username);
+			@PathVariable int cid, @PathVariable int aid, Principal principal) {
+		UserChallenge uc = userChallengeService.checkIfUserHasAcceptedChallenge(cid, aid);
 //		System.out.println(username);
 		if (uc != null) {
 			res.setStatus(200);

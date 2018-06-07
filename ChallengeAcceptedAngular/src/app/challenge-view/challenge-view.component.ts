@@ -1,3 +1,4 @@
+import { AuthService } from './../auth.service';
 import { TagsService } from './../tags.service';
 import { UserService } from './../user.service';
 import { HttpHeaders } from '@angular/common/http';
@@ -19,9 +20,8 @@ import { Tag } from '../models/tag';
 export class ChallengeViewComponent implements OnInit {
 
   displayChallenge: Challenge;
-  user = new User(); // change to localstorage user when ready
   flag = false;
-  testUser: User = new User(2);
+  testUser: User; // testUser is the logged in user now #dealwithit
   tags: Tag[] = [];
   selectedTags: Tag[] = [];
   userIdList: number[] = [];
@@ -158,13 +158,30 @@ export class ChallengeViewComponent implements OnInit {
    }
   }
 
+  getLoggedInUser() {
+    const un = this.authService.getLoggedInUserName();
+    this.userService.findUserByUsername(un).subscribe(
+      data => {
+        this.testUser = data;
+        this.getChallengeData();
+      },
+      error => {
+        this.router.navigateByUrl('/home');
+      }
+    );
+  }
+
   constructor(private challengeService: ChallengeService,
   private userChallengeService: UserChallengeService,
   private route: ActivatedRoute,
-  private tagService: TagsService) { }
+  private tagService: TagsService,
+  private authService: AuthService,
+  private userService: UserService,
+  private router: Router) { }
 
   ngOnInit() {
-    this.getChallengeData();
+    // this.getChallengeData();
+    this.getLoggedInUser();
   }
 
 }
