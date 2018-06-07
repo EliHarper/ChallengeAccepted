@@ -38,6 +38,8 @@ protected void configure(HttpSecurity http) throws Exception {
         .antMatchers(HttpMethod.GET, "/api/challenges/status/**").permitAll()
         .antMatchers(HttpMethod.GET, "/api/challenges/**").permitAll()
         .antMatchers(HttpMethod.GET, "/api/userskills/indexByPoints").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/skills").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/tags").permitAll()
         .antMatchers("/login").permitAll()
         .antMatchers("/register").permitAll()
         .anyRequest().authenticated()
