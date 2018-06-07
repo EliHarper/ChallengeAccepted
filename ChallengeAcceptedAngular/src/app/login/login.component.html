@@ -5,8 +5,7 @@
   <div id="content">
     <div class="header">
       <div class="header-inner">
-        <!--navbar-branding/logo - hidden image tag & site name so things like Facebook to pick up, actual logo set via CSS for flexibility -->
-        <a class="navbar-brand center-block" href="index.html" title="Home">
+        <a class="center-block" href="index.html" title="Home">
           <h1 class="hidden">
             <img src="assets/img/fistbump.png" alt="Flexor Logo">
           </h1>
@@ -40,7 +39,7 @@
                     <input type="password" name="password" [(ngModel)]="user.password" placeholder="password" />
                   </div>
                 </div>
-                <button (click)="login(user)">Login</button>
+                <button type="button" class="btn btn-warning" (click)="login(user)">Login</button>
               </fieldset>
             </form>
             <p class="m-b-0 m-t">Not signed up?
