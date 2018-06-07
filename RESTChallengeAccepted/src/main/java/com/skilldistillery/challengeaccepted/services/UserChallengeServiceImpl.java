@@ -83,6 +83,8 @@ public class UserChallengeServiceImpl implements UserChallengeService {
 	//also changing this back to uid, have the ID don't need the username
     public UserSkill tallyUserSkillPointsForChallenge(Challenge challenge, int uid) {
     	User u = userRepo.findById(uid).get();
+    	System.out.println("Challenge: " + challenge.getId());
+    	System.out.println("User: " + u.getId());
         UserChallenge managedUserChallenge = userChallengeRepo.findByUserIdAndChallengeId(u.getId(), challenge.getId());
         int newPoints = 0;
             if (managedUserChallenge.isAcceptorWon()) {

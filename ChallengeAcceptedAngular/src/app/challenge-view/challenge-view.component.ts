@@ -145,9 +145,9 @@ export class ChallengeViewComponent implements OnInit {
       this.userChallengeService.updateUserWinner(id, this.userIdList[index], this.displayChallenge).subscribe(
         data => {
           count++;
-          if (count = this.userIdList.length) {
+          // if (count = this.userIdList.length) {
             this.setChallengeToCompleted(this.displayChallenge.id);
-          }
+          // }
         },
         error => {
           console.log(error);
