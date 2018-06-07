@@ -22,6 +22,9 @@
   <!--Active Challenges-->
   <div class="showcase block block-border-bottom-grey">
     <div class="container">
+      <h1 align="center" class="bg-warning text-info" *ngIf="displayChallenge.minNumberOfChallengers !== displayChallenge.maxNumberOfChallengers">Need {{displayChallenge.minNumberOfChallengers}} to {{displayChallenge.maxNumberOfChallengers}} Challengers</h1>
+      <h1 align="center" class="bg-warning text-info" *ngIf="displayChallenge.minNumberOfChallengers === displayChallenge.maxNumberOfChallengers">Need {{displayChallenge.minNumberOfChallengers}} Challengers</h1>
+      <br>
       <h2 class="block-title">
         Description
       </h2>
@@ -55,6 +58,7 @@
         </div> -->
         <div *ngFor="let challenge of challengers" class="col-md-4 text-center">
           <div *ngIf="(displayChallenge.status.id !== 2)">
+          <tr>
             <span class="fa-stack fa-5x">
               <i class="fa fa-circle fa-stack-2x text-primary"></i>
               <i class="fa fa-group fa-stack-1x fa-inverse"></i>
