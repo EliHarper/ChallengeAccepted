@@ -5,8 +5,7 @@
   <div id="content">
     <div class="header">
       <div class="header-inner">
-        <!--navbar-branding/logo - hidden image tag & site name so things like Facebook to pick up, actual logo set via CSS for flexibility -->
-        <a class="navbar-brand center-block" href="index.html" title="Home">
+        <a class="center-block" href="index.html" title="Home">
           <h1 class="hidden">
             <img src="assets/img/fistbump.png" alt="Flexor Logo"> Flexor
           </h1>
@@ -56,7 +55,7 @@
                     <input type="password" name="password" [(ngModel)]="createdUser.password" placeholder="password" />
                   </div>
                 </div>
-                <button (click)="register(createdUser)">Register Me This Second!</button>
+                <button type="button" class="btn btn-warning" (click)="register(createdUser)">Register Me This Second!</button>
                 <div name="error" *ngIf="usernameTaken">
                   <h1>Username taken, please try again.</h1>
                 </div>
