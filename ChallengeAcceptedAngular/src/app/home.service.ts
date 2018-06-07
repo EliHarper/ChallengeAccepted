@@ -14,18 +14,19 @@ export class HomeService {
 
   getAllUserSkills() {
     // Get token
-    const token = this.authService.getToken();
+    // const token = this.authService.getToken();
     // Send token as Authorization header (this is spring security convention for basic auth)
-    const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
+    // const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
 
-    if (this.authService.checkLogin()) {
-      return this.http.get<UserSkill[]>(`${this.url}/userskills/indexByPoints`, { headers }).pipe(
+    // if (this.authService.checkLogin()) {
+      return this.http.get<UserSkill[]>(`${this.url}/userskills/indexByPoints`).pipe(
         catchError((err: any) => {
+          console.log('******************');
           console.log(err);
           return throwError(err);
         })
       );
-    }
+    // }
   }
 
   constructor(private http: HttpClient,
