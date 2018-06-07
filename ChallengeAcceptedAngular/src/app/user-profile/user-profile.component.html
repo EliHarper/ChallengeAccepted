@@ -22,7 +22,7 @@
                   <tr *ngIf="getCurrentLevel(uSkill.points) > 0">
                     <td>{{uSkill.skill.name}}</td>
                     <td>{{getCurrentLevel(uSkill.points)}}</td>
-                    <!-- <td><mat-progress-bar mode="determinate" value="{{getUserProgressToNextLevel(uSkill.skill.id, loadedUser.id)}}"></mat-progress-bar></td> -->
+                    <td><mat-progress-bar mode="determinate" value="{{getUserProgressToNextLevel(uSkill.points)}}"></mat-progress-bar></td>
                   </tr>
                 </tbody>
               </table>
