@@ -48,6 +48,9 @@ public class UserSkillServiceImpl implements UserSkillService {
 			
 			UserSkill managedUserSkill = userSkillRepo.findById(us.getId()); 
 			int totalPoints = managedUserSkill.getPoints();
+				if(totalPoints == 0) {
+					totalPoints = 10;
+				}
 			totalPoints += newPoints;
 			us.setPoints(totalPoints);
 			userSkillRepo.saveAndFlush(us);

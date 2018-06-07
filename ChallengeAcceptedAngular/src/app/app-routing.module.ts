@@ -11,6 +11,7 @@ import { ChallengeListComponent } from './challenge-list/challenge-list.componen
 import { LogoutComponent } from './logout/logout.component';
 
 const routes: Routes = [
+  {path: '', pathMatch: 'full', redirectTo: 'home'},
   {path: 'challview/:id', component: ChallengeViewComponent},
   {path: 'userprofile/:id', component: UserProfileComponent},
   {path: 'allchallenges', component: ChallengeListComponent},
@@ -18,7 +19,9 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'logout', component: LogoutComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'messages/:id', component: InboxComponent}
+  {path: 'messages/:id', component: InboxComponent},
+  {path: '**', component: HomeComponent}
+
 ];
 
 @NgModule({

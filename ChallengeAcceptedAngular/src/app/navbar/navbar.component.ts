@@ -1,3 +1,4 @@
+import { AuthService } from './../auth.service';
 import { SkillService } from './../skill.service';
 import { TagsService } from './../tags.service';
 import { Tag } from './../models/tag';
@@ -49,10 +50,15 @@ export class NavbarComponent implements OnInit {
     );
   }
 
+  checkLogin() {
+    return this.authService.checkLogin();
+  }
+
   constructor(private challengeService: ChallengeService,
               private router: Router,
               private tagService: TagsService,
-              private skillService: SkillService) { }
+              private skillService: SkillService,
+              private authService: AuthService) { }
 
   ngOnInit() {
     this.getSkills();
