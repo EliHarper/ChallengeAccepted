@@ -31,6 +31,7 @@ protected void configure(HttpSecurity http) throws Exception {
         .authorizeRequests()
         .antMatchers(HttpMethod.OPTIONS, "/api/**").permitAll()  // For CORS, the preflight request will hit the OPTIONS on the route
         .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+        .antMatchers(HttpMethod.GET, "/").permitAll()
 //        .antMatchers(HttpMethod.DELETE, "/api/users").permitAll()
         .antMatchers(HttpMethod.GET, "/api/challenges").permitAll()
 //        challenges/status/{sid}
