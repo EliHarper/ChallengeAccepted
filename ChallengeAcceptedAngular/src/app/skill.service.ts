@@ -29,12 +29,12 @@ export class SkillService {
 
   getAllSkills() {
     // Get token
-    // const token = this.authService.getToken();
+    const token = this.authService.getToken();
     // Send token as Authorization header (this is spring security convention for basic auth)
-    // const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
+    const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
 
     // if (this.authService.checkLogin()) {
-      return this.http.get<Skill[]>(`${this.url}/skills`).pipe(
+      return this.http.get<Skill[]>(`${this.url}/skills`, {headers}).pipe(
         catchError((err: any) => {
           console.log(err);
           return throwError(err);

@@ -13,8 +13,10 @@ import { AboutUsComponent } from './about-us/about-us.component';
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: 'home'},
+  {path: 'userprofile/myprofile/:id', component: UserProfileComponent},
+  {path: 'challview/mychallenge/:id', component: ChallengeViewComponent},
   {path: 'challview/:id', component: ChallengeViewComponent},
-  {path: 'userprofile/:id', component: UserProfileComponent},
+  {path: 'userprofile/:id', component: UserProfileComponent, runGuardsAndResolvers: 'always'},
   {path: 'allchallenges', component: ChallengeListComponent},
   {path: 'home', component: HomeComponent},
   {path: 'login', component: LoginComponent},
@@ -27,7 +29,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

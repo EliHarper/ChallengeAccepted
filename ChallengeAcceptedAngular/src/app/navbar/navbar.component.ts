@@ -49,7 +49,7 @@ export class NavbarComponent implements OnInit {
     this.userService.findUserByUsername(this.authService.getLoggedInUserName()).subscribe(
       data => {
         this.challengeService.create(challenge, data.id).subscribe(
-        userData => this.router.navigateByUrl('challview/' + userData.id),
+        userData => this.router.navigateByUrl('challview/mychallenge/' + userData.id),
         err => throwError(err)
         );
       },
@@ -68,7 +68,7 @@ export class NavbarComponent implements OnInit {
     const token = this.authService.getToken();
     const unpw = atob(token);
     const un = unpw.split(':')[0];
-    this.router.navigateByUrl(`userprofile/${un}`);
+    this.router.navigateByUrl(`userprofile/myprofile/${un}`);
   }
 
   userInbox() {
