@@ -33,6 +33,7 @@ import { InboxComponent } from './inbox/inbox.component';
 import { InboxService } from './inbox.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { AboutUsComponent } from './about-us/about-us.component';
     HomeComponent,
     TestingComponent,
     InboxComponent,
-    AboutUsComponent
+    AboutUsComponent,
+    FooterComponent
     ],
   imports: [
     BrowserModule,
