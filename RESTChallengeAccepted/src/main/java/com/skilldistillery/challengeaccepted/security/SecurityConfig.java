@@ -36,6 +36,7 @@ protected void configure(HttpSecurity http) throws Exception {
 //        challenges/status/{sid}
         .antMatchers(HttpMethod.GET, "/api/challenges/status/**").permitAll()
         .antMatchers(HttpMethod.GET, "/api/challenges/**").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/userskills/indexByPoints").permitAll()
         .antMatchers("/login").permitAll()
         .antMatchers("/register").permitAll()
         .anyRequest().authenticated()
