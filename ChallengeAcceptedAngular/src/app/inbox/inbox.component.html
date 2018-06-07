@@ -68,7 +68,7 @@
             <tr *ngFor="let message of allMessages; let i = index" [attr.data-index]="i">
                 <td (click)="getThreadMessages(message.threadId)">{{message.sender.username}}</td>
                 <td (click)="getThreadMessages(message.threadId)">{{message.timeSent}}</td>
-                <td><button *ngIf="!showingThreadMessages[i].show" (click)="showNumberOfMessages(message.id)">Check Number Of Messages in Thread</button><span *ngIf="showingThreadMessages[i].show" class="label label-primary">{{showingThreadMessages[i].number}}</span></td>
+                <td><button *ngIf="!showingThreadMessages[i].show" (click)="showNumberOfMessages(message.id)" type="button" class="btn btn-primary">Check Number Of Messages in Thread</button><span *ngIf="showingThreadMessages[i].show" class="label label-primary">{{showingThreadMessages[i].number}}</span></td>
             </tr>
           </tbody>
         </table>

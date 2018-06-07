@@ -17,7 +17,14 @@ export class RegisterComponent implements OnInit {
     const jsonString = JSON.stringify(this.createdUser);
 
     this.authService.register(this.createdUser).subscribe(
-      data => { this.router.navigateByUrl('/home'); },
+      data => {
+        console.log(data);
+        console.log(this.createdUser.username);
+        console.log(this.createdUser.password);
+
+        // this.authService.login(this.createdUser.username, this.createdUser.password);
+        this.router.navigateByUrl('/home');
+      },
       error => { console.log(error),
                 this.usernameTaken = true; }
     );

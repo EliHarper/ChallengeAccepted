@@ -20,6 +20,7 @@ export class AuthService {
       .get('http://localhost:8080/authenticate', {headers})
       .pipe(
         tap((res) => {
+          console.log(username + ':' + password + '****** IN LOGIN ***');
           localStorage.setItem('token' , token);
           return res;
         }),
@@ -34,6 +35,8 @@ export class AuthService {
     return this.http.post('http://localhost:8080/register', user)
     .pipe(
         tap((res) => {
+          console.log('******* IN AUTH REGISTER *********');
+          console.log(user);
           this.login(user.username, user.password);
         }),
         catchError((err: any) => {
