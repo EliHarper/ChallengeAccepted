@@ -67,7 +67,6 @@ export class NavbarComponent implements OnInit {
   userProfile() {
     const token = this.authService.getToken();
     const unpw = atob(token);
-    console.log(unpw);
     const un = unpw.split(':')[0];
     this.router.navigateByUrl(`userprofile/${un}`);
   }
@@ -75,7 +74,6 @@ export class NavbarComponent implements OnInit {
   userInbox() {
     const token = this.authService.getToken();
     const unpw = atob(token);
-    console.log(unpw);
     const un = unpw.split(':')[0];
     this.router.navigateByUrl(`messages/${un}`);
 
