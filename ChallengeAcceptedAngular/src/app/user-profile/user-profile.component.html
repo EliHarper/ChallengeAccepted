@@ -11,8 +11,8 @@
         <hr>
         <div class="row">
           <div class="col-md-4">
-            <h3>{{loadedUser.username}}'s Top Skills:</h3>
-            <table class="table">
+            <h2 class="block-title">{{loadedUser.username}}'s Top Skills:</h2>
+            <table *ngIf="!checkIfUserIsNew()" class="table">
               <thead>
                   <th scope="col">Skill</th>
                   <th scope="col">Level</th>
@@ -26,6 +26,7 @@
                   </tr>
                 </tbody>
               </table>
+              <div *ngIf="checkIfUserIsNew()"><h3>No Skills for {{loadedUser.username}} yet! Get out there</h3><br></div>
           </div>
           </div>
           <div class="row">
