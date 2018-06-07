@@ -28,6 +28,12 @@ export class ChallengeListComponent implements OnInit {
     );
   }
 
+  getIcons(name) {
+    name = name.split(' ').join('');
+    console.log(name);
+    return '../../assets/img/icon/' + name + '.png';
+  }
+
   constructor(
     private challengeService: ChallengeService,
     private userService: UserService,
