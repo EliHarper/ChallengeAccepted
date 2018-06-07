@@ -45,6 +45,7 @@ export class NavbarComponent implements OnInit {
   }
 
   createChallenge(challenge) {
+    console.log(challenge);
     this.userService.findUserByUsername(this.authService.getLoggedInUserName()).subscribe(
       data => {
         this.challengeService.create(challenge, data.id).subscribe(
