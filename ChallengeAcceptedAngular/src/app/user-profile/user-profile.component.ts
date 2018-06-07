@@ -141,7 +141,7 @@ export class UserProfileComponent implements OnInit {
   getIcons(name) {
     name = name.split(' ').join('');
     console.log(name);
-    return name;
+    return '../../assets/img/icon/' + name + '.png';
   }
 
   constructor(private userChallengeService: UserChallengeService,
