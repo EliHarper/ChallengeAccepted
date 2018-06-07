@@ -45,11 +45,12 @@
               <input type="number" matInput [(ngModel)]="challenge.maxNumberOfChallengers" min=1 required>
             </mat-form-field>
             <br>
-            <!-- <mat-form-field>
+            <!-- MIGHT NEED TO COMMENT THIS OUT -->
+            <mat-form-field>
               <mat-select placeholder="Tags" [(ngModel)]="challenge.tags" multiple>
-                <mat-option *ngFor="let tag of tags" [value]="tags">{{tag.name}}</mat-option>
+                <mat-option *ngFor="let tag of tags" [value]="tag">{{tag.name}}</mat-option>
               </mat-select>
-            </mat-form-field> -->
+            </mat-form-field>
             <br>
           </div>
           <div class="col-md-4">
