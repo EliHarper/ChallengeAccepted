@@ -21,7 +21,7 @@ public class UserSkill {
 	private int points;
 	
 	@ManyToOne
-	@JsonIgnore
+//	@JsonIgnore
 	@JoinColumn(name="user_id")
 	private User user;
 	

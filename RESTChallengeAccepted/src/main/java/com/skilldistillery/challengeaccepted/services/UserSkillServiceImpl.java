@@ -1,5 +1,6 @@
 package com.skilldistillery.challengeaccepted.services;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,5 +73,17 @@ public class UserSkillServiceImpl implements UserSkillService {
 	@Override
 	public UserSkill getOneUserSkill(int sid, int uid) {
 		return userSkillRepo.findBySkillIdAndUserId(sid, uid);
+	}
+
+	@Override
+	public List<UserSkill> index() {
+		List<UserSkill> userskills = userSkillRepo.findAll();
+		return userskills;
+	}
+
+	@Override
+	public List<UserSkill> getUserSkillsByPoints() {
+		List<UserSkill> userskills = userSkillRepo.getUserSkillsByPoints();
+		return userskills;
 	}
 }

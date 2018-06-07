@@ -1,6 +1,7 @@
 package com.skilldistillery.challengeaccepted.controllers;
 
 import java.security.Principal;
+import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,10 +26,26 @@ public class UserSkillController {
 	@Autowired
 	private UserSkillService userSkillSvc;
 	
+	@RequestMapping(path= "userskills", method = RequestMethod.GET)
+	public List<UserSkill> index() {
+		return userSkillSvc.index();
+	}
+	
 	// returns list of all user_skill records based on user id
 	@RequestMapping(path="userskills/{username}", method=RequestMethod.GET)
 	public Set<UserSkill> getUserSkillsByUserId(HttpServletRequest req, HttpServletResponse res, @PathVariable String username, Principal principal) {
 		Set<UserSkill> userSkills = userSkillSvc.getUserSkillsByUsername(username);
+		if (userSkills != null) {
+			res.setStatus(200);
+			return userSkills;
+		}
+		res.setStatus(404);
+		return null;
+	}
+	
+	@RequestMapping(path="userskills/indexByPoints", method=RequestMethod.GET)
+	public List<UserSkill> getUserSkillsByPoints(HttpServletRequest req, HttpServletResponse res, Principal principal) {
+		List<UserSkill> userSkills = userSkillSvc.getUserSkillsByPoints();
 		if (userSkills != null) {
 			res.setStatus(200);
 			return userSkills;
