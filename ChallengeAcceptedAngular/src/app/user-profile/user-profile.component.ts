@@ -138,6 +138,12 @@ export class UserProfileComponent implements OnInit {
     this.router.navigateByUrl(`challview/${id}`);
   }
 
+  getIcons(name) {
+    name = name.split(' ').join('');
+    console.log(name);
+    return name;
+  }
+
   constructor(private userChallengeService: UserChallengeService,
     private completedChallenges: CompletedStatusPipe,
     private topSkills: TopSkillsPipe,
