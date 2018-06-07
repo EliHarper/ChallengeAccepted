@@ -23,7 +23,8 @@
   <div class="showcase block block-border-bottom-grey">
     <div class="container">
       <h1 align="center" class="bg-warning text-info" *ngIf="displayChallenge.minNumberOfChallengers !== displayChallenge.maxNumberOfChallengers">Need {{displayChallenge.minNumberOfChallengers}} to {{displayChallenge.maxNumberOfChallengers}} Challengers</h1>
-      <h1 align="center" class="bg-warning text-info" *ngIf="displayChallenge.minNumberOfChallengers === displayChallenge.maxNumberOfChallengers">Need {{displayChallenge.minNumberOfChallengers}} Challengers</h1>
+      <h1 align="center" class="bg-warning text-info" *ngIf="displayChallenge.minNumberOfChallengers === displayChallenge.maxNumberOfChallengers && displayChallenge.minNumberOfChallengers !== 1">Need {{displayChallenge.minNumberOfChallengers}} Challengers</h1>
+      <h1 align="center" class="bg-warning text-info" *ngIf="displayChallenge.minNumberOfChallengers === displayChallenge.maxNumberOfChallengers && displayChallenge.minNumberOfChallengers === 1">Need {{displayChallenge.minNumberOfChallengers}} Challenger</h1>
       <br>
       <h2 class="block-title">
         Description

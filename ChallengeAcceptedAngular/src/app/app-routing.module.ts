@@ -9,6 +9,7 @@ import { HomeComponent } from './home/home.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { ChallengeListComponent } from './challenge-list/challenge-list.component';
 import { LogoutComponent } from './logout/logout.component';
+import { AboutUsComponent } from './about-us/about-us.component';
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: 'home'},
@@ -20,6 +21,7 @@ const routes: Routes = [
   {path: 'logout', component: LogoutComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'messages/:id', component: InboxComponent},
+  {path: 'about', component: AboutUsComponent},
   {path: '**', component: HomeComponent}
 
 ];

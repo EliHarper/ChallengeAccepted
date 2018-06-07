@@ -32,6 +32,8 @@ import { UserSkillService } from './user-skill.service';
 import { InboxComponent } from './inbox/inbox.component';
 import { InboxService } from './inbox.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { AboutUsComponent } from './about-us/about-us.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
@@ -49,7 +51,9 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     ChallengeViewComponent,
     HomeComponent,
     TestingComponent,
-    InboxComponent
+    InboxComponent,
+    AboutUsComponent,
+    FooterComponent
     ],
   imports: [
     BrowserModule,

@@ -1,3 +1,4 @@
+import { InboxService } from './../inbox.service';
 import { AuthService } from './../auth.service';
 import { UserSkill } from './../models/user-skill';
 import { SkillService } from './../skill.service';
@@ -15,6 +16,7 @@ import { ChallengesCreatedPipe } from '../pipes/challenges-created.pipe';
 import { userInfo } from 'os';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Skill } from '../models/skill';
+import { Message } from '../models/message';
 
 @Component({
   selector: 'app-user-profile',
@@ -31,6 +33,8 @@ export class UserProfileComponent implements OnInit {
   activeChallenges = [];
   challengesUserHasCompleted = [];
   loggedInUser: User;
+  message: string;
+  sentMessage = false;
 
   getNumCompletedChallenges = function(id) {
     return this.completedChallenges.transform(this.user.challenges).length;
@@ -154,6 +158,46 @@ export class UserProfileComponent implements OnInit {
     return newUser;
   }
 
+  sendNewMessage() {
+    const receiver = this.loadedUser;
+    const sender = this.loggedInUser;
+    const newThread = new Message();
+    newThread.sender = sender;
+    newThread.receiver = receiver;
+    newThread.message = this.message;
+    this.inboxService.submitReply(newThread).subscribe(
+      data => {
+        this.sentMessage = true;
+        this.message = '';
+      },
+      error => {
+        console.log(error);
+      }
+    );
+
+    // sendMessage() {
+    //   this.freshThread.receiver = this.receiver;
+    //   const sender = new User();
+    //   sender.username = this.loggedInUser.username;
+    //   this.freshThread.sender = sender;
+    //   console.log(this.freshThread);
+    //   this.inboxService.submitReply(this.freshThread).subscribe(
+    //     data => {
+    //       this.errorMessage = false;
+    //       this.freshThread = new Message();
+    //       this.receiver = new User();
+    //       this.getAllMessageHeadsOfUser();
+    //     },
+    //     error => {
+    //       console.log(error);
+    //       this.freshThread = new Message();
+    //       this.receiver = new User();
+    //       this.errorMessage = true;
+    //     }
+    //   );
+    // }
+  }
+
   constructor(private userChallengeService: UserChallengeService,
     private completedChallenges: CompletedStatusPipe,
     private topSkills: TopSkillsPipe,
@@ -164,7 +208,8 @@ export class UserProfileComponent implements OnInit {
     private userSkillService: UserSkillService,
     private skillService: SkillService,
     private router: Router,
-    private authService: AuthService ) { }
+    private authService: AuthService,
+    private inboxService: InboxService ) { }
 
     ngOnInit() {
       if (!this.authService.checkLogin()) {
