@@ -90,7 +90,7 @@
           <tr *ngFor="let yourHighness of leaderboard"  (click)="userProfile(yourHighness.user.username)">
             <td> {{ yourHighness.skill.name }} </td>
             <td> {{ yourHighness.user.username }} </td>
-            <td> {{ yourHighness.points }} </td>
+            <td> {{ getLevelFromPoints( yourHighness.points ) }} </td>
           </tr>
           <!-- <tr>
             <td>PingPong</td>

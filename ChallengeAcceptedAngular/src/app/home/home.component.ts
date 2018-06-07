@@ -21,6 +21,11 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  getLevelFromPoints(points) {
+    const level = Math.floor(points / 10);
+    return level;
+  }
+
   userProfile(username) {
     this.router.navigateByUrl(`userprofile/${username}`);
   }

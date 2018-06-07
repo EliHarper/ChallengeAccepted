@@ -144,6 +144,16 @@ export class UserProfileComponent implements OnInit {
     return '../../assets/img/icon/' + name + '.png';
   }
 
+  checkIfUserIsNew() {
+    let newUser = true;
+    for (let index = 0; index < this.userSkills.length; index++) {
+      if (this.userSkills[index].points > 0) {
+        newUser = false;
+      }
+    }
+    return newUser;
+  }
+
   constructor(private userChallengeService: UserChallengeService,
     private completedChallenges: CompletedStatusPipe,
     private topSkills: TopSkillsPipe,
