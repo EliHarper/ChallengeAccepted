@@ -12,17 +12,12 @@ export class AuthService {
 
 
   login (username, password) {
-    console.log('**** IN LOGIN TOP LEVEL ***');
-    console.log(username);
-    console.log(password);
-
     const token = this.generateBasicAuthToken(username, password);
     const headers = new HttpHeaders()
     .set('Authorization', `Basic ${token}`);
 
     return this.http.get('http://localhost:8080/authenticate', {headers}).pipe(
       tap((res) => {
-        console.log(username + ':' + password + '****** IN LOGIN TAP ***');
         localStorage.setItem('token' , token);
         return res;
       }),
@@ -36,8 +31,6 @@ export class AuthService {
   register(user) {
     return this.http.post('http://localhost:8080/register', user).pipe(
       tap((res) => {
-        console.log('******* IN AUTH REGISTER *********');
-        console.log(user);
         this.login(user.username, user.password).subscribe(
           data => {
             this.router.navigateByUrl('/home');
@@ -48,7 +41,6 @@ export class AuthService {
         );
       }),
       catchError((err: any) => {
-        console.log('ERROR IN REGISTER ARROO');
         return throwError('KABOOM');
       })
     );
