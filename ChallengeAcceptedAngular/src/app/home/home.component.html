@@ -87,7 +87,12 @@
           <th>Level</th>
         </thead>
         <tbody>
-          <tr>
+          <tr *ngFor="let yourHighness of leaderboard">
+            <td> {{ yourHighness.skill.name }} </td>
+            <td> {{ yourHighness.user.username }} </td>
+            <td> {{ yourHighness.points }} </td>
+          </tr>
+          <!-- <tr>
             <td>PingPong</td>
             <td>AlexTheDestroyer</td>
             <td>53</td>
@@ -111,7 +116,7 @@
             <td>Drinking</td>
             <td>MeganTheIncomplete</td>
             <td>84</td>
-          </tr>
+          </tr> -->
         </tbody>
       </table>
     </div>

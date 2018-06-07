@@ -20,7 +20,7 @@ export class ChallengeListComponent implements OnInit {
     this.challengeService.showChallengesByStatusId(1).subscribe(
       data => {
         this.challengeList = data;
-        console.log(data);
+        // console.log(data);
       },
       error => {
         console.log(error);
