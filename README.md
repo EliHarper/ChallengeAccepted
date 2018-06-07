@@ -25,7 +25,7 @@ Once a user is logged in, the navigation bar at the top of the site will update 
 
 A user may also navigate to their inbox, to view messages received from users, or to send a new message to another user. The inbox displays a message from each thread, which a user may click to view the full conversation.
 
-If a user wishes to create a new challenge, they may click on the orange "plus" sign in the navigation bar. This will expand the navigation bar to display a form, which the user may fill out to generate their challenge. Once the challenge is generated, it is pending and will be listed in the Marketplace for other users to accept. 
+If a user wishes to create a new challenge, they may click on the orange "plus" sign in the navigation bar. This will expand the navigation bar to display a form, which the user may fill out to generate their challenge. Once the challenge is generated, it is pending and will be listed in the Marketplace for other users to accept.
 
 #### Technologies Used
 * Java
