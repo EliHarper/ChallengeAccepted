@@ -8,7 +8,7 @@
         <!--navbar-branding/logo - hidden image tag & site name so things like Facebook to pick up, actual logo set via CSS for flexibility -->
         <a class="navbar-brand center-block" href="index.html" title="Home">
           <h1 class="hidden">
-            <img src="assets/img/logo.png" alt="Flexor Logo"> Flexor
+            <img src="assets/img/fistbump.png" alt="Flexor Logo"> Flexor
           </h1>
         </a>
       </div>
@@ -27,7 +27,7 @@
                 <div class="form-group">
                   <div class="input-group input-group-lg">
                     <span class="input-group-addon">
-                      <i class="fa fa-fw fa-envelope"></i>
+                      <i class="fa fa-fw fa-user"></i>
                     </span>
                     <input type="text" name="username" [(ngModel)]="createdUser.username" placeholder="username" />
                   </div>
@@ -38,6 +38,14 @@
                       <i class="fa fa-fw fa-envelope"></i>
                     </span>
                     <input type="text" name="email" [(ngModel)]="createdUser.email" placeholder="email" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="input-group input-group-lg">
+                    <span class="input-group-addon">
+                      <i class="fa fa-fw fa-home"></i>
+                    </span>
+                    <input type="text" name="location" [(ngModel)]="createdUser.location" placeholder="location" />
                   </div>
                 </div>
                 <div class="form-group">

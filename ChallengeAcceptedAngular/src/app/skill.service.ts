@@ -43,6 +43,17 @@ export class SkillService {
     }
   }
 
+  getIconsForSkills() {
+    let counter = 0;
+    const skills = this.getAllSkills();
+    skills.forEach(skill => {
+      const name = skill[counter].name;
+      counter++;
+      name.split(' ').join('');
+      console.log(name);
+    });
+  }
+
   constructor(
     private http: HttpClient,
     private authService: AuthService
