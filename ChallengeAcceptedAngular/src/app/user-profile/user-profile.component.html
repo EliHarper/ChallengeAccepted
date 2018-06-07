@@ -53,6 +53,31 @@
                 </p>
               </div>
           </div>
+          <div class="row">
+              <h2 class="block-title">
+                {{loadedUser.username}}'s Current Active Challenges
+              </h2>
+            <div *ngIf="activeChallenges.length == 0">
+              <h3>No Active Challenges for {{loadedUser.username}}!</h3>
+              <br>
+              <br>
+            </div>
+            <div *ngFor="let achallenge of activeChallenges" class="col-md-4 text-center">
+              <span class="fa-stack fa-5x">
+                <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+              </span>
+              <h4 class="text-weight-strong">
+                {{achallenge.name}}
+              </h4>
+              <p>{{achallenge.skill.name}}</p>
+                <p>
+                  <a (click)="viewChallenge(achallenge.id)" class="btn btn-more i-right">View Challenge
+                    <i class="fa fa-angle-right"></i>
+                  </a>
+                </p>
+              </div>
+          </div>
               <!-- WHY DOES THIS DIV BELOW BREAK THINGS-->
               <!-- ALSO GETTING WEIRD RESULTS - MAYBE QUERY IS BROKEN -->
               <div class="row">

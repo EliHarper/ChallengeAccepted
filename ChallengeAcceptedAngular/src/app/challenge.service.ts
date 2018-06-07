@@ -73,7 +73,7 @@ export class ChallengeService {
     const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
 
     if (this.authService.checkLogin()) {
-      return this.http.patch < Challenge > (`${this.url}/challenges/${id}/status/2`, {headers}).pipe(
+      return this.http.patch<Challenge>(`${this.url}/challenges/${id}/status/2`, {}, {headers}).pipe(
         catchError((err: any) => {
           console.log(err);
           return throwError(err);
@@ -89,7 +89,7 @@ export class ChallengeService {
     const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
 
     if (this.authService.checkLogin()) {
-      return this.http.patch < Challenge > (`${this.url}/challenges/${id}/status/4`, {headers}).pipe(
+      return this.http.patch<Challenge>(`${this.url}/challenges/${id}/status/4`, {}, {headers}).pipe(
         catchError((err: any) => {
           console.log(err);
           return throwError(err);
@@ -104,7 +104,7 @@ export class ChallengeService {
     const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
 
     if (this.authService.checkLogin()) {
-      return this.http.patch < Challenge > (`${this.url}/challenges/${id}/status/3`, {headers}).pipe(
+      return this.http.patch<Challenge> (`${this.url}/challenges/${id}/status/3`, {}, {headers}).pipe(
         catchError((err: any) => {
           console.log(err);
           return throwError(err);

@@ -28,6 +28,7 @@ export class UserProfileComponent implements OnInit {
   loadedUser: User;
   userSkills: UserSkill[] = [];
   pendingChallenges = [];
+  activeChallenges = [];
   challengesUserHasCompleted = [];
   loggedInUser: User;
 
@@ -97,10 +98,11 @@ export class UserProfileComponent implements OnInit {
   }
 
   getChallengesUserHasAccepted() {
-    this.challengeService.getChallengesOfUserAndStatus(this.loadedUser.id, 1).subscribe(
+    this.challengeService.getChallengesOfUserAndStatus(this.loadedUser.username, 1).subscribe(
       data => {
         console.log(data);
         this.pendingChallenges = data;
+        this.getChallengesUserHasActive();
         this.getChallengesUserHasCompleted();
       },
       error => {
@@ -109,8 +111,20 @@ export class UserProfileComponent implements OnInit {
     );
   }
 
+  getChallengesUserHasActive() {
+    this.challengeService.getChallengesOfUserAndStatus(this.loadedUser.username, 2).subscribe(
+      data => {
+        console.log(data);
+        this.activeChallenges = data;
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
   getChallengesUserHasCompleted() {
-    this.challengeService.getChallengesOfUserAndStatus(this.loadedUser.id, 3).subscribe(
+    this.challengeService.getChallengesOfUserAndStatus(this.loadedUser.username, 3).subscribe(
       data => {
         console.log(data);
         this.challengesUserHasCompleted = data;

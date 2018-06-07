@@ -48,7 +48,7 @@ export class NavbarComponent implements OnInit {
     this.userService.findUserByUsername(this.authService.getLoggedInUserName()).subscribe(
       data => {
         this.challengeService.create(challenge, data.id).subscribe(
-        userData => this.router.navigateByUrl('challview/' + data.id),
+        userData => this.router.navigateByUrl('challview/' + userData.id),
         err => throwError(err)
         );
       },

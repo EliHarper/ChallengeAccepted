@@ -80,9 +80,11 @@ public class UserChallengeServiceImpl implements UserChallengeService {
 	}
 	
 	 // tally points for all user skill records for a challenge
-    public UserSkill tallyUserSkillPointsForChallenge(Challenge challenge, String username) {
-    	
-    	User u = userRepo.findByUsername(username);
+	//also changing this back to uid, have the ID don't need the username
+    public UserSkill tallyUserSkillPointsForChallenge(Challenge challenge, int uid) {
+    	System.out.println("****************  " + challenge + "  ***************");
+    	System.out.println("****************  " + uid + "  ***************");
+    	User u = userRepo.findById(uid).get();
         UserChallenge managedUserChallenge = userChallengeRepo.findByUserIdAndChallengeId(challenge.getId(), u.getId());
         int newPoints = 0;
             if (managedUserChallenge.isAcceptorWon()) {
@@ -134,8 +136,9 @@ public class UserChallengeServiceImpl implements UserChallengeService {
 		return uc;
 	}
 	
-	public UserChallenge updateUCRecord(int cid, String username) {
-		User u = userRepo.findByUsername(username);
+	//Changing this back to a uid, I have the IDs from DB already
+	public UserChallenge updateUCRecord(int cid, int uid) {
+		User u = userRepo.findById(uid).get();
 		UserChallenge uc = userChallengeRepo.findByUserIdAndChallengeId(u.getId(), cid);
 		uc.setAcceptorWon(true);
 		userChallengeRepo.saveAndFlush(uc);

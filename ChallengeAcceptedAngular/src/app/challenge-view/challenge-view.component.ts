@@ -139,12 +139,13 @@ export class ChallengeViewComponent implements OnInit {
 
   updateWholeUserList(id, challenge) {
     console.log(challenge);
-
+    let count = 0;
   if (this.userIdList.length > 0) {
     for (let index = 0; index < this.userIdList.length; index++) {
       this.userChallengeService.updateUserWinner(id, this.userIdList[index], this.displayChallenge).subscribe(
         data => {
-          if (this.userIdList[this.userIdList.length - 1] === data.id) {
+          count++;
+          if (count = this.userIdList.length) {
             this.setChallengeToCompleted(this.displayChallenge.id);
           }
         },

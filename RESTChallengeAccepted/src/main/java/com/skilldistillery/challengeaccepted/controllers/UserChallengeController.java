@@ -111,11 +111,12 @@ public class UserChallengeController {
 	}
 	
 	// update a user_challenge record based on user id and challenge id
-	@RequestMapping(path="challenges/{cid}/user/{username}", method=RequestMethod.PATCH)
+	// Changing this back to a uid, the user id at this point has been retrieved from DB
+	@RequestMapping(path="challenges/{cid}/user/{uid}", method=RequestMethod.PATCH)
 	public UserSkill updateUserChallengeRecord(HttpServletRequest req, HttpServletResponse res, @PathVariable int cid, 
-			@PathVariable String username, @RequestBody Challenge challenge, Principal principal) {
-		userChallengeService.updateUCRecord(cid, username);
-		return userChallengeService.tallyUserSkillPointsForChallenge(challenge, username);
+			@PathVariable int uid, @RequestBody Challenge challenge, Principal principal) {
+		userChallengeService.updateUCRecord(cid, uid);
+		return userChallengeService.tallyUserSkillPointsForChallenge(challenge, uid);
 	}
 
 

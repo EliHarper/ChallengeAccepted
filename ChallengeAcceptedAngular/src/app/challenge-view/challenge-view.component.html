@@ -153,7 +153,7 @@
           </div>
       </div>
       <hr>
-      <div *ngIf="displayChallenge.creator.id === testUser.id">
+      <div *ngIf="displayChallenge.creator.id === testUser.id && (displayChallenge.status.id !== 3) && (displayChallenge.status.id !== 4)">
           <button type="button" class="btn btn-primary btn-block" (click)="setChallengeToActive(displayChallenge.id)">Start Challenge</button>
           <button type="button" class="btn btn-primary btn-block" (click)="setChallengeToExpired(displayChallenge.id)">Cancel Challenge</button>
         </div>

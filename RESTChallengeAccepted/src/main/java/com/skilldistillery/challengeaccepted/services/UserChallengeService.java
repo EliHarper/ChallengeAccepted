@@ -26,7 +26,9 @@ public interface UserChallengeService {
 	// Need this method to take an acceptor id, the user object is previously retrieved
 	public UserChallenge checkIfUserHasAcceptedChallenge(int cid, int aid);
 	
-	public UserChallenge updateUCRecord(int cid, String username);
+	// Changing this back to uid as well, user objects are previously retrieved
+	public UserChallenge updateUCRecord(int cid, int uid);
 	
-	public UserSkill tallyUserSkillPointsForChallenge(Challenge challenge, String username);
+	// Changing back to uid, have the id already
+	public UserSkill tallyUserSkillPointsForChallenge(Challenge challenge, int uid);
 }
