@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { InboxService } from './../inbox.service';
 import { Component, OnInit } from '@angular/core';
 import { User } from '../models/user';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-inbox',
@@ -100,9 +101,14 @@ export class InboxComponent implements OnInit {
   }
 
   constructor(private inboxService: InboxService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private authService: AuthService,
+    private router: Router) { }
 
   ngOnInit() {
+    if (!this.authService.checkLogin()) {
+      this.router.navigateByUrl('/home');
+    }
     this.getAllMessageHeadsOfUser();
     this.reply = new Message();
     this.errorMessage = false;

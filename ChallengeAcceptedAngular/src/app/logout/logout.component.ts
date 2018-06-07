@@ -20,6 +20,7 @@ export class LogoutComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
+    this.logout();
   }
 
 }

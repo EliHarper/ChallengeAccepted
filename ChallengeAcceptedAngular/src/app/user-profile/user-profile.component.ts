@@ -1,3 +1,4 @@
+import { AuthService } from './../auth.service';
 import { UserSkill } from './../models/user-skill';
 import { SkillService } from './../skill.service';
 import { UserSkillService } from './../user-skill.service';
@@ -83,7 +84,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   getUserData() {
-    this.userService.findUserById(this.route.snapshot.paramMap.get('id')).subscribe(
+    this.userService.findUserByUsername(this.route.snapshot.paramMap.get('id')).subscribe(
       data => {
         console.log(data);
         this.loadedUser = data;
@@ -132,9 +133,13 @@ export class UserProfileComponent implements OnInit {
     private userService: UserService,
     private userSkillService: UserSkillService,
     private skillService: SkillService,
-    private router: Router ) { }
+    private router: Router,
+    private authService: AuthService ) { }
 
     ngOnInit() {
+      if (!this.authService.checkLogin()) {
+        this.router.navigateByUrl('/home');
+      }
       this.getUserData();
   }
 }

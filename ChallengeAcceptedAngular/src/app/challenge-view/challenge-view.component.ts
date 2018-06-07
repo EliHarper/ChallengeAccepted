@@ -85,9 +85,6 @@ export class ChallengeViewComponent implements OnInit {
     );
   }
 
-  navigateToUserProfile () {
-
-  }
   getAcceptedData(id) {
     this.userChallengeService.getAllPendingAndAcceptedChallenges(id).subscribe(
       data => {

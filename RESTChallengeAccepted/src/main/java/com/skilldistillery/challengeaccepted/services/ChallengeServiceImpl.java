@@ -11,9 +11,11 @@ import com.skilldistillery.challengeaccepted.entities.ChallengeDTO;
 import com.skilldistillery.challengeaccepted.entities.Skill;
 import com.skilldistillery.challengeaccepted.entities.Status;
 import com.skilldistillery.challengeaccepted.entities.User;
+import com.skilldistillery.challengeaccepted.entities.UserChallenge;
 import com.skilldistillery.challengeaccepted.repositories.ChallengeRepository;
 import com.skilldistillery.challengeaccepted.repositories.SkillRepository;
 import com.skilldistillery.challengeaccepted.repositories.StatusRepository;
+import com.skilldistillery.challengeaccepted.repositories.UserChallengeRepository;
 import com.skilldistillery.challengeaccepted.repositories.UserRepository;
 
 @Service
@@ -27,6 +29,8 @@ public class ChallengeServiceImpl implements ChallengeService {
 	private SkillRepository skillzRepo;
 	@Autowired
 	private StatusRepository statusRepo;
+	@Autowired
+	private UserChallengeRepository userChallRepo;
 
 	@Override
 	public Challenge create(ChallengeDTO cDTO) {
@@ -44,8 +48,15 @@ public class ChallengeServiceImpl implements ChallengeService {
 		c.setCreator(user);
 		c.setSkill(skill);
 		c.setStatus(status);
-
 		chaRepo.saveAndFlush(c);
+		
+		UserChallenge userChall = new UserChallenge();
+		userChall.setAccepted(true);
+		userChall.setAcceptorWon(false);
+		userChall.setUser(user);
+		userChall.setChallenge(c);
+		userChallRepo.saveAndFlush(userChall);
+		
 		return c;
 	}
 

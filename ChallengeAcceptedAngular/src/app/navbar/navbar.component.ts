@@ -1,3 +1,4 @@
+import { UserService } from './../user.service';
 import { AuthService } from './../auth.service';
 import { SkillService } from './../skill.service';
 import { TagsService } from './../tags.service';
@@ -44,21 +45,38 @@ export class NavbarComponent implements OnInit {
   }
 
   createChallenge(challenge) {
-    this.challengeService.create(challenge).subscribe(
-      data => this.router.navigateByUrl('challview/' + data.id),
-      err => throwError(err)
+    this.userService.findUserByUsername(this.authService.getLoggedInUserName()).subscribe(
+      data => {
+        this.challengeService.create(challenge, data.id).subscribe(
+        userData => this.router.navigateByUrl('challview/' + data.id),
+        err => throwError(err)
+        );
+      },
+      error => {
+        console.log(error);
+      }
     );
+
   }
 
   checkLogin() {
     return this.authService.checkLogin();
   }
 
+  userProfile() {
+    const token = this.authService.getToken();
+    const unpw = atob(token);
+    console.log(unpw);
+    const un = unpw.split(':')[0];
+    this.router.navigateByUrl(`userprofile/${un}`);
+  }
+
   constructor(private challengeService: ChallengeService,
               private router: Router,
               private tagService: TagsService,
               private skillService: SkillService,
-              private authService: AuthService) { }
+              private authService: AuthService,
+              private userService: UserService) { }
 
   ngOnInit() {
     this.getSkills();

@@ -61,4 +61,12 @@ export class AuthService {
   getToken() {
     return localStorage.getItem('token');
   }
+
+  getLoggedInUserName() {
+    const token = this.getToken();
+    const unpw = atob(token);
+    console.log(unpw);
+    const un = unpw.split(':')[0];
+    return un;
+  }
 }

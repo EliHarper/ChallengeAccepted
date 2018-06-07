@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule} from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -75,7 +75,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     UserSkillService,
     AuthService,
     UserService,
-    InboxService ],
+    InboxService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

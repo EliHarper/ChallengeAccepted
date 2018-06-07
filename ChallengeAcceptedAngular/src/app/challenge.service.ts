@@ -11,13 +11,15 @@ import { throwError } from 'rxjs';
 export class ChallengeService {
   url = 'http://localhost:8080/api';
 
-  create = function (challenge) {
+  create = function (challenge, myId) {
     // Get token
     const token = this.authService.getToken();
+    console.log(challenge.skill);
+
     // Send token as Authorization header (this is spring security convention for basic auth)
     const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
     const challDTO = {skillId: challenge.skill.id,
-      creatorId: challenge.user.id,
+      creatorId: myId,
       location: challenge.location,
       name: challenge.name,
       description: challenge.description,
