@@ -4,13 +4,15 @@ import { Injectable } from '@angular/core';
 import { Message } from './models/message';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InboxService {
 
-  url = 'http://localhost:8080/api/';
+  private baseUrl = environment.baseUrl;
+  private url = this.baseUrl + 'api';
 
 
   allMessageHeads(id) {

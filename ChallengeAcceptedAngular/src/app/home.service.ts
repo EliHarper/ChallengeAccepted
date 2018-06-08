@@ -4,13 +4,15 @@ import { Injectable } from '@angular/core';
 import { UserSkill } from './models/user-skill';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HomeService {
 
-  url = 'http://localhost:8080/api';
+  private baseUrl = environment.baseUrl;
+  private url = this.baseUrl + 'api';
 
   getAllUserSkills() {
     // Get token

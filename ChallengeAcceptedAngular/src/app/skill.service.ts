@@ -4,12 +4,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Skill } from './models/skill';
 import { throwError } from 'rxjs';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SkillService {
-  url = 'http://localhost:8080/api';
+
+  private baseUrl = environment.baseUrl;
+  private url = this.baseUrl + 'api';
 
   getSkillById(id) {
     // Get token

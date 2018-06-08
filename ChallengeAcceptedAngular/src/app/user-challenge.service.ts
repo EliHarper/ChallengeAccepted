@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { throwError } from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import { AuthService } from './auth.service';
+import { environment } from '../environments/environment';
 
 
 @Injectable({
@@ -12,7 +13,8 @@ import { AuthService } from './auth.service';
 })
 export class UserChallengeService {
 
-  url = 'http://localhost:8080/api';
+  private baseUrl = environment.baseUrl;
+  private url = this.baseUrl + 'api';
 
   acceptingAMarketChallenge(dto) {
     // const headers = new HttpHeaders({'Content-Type': 'application/json'});(don't seem to need this)

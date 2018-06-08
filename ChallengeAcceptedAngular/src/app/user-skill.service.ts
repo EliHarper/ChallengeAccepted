@@ -4,13 +4,15 @@ import { catchError } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { UserSkill } from './models/user-skill';
 import { throwError } from 'rxjs';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserSkillService {
 
-  url = 'http://localhost:8080/api';
+  private baseUrl = environment.baseUrl;
+  private url = this.baseUrl + 'api';
 
   findUserSkillById(usid) {
     // Get token
