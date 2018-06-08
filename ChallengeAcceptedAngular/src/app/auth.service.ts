@@ -18,7 +18,7 @@ export class AuthService {
     const headers = new HttpHeaders()
     .set('Authorization', `Basic ${token}`);
 
-    return this.http.get(`${this.url}/authenticate`, {headers}).pipe(
+    return this.http.get(`${this.url}authenticate`, {headers}).pipe(
       tap((res) => {
         localStorage.setItem('token' , token);
         return res;
@@ -31,7 +31,7 @@ export class AuthService {
   }
 
   register(user) {
-    return this.http.post(`${this.url}/register`, user).pipe(
+    return this.http.post(`${this.url}register`, user).pipe(
       tap((res) => {
         this.login(user.username, user.password).subscribe(
           data => {

@@ -22,7 +22,7 @@ export class InboxService {
     const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
 
     if (this.authService.checkLogin()) {
-      return this.http.get<Message[]>(`${this.url}messages/heads/${id}`, {headers}).pipe(
+      return this.http.get<Message[]>(`${this.url}/messages/heads/${id}`, {headers}).pipe(
         catchError((err: any) => {
           console.log(err);
           return throwError(err);
@@ -38,7 +38,7 @@ export class InboxService {
     const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
 
     if (this.authService.checkLogin()) {
-      return this.http.get<Message[]>(`${this.url}messages/threads/${id}`, {headers}).pipe(
+      return this.http.get<Message[]>(`${this.url}/messages/threads/${id}`, {headers}).pipe(
         catchError((err: any) => {
           console.log(err);
           return throwError(err);
@@ -54,7 +54,7 @@ export class InboxService {
     const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
 
     if (this.authService.checkLogin()) {
-      return this.http.post<Message[]>(`${this.url}messages`, reply, { headers }).pipe(
+      return this.http.post<Message[]>(`${this.url}/messages`, reply, { headers }).pipe(
         catchError((err: any) => {
           console.log(err);
           return throwError(err);
@@ -70,7 +70,7 @@ export class InboxService {
     const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
 
     if (this.authService.checkLogin()) {
-      return this.http.delete<Boolean>(`${this.url}messages/${id}`, {headers}).pipe(
+      return this.http.delete<Boolean>(`${this.url}/messages/${id}`, {headers}).pipe(
         catchError((err: any) => {
           console.log(err);
           return throwError(err);
