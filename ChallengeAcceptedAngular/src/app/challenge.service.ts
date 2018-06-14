@@ -1,3 +1,4 @@
+import { environment } from './../environments/environment';
 import { AuthService } from './auth.service';
 import { catchError } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
@@ -9,7 +10,9 @@ import { throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class ChallengeService {
-  url = 'http://localhost:8080/api';
+
+  private baseUrl = environment.baseUrl;
+  private url = this.baseUrl + 'api';
 
   create = function (challenge, myId) {
     // Get token

@@ -56,9 +56,9 @@
           <div class="col-md-4">
               <!-- <img id="my-img" src="http://dummyimage.com/100x100/000/fff" onmouseover="hover(this);" onmouseout="unhover(this);" /> -->
               <!-- <button class="create-challenge-button" (click)="createChallenge(challenge)" > -->
-                  <img (click)="createChallenge(challenge)" src="../../assets/img/fistbumpblack1.png"
-                  onmouseover="this.src='../../assets/img/fistbumpblack2.png'"
-                  onmouseout="this.src='../../assets/img/fistbumpblack1.png'"
+                  <img (click)="createChallenge(challenge)" src="assets/img/fistbumpblack1.png"
+                  onmouseover="this.src='assets/img/fistbumpblack2.png'"
+                  onmouseout="this.src='assets/img/fistbumpblack1.png'"
                   border="0" alt=""/>
                 <!-- </button> -->
             <br>
@@ -75,9 +75,9 @@
       <div class="row">
         <div class="col-md-8">
           <!--navbar-branding/logo - hidden image tag & site name so things like Facebook to pick up, actual logo set via CSS for flexibility -->
-          <a class="navbar-brand" href="/home" title="Home">
-            <h1 class="hidden">
-              <img src="assets/img/logo.png" alt="Flexor Logo"> Challenge Accepted
+          <a [routerLink]="['/home']" class="text-uppercase">
+            <h1 class="header-image">
+              <img src="assets/img/logo.png" alt="Flexor Logo">
             </h1>
           </a>
         </div>
@@ -104,9 +104,9 @@
       <div class="row">
         <div class="col-md-8">
           <!--navbar-branding/logo - hidden image tag & site name so things like Facebook to pick up, actual logo set via CSS for flexibility -->
-          <a class="navbar-brand" href="index.html" title="Home">
-            <h1 class="hidden">
-              <img src="assets/img/logo.png" alt="Flexor Logo"> Challenge Accepted
+          <a [routerLink]="['/home']" class="text-uppercase">
+            <h1 class="header-image">
+              <img src="assets/img/logo.png" alt="Flexor Logo">
             </h1>
           </a>
         </div>

@@ -144,7 +144,7 @@ export class UserProfileComponent implements OnInit {
 
   getIcons(name) {
     name = name.split(' ').join('');
-    return '../../assets/img/icon/' + name + '.png';
+    return 'assets/img/icon/' + name + '.png';
   }
 
   checkIfUserIsNew() {

@@ -4,13 +4,16 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from './models/user';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  url = 'http://localhost:8080/api';
+  private baseUrl = environment.baseUrl;
+  private url = this.baseUrl + 'api';
+
   findUserById(id) {
     return this.http.get<User>(`${this.url}/users/${id}`).pipe(
       catchError((err: any) => {

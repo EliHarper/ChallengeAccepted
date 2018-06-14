@@ -16,3 +16,12 @@
   border: 1px transparent;
   margin: 1px transparent;
 }
+
+.header-image {
+  max-width: 200px;
+  max-height: 100px;
+}
+
+.header {
+  height: 20px;
+}

@@ -4,13 +4,15 @@ import { Injectable } from '@angular/core';
 import { Message } from './models/message';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InboxService {
 
-  url = 'http://localhost:8080/api/';
+  private baseUrl = environment.baseUrl;
+  private url = this.baseUrl + 'api';
 
 
   allMessageHeads(id) {
@@ -20,7 +22,7 @@ export class InboxService {
     const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
 
     if (this.authService.checkLogin()) {
-      return this.http.get<Message[]>(`${this.url}messages/heads/${id}`, {headers}).pipe(
+      return this.http.get<Message[]>(`${this.url}/messages/heads/${id}`, {headers}).pipe(
         catchError((err: any) => {
           console.log(err);
           return throwError(err);
@@ -36,7 +38,7 @@ export class InboxService {
     const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
 
     if (this.authService.checkLogin()) {
-      return this.http.get<Message[]>(`${this.url}messages/threads/${id}`, {headers}).pipe(
+      return this.http.get<Message[]>(`${this.url}/messages/threads/${id}`, {headers}).pipe(
         catchError((err: any) => {
           console.log(err);
           return throwError(err);
@@ -52,7 +54,7 @@ export class InboxService {
     const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
 
     if (this.authService.checkLogin()) {
-      return this.http.post<Message[]>(`${this.url}messages`, reply, { headers }).pipe(
+      return this.http.post<Message[]>(`${this.url}/messages`, reply, { headers }).pipe(
         catchError((err: any) => {
           console.log(err);
           return throwError(err);
@@ -68,7 +70,7 @@ export class InboxService {
     const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
 
     if (this.authService.checkLogin()) {
-      return this.http.delete<Boolean>(`${this.url}messages/${id}`, {headers}).pipe(
+      return this.http.delete<Boolean>(`${this.url}/messages/${id}`, {headers}).pipe(
         catchError((err: any) => {
           console.log(err);
           return throwError(err);

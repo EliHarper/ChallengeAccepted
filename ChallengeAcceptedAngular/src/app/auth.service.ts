@@ -4,19 +4,21 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
+  private url = environment.baseUrl;
 
   login (username, password) {
     const token = this.generateBasicAuthToken(username, password);
     const headers = new HttpHeaders()
     .set('Authorization', `Basic ${token}`);
 
-    return this.http.get('http://localhost:8080/authenticate', {headers}).pipe(
+    return this.http.get(`${this.url}authenticate`, {headers}).pipe(
       tap((res) => {
         localStorage.setItem('token' , token);
         return res;
@@ -29,7 +31,7 @@ export class AuthService {
   }
 
   register(user) {
-    return this.http.post('http://localhost:8080/register', user).pipe(
+    return this.http.post(`${this.url}register`, user).pipe(
       tap((res) => {
         this.login(user.username, user.password).subscribe(
           data => {
